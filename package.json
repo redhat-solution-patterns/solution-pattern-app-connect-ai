@@ -1,0 +1,22 @@
+{
+  "name": "solution-pattern-app-connect-ai",
+  "description": "AI-Powered Application Integration Platform Solution Pattern",
+  "homepage": "https://redhat-solution-patterns.github.io/solution-pattern-app-connect-ai",
+  "author": {
+    "name": "Bruno Meseguer",
+    "url": "https://github.com/brunoNetId"
+  },
+  "dependencies": {
+    "@antora/cli": "^3.1.0",
+    "@antora/site-generator-default": "^3.1.0"
+  },
+  "scripts": {
+    "build": "antora site.yml",
+    "dev": "antora dev-site.yml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redhat-solution-patterns/solution-pattern-app-connect-ai.git"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,26 @@
+* xref:index.adoc[{counter:module}. Home page]
+** xref:index.adoc#use-cases[{module}.{counter:submodule1} Use cases]
+** xref:index.adoc#_the_story_behind_this_solution_pattern[{module}.{counter:submodule1} The story behind this solution pattern]
+** xref:index.adoc#_the_solution[{module}.{counter:submodule1} The solution]
+** xref:index.adoc#tech_stack[{module}.{counter:submodule1} Technology stack]
+
+* xref:02-architecture.adoc[{counter:module}. Architecture]
+** xref:02-architecture.adoc#_common_challenges[{module}.{counter:submodule2}. Common challenges]
+** xref:02-architecture.adoc#tech_stack[{module}.{counter:submodule2}. Technology stack]
+** xref:02-architecture.adoc#in_depth[{module}.{counter:submodule2}. An in-depth look at the solution's architecture]
+*** xref:02-architecture.adoc#_secure_data_ingestion[{module}.{submodule2}.{counter:_submodule2}. Secure Data Ingestion]
+*** xref:02-architecture.adoc#_event_driven_messaging[{module}.{submodule2}.{counter:_submodule2}. Event-Driven Messaging]
+*** xref:02-architecture.adoc#_ai_assisted_automation[{module}.{submodule2}.{counter:_submodule2}. AI-Assisted Automation]
+*** xref:02-architecture.adoc#_governance_and_rate_limiting[{module}.{submodule2}.{counter:_submodule2}. Governance and Rate Limiting]
+*** xref:02-architecture.adoc#_scalability[{module}.{submodule2}.{counter:_submodule2}. Scalability]
+*** xref:02-architecture.adoc#_extensibility[{module}.{submodule2}.{counter:_submodule2}. Extensibility]
+
+* xref:03-demo.adoc[{counter:module}. See the Solution in Action]
+** xref:03-demo.adoc#_demonstration[{module}.{counter:submodule3} Demonstration]
+** xref:03-demo.adoc#_recorded_video[{module}.{counter:submodule3} Recorded Video]
+** xref:03-demo.adoc#_install_the_demonstration[{module}.{counter:submodule3}. Install the demonstration]
+** xref:03-demo.adoc#_walkthrough_guide[{module}.{counter:submodule3}. Walkthrough guide]
+
+* xref:04-devresources.adoc[{counter:module}. Developer Resources]
+
+* https://redhat-solution-patterns.github.io/[{counter:module}. Other Red Hat Solution Patterns]

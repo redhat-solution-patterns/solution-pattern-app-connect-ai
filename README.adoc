@@ -1,0 +1,51 @@
+= Solution Pattern: AI-Powered Application Integration Platform
+
+Integration and AI used to be separate concerns. Data flows ran on one side, AI models on the other. That separation is breaking down. Organizations now need platforms where application connectivity and AI work as one unified system.
+
+This solution pattern demonstrates how to build such a platform using Red Hat Application Foundations. It addresses four interconnected challenges: secure data ingestion across infrastructure boundaries, decoupled multi-channel messaging, AI-assisted workflow automation, and governed access to large language models.
+
+The architecture combines:
+
+* *Red Hat Service Interconnect* — secure cross-cluster database connectivity
+* *Red Hat Streams for Apache Kafka* — event-driven messaging backbone
+* *Red Hat build of Apache Camel* — integration flows and agentic AI orchestration
+* *Red Hat Connectivity Link* — AI governance with token-based rate limiting
+* *Red Hat OpenShift Data Foundation* — S3-compatible object storage
+
+Documentation: https://redhat-solution-patterns.github.io/solution-pattern-app-connect-ai
+
+== Building the Documentation
+
+=== Option 1: Using Podman/Docker (Recommended)
+
+Run with live preview:
+----
+podman run --rm --name antora -v $PWD:/antora -p 8080:8080 \
+  -e ANTORA_CONFIG=local-site.yml \
+  -i -t ghcr.io/juliaaano/antora-viewer
+----
+
+Then open: http://localhost:8080
+
+=== Option 2: Using npm
+
+Install Antora:
+----
+npm install
+----
+
+Build the site:
+----
+npm run build
+----
+
+For development with live preview:
+----
+npm run dev
+----
+
+Output: `gh-pages/index.html`
+
+== Contributors
+
+Bruno Meseguer (Red Hat)

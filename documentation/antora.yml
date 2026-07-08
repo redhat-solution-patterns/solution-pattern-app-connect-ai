@@ -1,0 +1,5 @@
+name: solution-pattern-app-connect-ai
+title: 'AI-Powered Application Integration Platform'
+version: master
+nav:
+  - modules/ROOT/nav.adoc

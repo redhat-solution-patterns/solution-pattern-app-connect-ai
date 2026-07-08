@@ -1,0 +1,36 @@
+---
+site:
+  title: AI-Powered Application Integration Platform
+  url: http://localhost:8080
+  start_page: solution-pattern-app-connect-ai:ROOT:index.adoc
+  keys:
+    google_analytics: 'G-FWRNJP4L78'
+
+content:
+  sources:
+    - url: .
+      start_path: documentation
+
+asciidoc:
+  attributes:
+    release-version: master
+    page-pagination: true
+  extensions:
+    - ./lib/tab-block.js
+    - ./lib/remote-include-processor.js
+
+ui:
+  bundle:
+    url: https://github.com/redhat-solution-patterns/course-ui/releases/download/v0.1.16/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+    - path: ./supplemental-ui
+    - path: .nojekyll
+    - path: ui.yml
+      contents: "static_files: [ .nojekyll ]"
+
+runtime:
+  cache_dir: ./.cache/antora
+
+output:
+  dir: ./www

@@ -1,0 +1,16 @@
+= Developer Resources
+:sectnums:
+:sectlinks:
+
+Here you find a list of developer resources relevant to this Solution Pattern
+
+* https://developers.redhat.com/about[{counter:submodule4}. Register^] for Red Hat developers subscription
+* https://developers.redhat.com/products/redhat-build-of-apache-camel/overview[{counter:submodule4}. Red Hat build of Apache Camel^]
+* https://developers.redhat.com/products/streams-for-apache-kafka[{counter:submodule4}. Red Hat Streams for Apache Kafka^]
+* https://www.redhat.com/en/technologies/cloud-computing/openshift[{counter:submodule4}. Red Hat OpenShift^]
+* https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[{counter:submodule4}. Red Hat OpenShift Data Foundation^]
+* https://www.redhat.com/en/technologies/cloud-computing/connectivity-link[{counter:submodule4}. Red Hat Connectivity Link^]
+* https://www.redhat.com/en/technologies/cloud-computing/service-interconnect[{counter:submodule4}. Red Hat Service Interconnect^]
+* https://kaoto.io[{counter:submodule4}. Kaoto - Apache Camel visual designer^]
+* https://camel.apache.org/manual/camel-jbang.html[{counter:submodule4}. Camel JBang^]
+* https://kuadrant.io[{counter:submodule4}. Kuadrant - Kubernetes Gateway API policy framework^]

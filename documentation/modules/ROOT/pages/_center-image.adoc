@@ -1,0 +1,40 @@
+// You might be rendering Asciidoc in:
+//  - VS-Code
+//  - GitHub
+//  - GitHub Pages
+//  - others...
+
+// GitHub presents 2 problems:
+//  - It doesn't center images
+//  - It doesn't resolve the image path if using a passthrough
+
+// This is a workaround to force centering the image in GitHub Pages.
+
+// TIP:
+// GitHub pages {user-home} is "/github/home"
+// {user-home}
+
+
+
+//When rendering in VS-Code or GitHub
+ifdef::env-vscode,env-github[]
+.{image-desc}
+image::{image-file}[width={image-width}, align=center]
+endif::env-vscode,env-github[]
+
+//When rendering in GitHub Pages we use Passthrough
+ifndef::env-vscode,env-github[]
+[subs=attributes+]
+++++
+<p align="center">
+	<img src="_images/{image-file}" alt="{image-desc}" width="{image-width}">
+</p>
+++++
+endif::env-vscode,env-github[]
+
+
+
+//Another alternative to center an image (in a table)
+// |===
+// ^.^| image:11-arch-archiving-persist.jpeg[,60%]
+// |===

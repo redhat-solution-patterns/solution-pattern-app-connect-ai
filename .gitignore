@@ -1,0 +1,6 @@
+.cache/
+gh-pages/
+node_modules/
+package-lock.json
+.DS_Store
+www/

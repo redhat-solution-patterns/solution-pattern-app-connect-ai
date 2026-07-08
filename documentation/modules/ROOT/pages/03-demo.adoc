@@ -1,0 +1,1251 @@
+:imagesdir: ../assets/images
+include::partial$style.adoc[]
+
+
+= Solution Pattern: AI-Powered Application Integration Platform
+:sectnums:
+:sectlinks:
+:doctype: book
+:imagesdir: ../assets/images
+
+= See the Solution in Action
+
+== Demonstration
+
+The demo showcases how Red Hat Application Foundations technologies combine to deliver a cloud-native, AI-powered integration platform. The demonstration focuses on:
+
+  - Ingesting purchase orders and storing them securely across infrastructure boundaries via Service Interconnect
+  - Bridging disconnected messaging platforms through a Kafka-based event-driven architecture
+  - Automating support workflows with AI-assisted case resolution using natural language
+  - Enforcing token-based governance on LLM consumption through Connectivity Link
+  - Extending the platform with new communication channels following a standard integration pattern
+
+{empty} +
+
+== Recorded Video
+
+Watch the recorded video of the solution pattern, and find below instructions on how to install the demo and run it.
+
+video::PLACEHOLDER[youtube, width=800, height=480]
+
+{empty} +
+
+== Install the demonstration
+
+=== Provision the demonstration environment
+
+1. Provision the following _Red Hat Demo Platform_ (RHDP) item:
++
+--
+* https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.ai-data-flows.prod&utm_source=webapp&utm_medium=share-link[**Build fast and secure AI data flows with Red Hat Application Foundations and Connectivity Link**^]
++
+image:rhdp-tile-ai-data-flows.png[,30%,link=https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.ai-data-flows.prod&utm_source=webapp&utm_medium=share-link, window=_blank]
++
+[NOTE]
+=====
+* The RHDP catalog item provisions a complete OpenShift environment with all demonstration components pre-installed and configured. You can begin exploring the solution immediately after provisioning completes.
+* The provisioning process takes approximately 60-90 minutes to complete. You will receive an email notification when your environment is ready.
+=====
+--
++
+{empty} +
+
+=== Access the demonstration environment
+
+{empty} +
+
+[.indent2]
+[IMPORTANT]
+====
+The RHDP environment serves two distinct purposes:
+
+1. **Hands-on Lab** — Students can follow the detailed Lab Instructions step-by-step to complete hands-on exercises
+2. **Solution Pattern Demonstration** — Architects and decision-makers can follow the walkthrough guide below to understand the architecture in action
+
+**For this solution pattern**: Follow the walkthrough guide provided in the sections below, not the Lab Instructions. The Lab Instructions contain important reference information (such as credentials, URLs, and environment details) that the walkthrough may reference, but treat them as support material rather than the primary guide.
+====
+
+{empty} +
+
+Once your RHDP environment is provisioned, you will receive an email with access details. You can find the **Lab Instructions** link in both the email notification and on the RHDP cluster details page. Clicking this link opens the hands-on workshop guide in a new browser tab.
+
+[.bordered]
+image::rhdp-lab-instructions-link.png[Lab Instructions link,60%]
+
+Use your RHDP-provided credentials to access the lab instructions. Once inside, you'll find a **Resources** panel on the right side of the page. Click to expand it and reveal links to all the demonstration components:
+
+[cols="1,2",frame=none,grid=none]
+|===
+a|[.bordered]
+image::rhdp-resources-panel.png[Resources panel with access links,60%, align=center]
+
+a|The Resources panel provides quick access to:
+
+- **OpenShift Credentials** — Your username and password for the OpenShift cluster
+- **Dev Spaces Console** — Click to open Red Hat OpenShift Dev Spaces in a new tab
+- **Developer Console** — Direct link to the OpenShift Topology View
+- **Matrix Web Client** — Customer-facing messaging platform
+- **Rocket.Chat Web Client** — Support agent messaging platform
+|===
+
+==== Open Dev Spaces and access the terminal
+
+1. Click the **Dev Spaces Console** link from the Resources panel
+2. Click **Open** to launch the `camel-lab` workspace (wait a few moments while it initializes)
++
+[.bordered]
+image::devspaces-dashboard-open.png[Open Dev Spaces workspace,60%]
+
+3. When the IDE loads, open a terminal by clicking the menu button (three horizontal lines) in the top-left, then select **Terminal** → **New Terminal**
++
+image::toggle-terminal.png[Open terminal in Dev Spaces,40%]
+
+The workspace contains pre-configured setup scripts for each demonstration phase. You'll execute these scripts from the terminal as you progress through the walkthrough.
+
+{empty} +
+
+== Walkthrough guide
+
+The guide below demonstrates the key capabilities of this Solution Pattern in action.
+
+The walkthrough follows a story. Each phase solves a problem that sets up the next one.
+
+TIP: Hover over each phase in the diagram to learn more.
+
+{blank}
+
+[#journey-diagram.mermaid]
+----
+flowchart LR
+    A["Ingest purchase\norders"] -->|"customer spots\na problem"| B["Multi-channel\ncommunication"]
+    B -->|"agent needs\nhelp resolving"| C["AI-assisted\nsupport"]
+    C -->|"AI usage must\nbe controlled"| D["Govern AI\nconsumption"]
+
+    style A fill:#e8f5e9,stroke:#66bb6a,color:#000
+    style B fill:#e3f2fd,stroke:#42a5f5,color:#000
+    style C fill:#fff3e0,stroke:#fb8c00,color:#000
+    style D fill:#fce4ec,stroke:#ef5350,color:#000
+----
+
+[.overlay]
+****
+[.target]
+journey-diagram
+
+[.numbers]
+{x: 8.6, y: 96} +
+{x: 38, y: 96} +
+{x: 66, y: 96} +
+{x: 92, y: 96}
+****
+
+[.mermaid-hints-simple]
+****
+A | ① Secure Data Ingestion | The commerce platform sends purchase orders in EDI format. A Camel flow transforms the EDI into XML and stores the data in a backend database. The database lives on separate infrastructure, so Service Interconnect provides a secure link without exposing anything to the public network. The flow also renders PDF invoices and pushes them to S3 storage. +
+B | ② Multi-Channel Communication | A customer reviews their invoice and spots a mistake. They reach out to support, but customer and support team use different messaging platforms. +
+You connect both so that messages from one show up in the other. Agents can respond from their own portal without caring which platform the customer is on. +
+C | ③ AI-assisted Issue Resolution | The support agent needs to look up the order, fix it in the database, and regenerate the invoice. Instead of doing it manually, the agent talks to an AI bot right inside their messaging portal. +
+The integration layer sends the request to an LLM, which decides what to do (query the database, update the record, regenerate the PDF) and reports back. The whole thing happens using natural language. +
+D | ④ Governing AI Consumption | Once AI is part of the workflow, you need controls. Who can call the LLM? How many tokens can it consume? +
+A gateway sits in front of the AI service and enforces authentication and token-based rate limits. Multiple tiers of service, each with its own token budget. When one tier runs out, the system falls back to the next.
+****
+
+[NOTE]
+====
+The walkthrough below provides a narrative overview of the solution architecture in action. Each phase section describes **what happens** and **why it demonstrates the pattern**, without detailed execution steps.
+
+To actually run the demonstration yourself with step-by-step commands and setup scripts, open the **Lab Instructions** from your RHDP environment. The lab chapters map directly to the phases below:
+
+- **Phase 1: Data Ingestion** → Lab Module 1
+- **Phase 2: Multi-Channel Communication** → Lab Modules 2-3
+- **Phase 3: AI-Assisted Support** → Lab Module 4
+- **Phase 4: Governance** → Lab Module 5
+====
+
+{empty} +
+
+=== Phase 1: Data Ingestion Flow
+
+Follow the steps below to complete a run through that demonstrates the data ingestion flow.
+
+{empty} +
+
+. *Enable access to the database*
++
+The first capability at play in this phase is the ability to securely connect the integration platform to the database. This is achieved using Service Interconnect.
++
+Unfold the instructions below and follow the steps to enable access to the database.
++
+--
+.Click this link to unfold instructions.
+[%collapsible]
+====
+======
+
+The database is unreachable by default.
+
+{blank}
+
+[.mermaid.mermaid-w50]
+[subs="attributes"]
+----
+flowchart LR
+    subgraph yoursLabel ["{username}-devspaces ."]
+        subgraph yours [" "]
+            Camel[⚙️ Integration]
+        end
+    end
+
+    Camel -.-x|"❌ unreachable"| SVC
+
+    subgraph sharedLabel ["shared-database ."]
+        subgraph shared [" "]
+            %% SI2{{"Service\nInterconnect"}}
+            SVC((svc))
+            SVC --> DB
+        end
+    end
+
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style yoursLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style Camel fill:#f8b4b4,stroke:#EE0000,font-weight:bold
+    style sharedLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style yours fill:#fce4e4,stroke:#EE0000
+    style shared fill:#fce4e4,stroke:#EE0000
+    style DB fill:none,stroke:none
+    style SVC fill:#fce4e4,stroke:#EE0000,color:#333
+----
+
+To enable access to the database, run the following command in your terminal in _Dev Spaces_:
+
+[.copypaste]
+****
+si-setup
+****
+
+You should see all resources reporting `ready OK`:
+
+[subs="attributes"]
+++++
+<pre style="background-color: #181818; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: #CBCBCB">Namespace: {username}-devspaces
+    <span style="color: #07BC7A">✓</span> Site                    ready  OK
+    <span style="color: #07BC7A">✓</span> AccessGrant             ready  OK
+    <span style="color: #07BC7A">✓</span> Listener                ready  OK
+
+Namespace: shared-database
+    <span style="color: #07BC7A">✓</span> AccessToken             ready  OK
+    <span style="color: #07BC7A">✓</span> Link                    ready  OK</pre>
+++++
+
+The above output indicates a Service Interconnect link has been established between your namespace and the database namespace.
+
+{blank}
+
+[.mermaid.mermaid-w80]
+[subs="attributes"]
+----
+flowchart LR
+    subgraph yoursLabel ["{username}-devspaces ."]
+        subgraph yours [" "]
+            Camel[⚙️ Integration]
+
+            SI1{{"Service\nInterconnect"}}
+        end
+    end
+
+    Camel --> SI1
+
+    SI1 -.-|"🔒 secure link"| SI2
+
+    subgraph sharedLabel ["shared-database ."]
+        subgraph shared [" "]
+            SI2{{"Service\nInterconnect"}}
+            SVC((svc))
+            SVC --> DB
+        end
+    end
+
+    SI2 --> SVC
+
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style yoursLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style sharedLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style yours fill:#fce4e4,stroke:#EE0000
+    style shared fill:#fce4e4,stroke:#EE0000
+    style Camel fill:#f8b4b4,stroke:#EE0000,font-weight:bold
+    style DB fill:none,stroke:none
+    style SI1 fill:#f8b4b4,stroke:#EE0000,color:#333
+    style SI2 fill:#f8b4b4,stroke:#EE0000,color:#333
+    style SVC fill:#fce4e4,stroke:#EE0000,color:#333
+----
+
+======
+
+====
+--
++
+{empty} +
+
+. *Setup and run the data ingestion flow*
++
+--
+To setup the processeing flow, run the following command in your terminal in _Dev Spaces_:
+
+[.copypaste]
+****
+step 3
+****
+
+
+To run the process, run it with the following command:
+
+[.copypaste]
+****
+camel run *
+****
+
+DevSpaces will detect that port 8080 is open and show a notification — click *Open In New Tab* to open the embedded Test Shop in your browser.
+
+{blank}
+
+[.bordered]
+image::devspaces-port-notification.png[width=50%]
+
+The Test Shop will now be open in your browser.
+--
++
+{empty} +
+
+. *Submit a purchase order*
++
+From the Test Shop web page, follow the steps below to submit a purchase order:
++
+{blank}
++
+[#testshop-order]
+[.bordered]
+image::testshop-order.png[width=60%]
++
+[.overlay]
+****
+[.target]
+testshop-order
+
+[.numbers]
+{x: 82, y: 12, size: 1.5}
+{x: 35, y: 86, size: 1.5}
+{x: 63, y: 58, size: 1.5}
+****
++
+{blank}
++
+--
+. Add an item to the basket — note the total amount
+. Expand *EDI X12 850 Preview* to peek at the raw EDI message — no need to fully understand it, but you may spot the item name, quantity, and total amount in the data
+. Click *Place Order* — the shop sends the Purchase Order to your Camel route
+--
++
+{empty} +
+
+. *View the invoice*
++
+The order above is processed, records are added to the database (via Service Interconnect) and an invoice is generated and stored in S3.
++
+{blank}
++
+++++
+<div style="background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 12px; max-width: 480px; font-family: sans-serif; overflow: hidden">
+  <div style="display: flex; align-items: center; gap: 8px; color: #3a7d44; font-weight: 700; font-size: 17px; padding: 16px 24px; border-bottom: 1px solid #e0e0e0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    Invoice Generated
+  </div>
+  <div style="padding: 24px; text-align: center">
+    <p style="color: #555; font-size: 15px; margin: 0 0 20px 0">Your order has been processed and an invoice is ready.</p>
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: #3a7d44; color: white; font-weight: 700; font-size: 15px; padding: 12px 28px; border-radius: 8px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      View Invoice (PDF)
+    </div>
+    <div style="color: #aaa; font-size: 13px; font-family: monospace; margin-top: 10px">invoice_66507812.pdf</div>
+    <div style="margin-top: 16px">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; font-weight: 700; font-size: 15px; padding: 12px 28px; border-radius: 8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+        Check Database
+      </div>
+    </div>
+  </div>
+</div>
+++++
++
+{empty} +
++
+Click *View Invoice (PDF)* to open it in your browser. The Seller section should display the default mapping values mapped from the EDI message:
++
+{blank}
++
+++++
+<div style="background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 20px 28px; max-width: 380px; font-family: sans-serif; color: #222; line-height: 1.6">
+  <div style="display: flex; align-items: center; margin-bottom: 8px; margin-left: 38px">
+    <div style="width: 28px; height: 14px; background: #aaa; border-radius: 2px; margin-right: 10px; margin-left: -38px"></div>
+    <span style="font-weight: bold; font-size: 15px">Seller:</span>
+  </div>
+  <div style="font-size: 14px; margin-left: 38px">
+    Test Shop Warehouse<br/>
+    456 Warehouse Blvd<br/>
+    Stockton, CA 95202
+  </div>
+</div>
+++++
++
+TIP: Editing the mapping values in the data mapper will update the invoice PDF accordingly. If you want to know more explore the lab instructions.
+
+{empty} +
+
+When you're done, press kbd:[Ctrl+C] in the terminal to stop Camel.
+
+{empty} +
+
+
+=== Phase2: Multi-Channel Communication
+
+The diagram below shows the four flows enabling bidirectional communication between customer and support agent:
+
+[.mermaid.mermaid-w40]
+----
+flowchart LR
+    MX -->|"flow 1"| K -->|"flow 2"| RC
+    RC -->|"flow 3"| K -->|"flow 4"| MX
+
+    MX@{ img: "/solution-pattern-app-connect-ai/_images/element-icon.svg", label: "Matrix", pos: "b", h: 100, w: 80, constraint: "on" }
+    K@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 100, w: 80, constraint: "on" }
+    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 100, w: 100, constraint: "on" }
+
+    style MX fill:none,stroke:none
+    style K fill:none,stroke:none
+    style RC fill:none,stroke:none
+
+    linkStyle 0 stroke:#66bb6a,stroke-width:2px
+    linkStyle 1 stroke:#66bb6a,stroke-width:2px
+    linkStyle 2 stroke:#ef5350,stroke-width:2px
+    linkStyle 3 stroke:#ef5350,stroke-width:2px
+----
+
+{empty} +
+
+Follow the steps below to complete a run through that demonstrates the multi-channel communication flow.
+
+{empty} +
+
+. *Scale up the flows involved*
++
+The flows have been pre-deployed on _OpenShift_, but are not scaled up. You need to scale them up to enable inter-platform communication.
++
+Unfold the instructions below and follow the steps to enable access to the database.
++
+--
+.Click this link to unfold instructions.
+[%collapsible]
+====
+======
+
+From your _Dev Spaces_ terminal, scale up all four deployments to start the flows:
+
+{blank}
+
+[.copypaste]
+****
+oc scale deployment m2k r2k k2m k2r --replicas=1
+****
+
+{blank}
+
+Once all pods are up and running, the Topology view should show blue rings around each deployment:
+
+[.bordered]
+image::openshift-topology-running.png[width=60%]
+
+TIP: Access the Topology view from the resources overview on the right side of the lab instructions. image:resources-topology-view.png[width=200]
+======
+====
+--
++
+{empty} +
+
+. *Try the flows*
++
+--
+Now that all flows are running, it's time to simulate a conversation between customer and support agent.
+
+[TIP]
+====
+For easy onboarding onto Matrix and Rocket.Chat, follow the lab instructions _"Lab 2 - Messaging Access"_ containing the following chapters:
+
+* *Matrix platform onboarding* — the customer side
+* *Rocket.Chat platform onboarding* — the support agent side
+====
+
+{empty} +
+
+Let's simulate a brief exchange between a customer and a support agent(you will impersonate both personas).
+
+. *Customer sends a message* — go to your _Matrix_ room and type:
++
+{blank}
++
+[.copypaste]
+****
+Hi, I need some help with a purchase order I placed recently.
+****
++
+{blank}
+
+. *Agent responds* — go to your _Rocket.Chat_ room, you should see the customer's message. Reply with:
++
+{blank}
++
+[.copypaste]
+****
+Of course! Could you share your order reference so we can look into it?
+****
+
+{empty} +
+
+If all goes well, both platforms should show the full exchange. You should see something similar to:
+
+[subs=attributes]
+++++
+<div class="matrix-flow-wrapper">
+  <style>
+    .matrix-flow-wrapper {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+      background-color: white;
+    }
+    .platform-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      margin-left: 15px;
+      z-index: 2;
+    }
+    .icon-label {
+      font-size: 18px;
+      color: #000;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+    .matrix-bg { background-color: #33C69D; }
+    .rocket-bg { background-color: #f5455c; padding: 5px; box-sizing: border-box; }
+    .msg-bubble-light {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fcfcfc;
+      width: 260px;
+      padding: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+
+  <div style="display: flex; align-items: flex-end; margin-left: -150px; transform: scale(.8)">
+    <div style="margin-right: -200px; margin-bottom: 35px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <div class="platform-row">
+        <!-- Matrix Icon -->
+        <div class="icon-container" style="transform: scale(1.8); margin-top: 35px; margin-right: 31px">
+          <div class="icon-box matrix-bg" style="margin-top: 5px; transform: scale(1);">
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <g transform="translate(-11 -11) scale(0.09)">
+                <path stroke-width="30" d="m153.25 277.15c.47-46.35 37.79-81.6 81.6-81.6m0-42.3c46.35.47 81.6 37.79 81.6 81.6m42.3 0c-.47 46.35-37.79 81.6-81.6 81.6m0 42.3c-46.35 0-81.6-37.79-81.6-81.6"/>
+              </g>
+            </svg>
+          </div>
+          <span class="icon-label">Matrix</span>
+        </div>
+        <!-- Matrix Messages -->
+        <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 480px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 5px 5px; gap: 2px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+          <div style="display: flex; align-items: center;">
+            <div style="width: 30px; height: 30px; background-color: #4a90e2; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0;">
+              U
+            </div>
+            <div style="margin-left: 12px; font-weight: bold; font-size: 15px; color: #00d781; line-height: 1.4;">
+              user1
+            </div>
+          </div>
+          <div style="background-color: white; display: flex; align-items: baseline; padding: 5px 0px;">
+            <div style="width: 30px; text-align: center; font-size: 10px; color: #6c757d; flex-shrink: 0;">
+              4:10
+            </div>
+            <div style="margin-left: 12px; font-size: 15px; color: #333; line-height: 1.2;">
+              Hi, I need some help with a purchase order I placed recently.
+            </div>
+          </div>
+          <div style="background-color: #eee; display: flex; align-items: baseline; padding: 5px 0px;">
+            <div style="width: 30px; text-align: center; font-size: 10px; color: #6c757d; flex-shrink: 0;">
+              4:11
+            </div>
+            <div style="margin-left: 12px; font-size: 15px; color: #333; line-height: 1.2;">
+              <span style="font-weight:700">user1@rocketchat:</span> Of course! Could you share your order reference so we can look into it?
+            </div>
+          </div>
+        </div>
+        <!-- Bidirectional Arrow -->
+        <div style="margin-top: 15px">
+          <svg width="150" height="60" viewBox="0 0 150 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <path d="M5 30 L25 10 V20 H100 V10 L120 30 L100 50 V40 H25 V50 L5 30 Z" fill="#EDEDED" stroke="#777" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <!-- Rocket.Chat Icon -->
+        <div class="icon-container" style="margin-left:-85px; transform: scale(1.8); margin-top: 45px; position: relative; z-index: 20">
+          <div style="margin-left: 720px;">
+            <div class="icon-box rocket-bg">
+              <svg style="z-index: 10" width="45" height="45" viewBox="0 0 24 24" fill="white">
+                <g transform="translate(-2 -2) scale(.9)">
+                <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+              </svg>
+            </div>
+            <span class="icon-label" style="margin-left: -0px">Rocket.Chat</span>
+          </div>
+        </div>
+        <!-- Rocket.Chat Messages -->
+        <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 560px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; z-index: 1; background-color: white">
+          <div style="gap:10px; display: flex; flex-direction: row;">
+            <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; flex-shrink: 0; z-index: 1">
+              U
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; z-index: 1">
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+                <span style="font-weight: bold; font-size: 14px; color: #333;">user1</span>
+                <span style="font-size: 11px; color: #aaa;">4:10 PM</span>
+              </div>
+              <div style="font-size: 14px; color: #333; line-height: 1.4; margin: 0; padding: 0;">
+                <span style="font-weight:700">user1@matrix:</span> Hi, I need some help with a purchase order I placed recently.
+              </div>
+            </div>
+          </div>
+          <div style="gap:10px; display: flex; flex-direction: row;">
+            <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; flex-shrink: 0;">
+              U
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+                <span style="font-weight: bold; font-size: 14px; color: #333;">user1</span>
+                <span style="font-size: 11px; color: #aaa;">4:11 PM</span>
+              </div>
+              <div style="font-size: 14px; color: #333; line-height: 1.4; margin: 0; padding: 0;">
+                Of course! Could you share your order reference so we can look into it?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+++++
+--
++
+{empty} +
+
+=== Phase 3: AI-Assisted Case Resolution
+
+The following phase demonstrates how the AI-powered integration platform can assist support agents with complex case resolution tasks.
+
+{empty} +
+
+. *Setup and run the data ingestion flow*
++
+--
+[loweralpha]
+. To setup the processeing flow, run the following command in your terminal in _Dev Spaces_:
++
+{blank}
++
+[.copypaste]
+****
+step 8
+****
++
+{blank}
+
+. Now, use the `mcp` script to start the MCP servers, as follows:
++
+{blank}
++
+[.copypaste]
+****
++++./mcp start+++
+****
++
+{blank}
++
+TIP: The first time you run the MCP servers, it'll take some time to download dependencies and start. +
+Run `./mcp help` to explore options and troubleshoot issues.
+
+
+. To run the process, run it with the following command:
++
+{blank}
++
+[.copypaste]
+****
+camel run agent
+****
++
+{blank}
++
+Wait for the process to start.
+--
++
+{empty} +
+
+
+. *Try it out*
++
+Go through the following steps to recreate the the full resulution process:
++
+{empty} +
++
+[lowerroman]
+.. *Pull the invoice*
++
+From _Rocket.Chat_, as the support agent, enter the following message:
++
+{blank}
++
+[.copypaste]
+****
+Can you show me invoice 61356291?
+****
++
+[TIP]
+--
+.What if the AI still says it can't help?
+[%collapsible]
+====
+The workshop uses a small LLM that can be inconsistent. The system prompt tells it to re-evaluate its tools before responding, but sometimes it replies as if no tools are available, for example:
+
+{blank}
+
+:fig-time: 5:10 PM
+:fig-user-msg: Can you show me invoice 61356291
+:fig-bot-msg: I'm sorry, I don't have the capability to retrieve that PDF right now.
+include::_figures/rc-interaction.adoc[]
+
+If that happens, try one or both of these options:
+
+1. Send a more specific request:
++
+{blank}
++
+[.copypaste]
+****
+Please try again using the tool to get invoices
+****
++
+This points the LLM to the right tool, which is usually enough to get it working.
++
+{blank}
+2. Stop the process with kbd:[CTRL+C] and restart it. A fresh start gives the LLM a clean tool list.
+
+====
+--
++
+If all goes well, this time the LLM discovers the tool, calls it, and responds with the invoice:
++
+{blank}
++
+:fig-time: 6:47 PM
+:fig-user-msg: Can you show me invoice 61356291
+:fig-bot-msg: Here is the PDF for Invoice 61356291.
+:fig-attach-title: Invoice 61356291 PDF ▾
+:fig-attach-desc: Click to view or download
+include::_figures/rc-interaction-attach.adoc[]
++
+{blank}
++
+The bot identified the right tool, retrieved the invoice, and returned a download link to the support agent. Clicking the link opens the PDF in a new tab.
++
+{blank}
++
+.See the sample invoice
+[%collapsible]
+=====
+{blank}
+
+include::_figures/invoice-pdf.adoc[]
+=====
++
+{empty} +
+
+.. *Amend the invoice*
++
+--
+
+The ai-bot can do more than just retrieve data — it can act on it. Imagine the customer has changed their mind and wants to return one of the items. Ask the AI assistant to amend the invoice:
+
+{blank}
+
+[.copypaste]
+****
+The customer would like to return stemless wine glasses, could you please adjust the invoice?
+****
+
+The agentic system inspects the invoice, identifies the matching item, triggers the necessary tools to update the database, and responds with a summary of the changes:
+
+{blank}
+
+:fig-time: 6:49 PM
+:fig-user-msg: The customer would like to return stemless wine glasses, could you please adjust the invoice?
+:fig-bot-msg: The database records have been updated. The stemless wine glasses item (Item 4) has been removed, and the summary values have been recalculated. Would you like to see the new PDF invoice?
+include::_figures/rc-interaction.adoc[]
+
+The agentic system acted autonomously — it inspected the invoice, identified the item, updated the quantity in the database, recalculated the totals, and confirmed the changes. All from a single natural language request.
+
+Notice the bot's response — it may suggest viewing the updated invoice (LLMs are unpredictable, so the exact wording varies). If it does, simply reply `yes`. If it doesn't, ask to see the amended invoice:
+
+{blank}
+
+[.copypaste]
+****
+Can you show me the updated invoice?
+****
+
+Either way, the bot responds with the updated PDF link:
+
+{blank}
+
+:fig-time: 6:50 PM
+:fig-bot-msg: Here is the updated PDF for Invoice 61356291.
+:fig-attach-title: Invoice 61356291 PDF ▾
+:fig-attach-desc: Click to view or download
+include::_figures/rc-bot-attach.adoc[]
+
+Click the link to open the regenerated invoice.
+
+{blank}
+
+.See a sample of the amended invoice
+[%collapsible]
+====
+{blank}
+
+include::_figures/invoice-pdf-amended.adoc[]
+====
+
+NOTE: Notice the red *Amended* tag in the upper-right corner of the invoice — this indicates the document has been modified from the original.
+
+Inspect the document and verify the modifications are correct — the stemless wine glasses (item 4) should be removed, and the totals recalculated accordingly.
+--
++
+{empty} +
+
+.. *Raise a ticket*
++
+--
+A customer support process rarely ends with a single action. Returning an item involves multiple departments — confirming the goods were received, processing the refund, updating inventory, notifying the customer. Rather than handling each step manually, ask the AI agent to raise a ticket that coordinates everything:
+
+{blank}
+
+[.copypaste]
+****
+Could you please raise a ticket? Include the details explained, and ask the right departments to refund the customer accordingly.
+****
+
+The agentic system gathers the context from the conversation, creates a ticket in the HelpDesk system, and responds with a confirmation:
+
+{blank}
+
+:fig-time: 6:52 PM
+:fig-user-msg: Could you please raise a ticket? Include the details explained, and ask the right departments to refund the customer accordingly.
+:fig-bot-msg: A ticket has been created with ID 1025. Would you like to share this ticket with the customer?
+include::_figures/rc-interaction.adoc[]
+
+At this point, the bot has created a ticket and asks permission to share it with the customer. You can either reply with "Yes, please share it with the customer." or "Could you share the ticket with the customer?" depending on the bot's response.
+
+Either way, the final outcome is the same — the bot shares the ticket and the customer receives a link to the HelpDesk system:
+
+{blank}
+
+:fig-time: 6:53 PM
+:fig-bot-msg: The ticket #1025 has been successfully shared with the customer. They will receive a link to the HelpDesk system.
+:fig-attach-title: Ticket 1025 ▾
+:fig-attach-desc: Click to open HelpDesk and select ticket 1025
+include::_figures/rc-bot-attach.adoc[]
+
+Remember — the customer communicates from the _Matrix_ messaging platform. The bot indicated the ticket was shared, which means the customer should have received a message with the ticket reference. Switch to your _Matrix_ window and check.
+
+You should see a message like this:
+
+{blank}
+
+:fig-time: 11:05
+:fig-sender: ai@rocketchat:
+:fig-msg: pass:[&#x1F4C4; Ticket <span style="color: #6D28D9; font-weight: bold;">#1025</span> created.<br>(Click to open in HelpDesk)]
+include::_figures/matrix-message.adoc[]
+--
++
+{empty} +
+
+.. *Verify the ticket from the customer's perspective*
++
+--
+Now put yourself in the customer's shoes. The customer received a message in _Matrix_ with a link to the _Globex HelpDesk_ ticketing system. Click the ticket link in the _Matrix_ window.
+
+A new tab opens with the _Globex HelpDesk_ login page:
+
+{blank}
+
+include::_figures/helpdesk-login.adoc[]
+
+To login, run the following command to obtain your _HelpDesk_ credentials:
+
+{blank}
+
+[.copypaste]
+****
+grep -E "helpdesk_(username|password)" /tmp/lab-config.cache
+****
+
+The command above should display your credentials, similar to:
+
+{blank}
+
+++++
+<pre style="background-color: #181818; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: #CBCBCB"><span style="color: #F14C4B;font-weight:bold">helpdesk_username</span>=user1
+<span style="color: #F14C4B;font-weight:bold">helpdesk_password</span>=59QwdxEM
+</pre>
+++++
+
+Log in using the credentials displayed in your terminal
+
+Once logged in, the _Globex HelpDesk_ displays the list of open tickets. You should see the ticket the AI agent just created:
+
+{blank}
+
+include::_figures/helpdesk-tickets.adoc[]
+
+Click the ticket to inspect its details. The AI agent composed the ticket body from the conversation — it includes a summary of the changes and a link to the updated invoice:
+
+{blank}
+
+include::_figures/helpdesk-ticket-detail.adoc[]
+
+The full circle is complete: the AI assistant retrieved an invoice, amended it, raised a ticket with all the relevant details, and shared it with the customer across messaging platforms. All from natural conversation.
+--
++
+{empty} +
+
+=== Phase 4: Governance and Rate Limiting
+
+The following phase demonstrates how the AI-powered integration platform can be used to implement governance and rate limiting policies.
+
+{empty} +
+
+. *Review and apply the AuthPolicy*
++
+--
+Create an AuthPolicy that is applied to the HTTPRoute (ai-proxy-route) and enforces a key-based authentication scheme. This will ensure that only authorized users with a valid API key can access the LLM.
+
+{blank}
+
+.Click this link to unfold the actions.
+[%collapsible]
+====
+======
+
+Examine the AuthPolicy and *apply* it by pasting the following command in your terminal:
+
+{blank}
+
+[.copypaste]
+****
+oc apply -f - <<EOF
+apiVersion: kuadrant.io/v1
+kind: AuthPolicy
+metadata:
+  name: ai-proxy-auth
+  namespace: $WORKSPACE_NAMESPACE
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: ai-proxy-route
+  rules:
+    authentication:
+      api-key-users:
+        apiKey:
+          selector:
+            matchLabels:
+              app: my-llm-${WORKSPACE_NAMESPACE%-devspaces}
+        credentials:
+          authorizationHeader:
+            prefix: Bearer
+    response:
+      success:
+        filters:
+          identity:
+            json:
+              properties:
+                groups:
+                  selector: auth.identity.metadata.annotations.kuadrant\.io/groups
+                userid:
+                  selector: auth.identity.metadata.annotations.secret\.kuadrant\.io/user-id
+        headers:
+          authorization:
+            plain:
+              selector: auth.identity.metadata.annotations.secret\.kuadrant\.io/upstream-token
+      unauthenticated:
+        headers:
+          "content-type":
+            value: application/json
+        body:
+          value: |
+            {
+              "error": "Unauthenticated",
+              "message": "Invalid or missing API Key."
+            }
+      unauthorized:
+        headers:
+          "content-type":
+            value: application/json
+        body:
+          value: |
+            {
+              "error": "Forbidden",
+              "message": "Access denied. Your account does not have the required permissions (gold/silver)."
+            }
+    authorization:
+      allow-groups:
+        opa:
+          rego: |
+            groups := split(object.get(input.auth.identity.metadata.annotations, "kuadrant.io/groups", ""), ",")
+            allow { groups[pass:[_]] == "gold" }
+            allow { groups[pass:[_]] == "silver" }
+EOF
+****
+======
+====
+--
++
+{empty} +
+
+. *Review and apply the TokenRateLimitPolicy*
++
+--
+The TokenRateLimitPolicy is a gateway-level resource. It defines token budgets per tier and lets the gateway enforce them independently of the running application.
+
+{blank}
+
+.Click this link to unfold the actions.
+[%collapsible]
+====
+======
+The policy defines two token budgets that reflect the cost of each tier:
+
+* *Gold* — richer analysis, higher compute cost. A stricter token allowance with a slower renewal window.
+* *Silver* — lighter analysis, lower compute cost. A more generous token allowance that renews faster.
+
+{blank}
+
+Review the TokenRateLimitPolicy below and *apply it by pasting* the following yaml in your new terminal tab:
+
+{blank}
+
+[.copypaste]
+****
+oc apply -f - <<EOF
+apiVersion: kuadrant.io/v1alpha1
+kind: TokenRateLimitPolicy
+metadata:
+  name: openai-token-limits
+  namespace: $WORKSPACE_NAMESPACE
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: ai-proxy-route
+  limits:
+    gold:
+      rates:
+        - limit: 50
+          window: 4m
+      when:
+        - predicate: |
+            auth.identity.groups.split(",").exists(g, g == "gold")
+      counters:
+        - expression: auth.identity.userid
+    silver:
+      rates:
+        - limit: 500
+          window: 2m
+      when:
+        - predicate: |
+            auth.identity.groups.split(",").exists(g, g == "silver")
+      counters:
+        - expression: auth.identity.userid
+EOF
+****
+
+Notice how the YAML matches the tier budgets described above: 
+
+* `gold` with a tighter limit and longer window
+* `silver` with a more generous allowance that renews faster.
+======
+====
+--
++
+{empty} +
+
+
+
+. *Setup and run the customer AI assistant*
++
+--
+To setup the processeing flow, run the following command in your terminal in _Dev Spaces_:
+
+[.copypaste]
+****
+step 10
+****
+
+
+To run the process, run it with the following command:
+
+[.copypaste]
+****
+camel run * --local-kamelet-dir ../support/kamelets
+****
+--
++
+{empty} +
+
+
+. *Generate a customer profile*
++
+--
+From _Rocket.Chat_ issue the following message:
+
+{blank}
+
+[.copypaste]
+****
+Please, generate a customer profile for order 61356291
+****
+
+NOTE: The order number in this request is illustrative -- the Customer Profile Tool uses simulated input data from JSON files in the `data/` folder of your project. You can explore these files in the source code to see the mock CRM, history, audit, and ticket data that feeds the analysis.
+
+The system should respond and default to Gold -- the richer of the two analysis tiers. You should see a *GOLD TIER ANALYSIS* with a full customer profile, similar to:
+
+{blank}
+
+:fig-time: 6:49 PM
+include::_figures/rc-gold-profile.adoc[]
+
+NOTE: Because LLM responses are non-deterministic, the exact wording may differ from the sample above. What matters is the *GOLD TIER ANALYSIS* banner and the four sections: Customer Profile, Sentiment & Risk, Open Issues, and Recommended Action.
+
+At this point, authentication is enforced. Both Gold and Silver keys are configured, and the AuthPolicy validates them before allowing access to the LLM. In the next exercise, you'll discover how the gateway controls how much each tier can consume, and what happens when a tier reaches its limit.
+--
++
+{empty} +
+
+. *Force a rate limit*
++
+--
+In the previous step, the generated profile was based on the Gold tier. Because the rate limit is enforced, the next request will be downgraded to the Silver tier. Credit for gold tier was consumed and the system will default to the Silver tier.
+
+From _Rocket.Chat_ issue the following message:
+
+{blank}
+
+[.copypaste]
+****
+Please try again
+****
+
+The system should generate back a Silver profile -- the poorer of the two analysis tiers. You should see a *SILVER TIER ANALYSIS* with a full customer profile, similar to:
+
+{blank}
+
+:fig-time: 6:49 PM
+include::_figures/rc-silver-profile.adoc[]
+
+--
++
+{empty} +
+
+
+. *Force a rate limit exhaustion*
++
+--
+Again, from _Rocket.Chat_ issue the same message:
+
+{blank}
+
+[.copypaste]
+****
+Please try again
+****
+
+Once both budgets are consumed, the system has no remaining capacity. You should see a *SERVICE NOTICE* with a `429 Too Many Requests` status, confirming that the token rate limiting policy is fully enforced:
+
+{blank}
+
+:fig-time: 11:25 AM
+:fig-user-msg: Please try again
+:fig-status: 429 Too Many Requests
+:fig-action: Intelligence Service is currently paused due to high traffic.
+:fig-notice: Please try your request again in a few moments.
+include::_figures/rc-service-notice.adoc[]
+
+NOTE: Token budgets are not permanent. They operate on a time window basis, so after enough time passes the budgets get replenished. If you wait a few minutes and try again, the system will resume producing profiles following the same fallback strategy: Gold first, then Silver.
+--
++
+{empty} +
+
+
++++<h2>🎉 Well done! 🎉</h2>+++
+
+You have completed the walkthrough of the AI-Powered Application Integration Platform solution pattern.
+
+[TIP]
+====
+This walkthrough provided a narrative overview of the architecture and key capabilities. To experience the platform hands-on with detailed, self-guided instructions, step-by-step commands, and in-depth explanations of each component, explore the **Lab Instructions** from your RHDP environment.
+
+The hands-on lab is designed as a comprehensive workshop experience, perfect for team training sessions or workshop days where multiple students can work collaboratively on the same environment. It offers:
+
+- Detailed setup instructions for each phase
+- Step-by-step command sequences with explanations
+- In-depth exploration of Service Interconnect, Kafka, Agentic Camel, and Connectivity Link
+- Troubleshooting guidance and verification steps
+- Extended scenarios demonstrating additional capabilities
+- Multi-user support for workshop environments where teams can learn together
+
+Visit the Lab Instructions to discover all the capabilities in practice — whether individually or as part of a workshop.
+====
+
+
+{empty} +

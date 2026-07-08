@@ -1,0 +1,131 @@
+:imagesdir: ../assets/images
+include::partial$style.adoc[]
+
+[#use-cases]
+== Use cases
+
+Common use cases that can be addressed with this architecture are:
+
+- Secure data ingestion from external platforms into backend databases residing on separate infrastructure
+- Multi-channel customer support integrating disconnected messaging platforms
+- Event-driven architecture decoupling services through Apache Kafka
+- AI-assisted case resolution with natural language interaction and autonomous tool orchestration
+- Token-based governance and rate limiting for large language model consumption
+- Automated invoice generation and archival to object storage
+- Extensible platform design enabling new communication channels without touching existing integrations
+- Compliance-ready AI deployment with authentication and usage controls
+
+
+{empty} +
+
+== The story behind this solution pattern
+
+Organizations often face a familiar set of disconnected systems. Order data lives across disparate infrastructure. Databases reside on separate networks, inaccessible from cloud environments without complex VPN configurations or exposed endpoints. Customer support operates across multiple messaging platforms — customers connect through one channel while support agents work in another. When issues arise, agents manually jump between systems to investigate problems, update records, and regenerate documents. No AI assists them, and even if it did, there would be no controls governing access or consumption.
+
+These gaps create friction. Resolution times stretch. Manual processes introduce errors. Scaling support teams becomes expensive. Compliance requirements around data access and AI usage go unmet.
+
+{empty} +
+
+== The Solution
+
+This solution pattern implements an architecture that addresses each of these challenges through a unified platform built on Red Hat Application Foundations. The demonstration scenario uses an order processing and customer support workflow to illustrate the capabilities. The diagram below shows the complete architecture:
+
+{empty} +
+
+[#pattern-diagram.mermaid]
+----
+flowchart LR
+
+    chatInner ~~~ Customer
+    chatInner ~~~ SupportAgent
+
+    Customer --> Shop -->|"EDI message"| Camel
+
+    Camel --> ServiceInterconnect{{"Service\nInterconnect"}} --> Database
+
+    Camel --- spacer1[" "]
+
+    SupportAgent --- spacer2[" "] --> AgenticCamel <--> ConnectivityLink --> LLM
+
+    AgenticCamel --- spacer1[" "] --> Storage
+    AgenticCamel --> ServiceInterconnect
+
+    subgraph chatOuter ["Customer Support Platform"]
+        subgraph chatInner [" "]
+        direction LR
+        ChatCustomer --- |Camel| Kafka --- |Camel| ChatAgent
+        end
+    end
+
+    chatOuter ~~~ SupportAgent
+    chatOuter ~~~ Customer
+
+    Camel@{ img: "/solution-pattern-app-connect-ai/_images/integration-icon.svg", label: "Camel Integration", pos: "b", h: 80, w: 80, constraint: "on" }
+    Customer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    Shop@{ img: "/solution-pattern-app-connect-ai/_images/shop-icon.svg", label: "Shop", pos: "b", h: 80, w: 80, constraint: "on" }
+    Storage@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "OpenShift<br>Data Foundation", pos: "b", h: 80, w: 80, constraint: "on" }
+    SupportAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    LLM@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "MaaS / LLM", pos: "b", h: 80, w: 80, constraint: "on" }
+    Database@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    AgenticCamel@{ img: "/solution-pattern-app-connect-ai/_images/ai-icon.svg", label: "Agentic Camel", pos: "b", h: 80, w: 80, constraint: "on" }
+    ConnectivityLink@{ img: "/solution-pattern-app-connect-ai/_images/guardrail-icon.svg", label: "Connectivity Link", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatCustomer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Kafka@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style ChatCustomer fill:none,stroke:none
+    style ChatAgent fill:none,stroke:none
+    style Kafka fill:none,stroke:none
+    style chatOuter fill:none,stroke:none
+    style chatInner fill:#fce4e4,stroke:#EE0000
+    style ServiceInterconnect fill:#f8b4b4,stroke:#EE0000,color:#333
+    style Customer fill:none,stroke:none
+    style Camel fill:none,stroke:none,font-weight:bold
+    style Shop fill:none,stroke:none
+    style Storage fill:none,stroke:none
+    style spacer1 fill:none,stroke:none,width:1px,height:1px
+    style spacer2 fill:none,stroke:none,width:1px,height:1px
+    style SupportAgent fill:none,stroke:none
+    style LLM fill:none,stroke:none
+    style Database fill:none,stroke:none
+    style AgenticCamel fill:none,stroke:none
+    style ConnectivityLink fill:none,stroke:none
+----
+
+[.overlay]
+****
+[.target]
+pattern-diagram
+
+[.numbers]
+{x: 63, y: 5}
+{x: 20, y: 60}
+{x: 68, y: 45}
+{x: 84, y: 103}
+****
+
+{blank}
+
+The architecture addresses the challenges as follows:
+
+pass:[<span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">1</span>] **Secure data ingestion**: An Apache Camel integration ingests EDI purchase orders from the Shop, transforms them to XML, and stores data in a backend database via Red Hat Service Interconnect — a secure connectivity solution that bridges environments without exposing databases to public networks. The same flow renders PDF invoices and uploads them to S3 object storage provided by Red Hat OpenShift Data Foundation.
+
+pass:[<span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">2</span>] **Event-driven messaging**: Red Hat Streams for Apache Kafka serves as the event-driven backbone, decoupling messaging platforms. Customers reach out through Matrix while support agents work in Rocket.Chat. Messages flow bidirectionally through Kafka topics, with each platform integrating via a standard data model. This decoupling makes the architecture extensible — new channels plug into Kafka without modifying existing flows.
+
+pass:[<span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">3</span>] **AI-assisted automation**: An AI agent powered by Agentic Apache Camel and Model-as-a-Service (MaaS) enables support agents to resolve issues through natural language. The agent interprets requests, autonomously selects tools, and executes backend operations — querying databases, updating records, regenerating invoices — all within the support chat interface.
+
+pass:[<span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">4</span>] **Governance and rate limiting**: Red Hat Connectivity Link sits in front of the AI service, enforcing authentication via API keys and token-based rate limiting across service tiers. Organizations can define Gold and Silver tiers with distinct token budgets, enabling fallback strategies when high-cost tiers exhaust their quotas.
+
+The result is a platform where data flows securely, systems communicate through decoupled channels, AI automates support workflows, and governance controls AI consumption — all deployed on Red Hat OpenShift.
+{empty} +
+
+[NOTE]
+====
+Rocket.Chat and Matrix are open-source implementations of direct messaging platforms. While not as popular or ubiquitous as WhatsApp or Discord for example, they can be installed on an OpenShift cluster and do not require registration, making them more suitable for our solution pattern demo environment.
+====
+
+
+[TIP]
+Please see the xref:02-architecture.adoc[Architecture] section for more details on the technologies involved and architecture diagrams.
+
+{empty} +

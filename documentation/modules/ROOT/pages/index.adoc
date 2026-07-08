@@ -1,0 +1,25 @@
+= Solution Pattern: AI-Powered Application Integration Platform
+:page-layout: home
+:sectnums:
+:sectlinks:
+:doctype: book
+
+
+Integration and AI used to be separate concerns. Data flows ran on one side, AI models on the other. That separation is breaking down. Organizations now need platforms where application connectivity and AI work as one unified system.
+
+This solution pattern demonstrates how to build such a platform. It addresses four interconnected architectural challenges: secure data ingestion across infrastructure boundaries, decoupled multi-channel messaging, AI-assisted workflow automation, and governed access to large language models.
+
+This architecture applies wherever organizations need to bridge infrastructure boundaries securely, integrate disconnected communication platforms, automate operations with AI assistance, and enforce governance controls on AI services. The solution pattern demonstrates these capabilities through an order processing and customer support scenario, where purchase orders flow into backend systems, customer inquiries route across messaging platforms, and AI agents assist support teams with database queries and document generation.
+
+*Contributors*: _Bruno Meseguer (Red Hat)_
+++++
+ <br>
+++++
+[NOTE]
+====
+Solutions Patterns help you understand the art of the possible with Red Hat's portfolio, and are not intended to be used as-is for production environments. You are welcome use any part of this solution pattern for your own workloads.
+====
+
+{empty} +
+
+include::01-pattern.adoc[]
