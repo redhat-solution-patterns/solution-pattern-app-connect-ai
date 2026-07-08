@@ -1005,11 +1005,12 @@ The following phase demonstrates how the AI-powered integration platform can be 
 
 . *Review and apply the AuthPolicy*
 +
---
 Create an AuthPolicy that is applied to the HTTPRoute (ai-proxy-route) and enforces a key-based authentication scheme. This will ensure that only authorized users with a valid API key can access the LLM.
-
++
 {blank}
-
++
+[IMPORTANT]
+--
 .Click this link to unfold the actions.
 [%collapsible]
 ====
@@ -1093,11 +1094,12 @@ EOF
 
 . *Review and apply the TokenRateLimitPolicy*
 +
---
 The TokenRateLimitPolicy is a gateway-level resource. It defines token budgets per tier and lets the gateway enforce them independently of the running application.
-
++
 {blank}
-
++
+[IMPORTANT]
+--
 .Click this link to unfold the actions.
 [%collapsible]
 ====
