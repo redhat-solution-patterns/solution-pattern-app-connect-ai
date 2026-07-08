@@ -35,7 +35,7 @@ jobs:
       - name: upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: www
+          path: gh-pages
   deploy:
     needs: build
     environment:
