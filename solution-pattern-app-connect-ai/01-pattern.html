@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Solution Patterns from Red Hat</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-app-connect-ai/01-pattern.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWRNJP4L78"></script>
+<script>function gtag() { dataLayer.push(arguments) }; window.dataLayer = window.dataLayer || []; gtag('js', new Date()); gtag('config', 'G-FWRNJP4L78')</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns from Red Hat</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-app-connect-ai" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">AI-Powered Application Integration Platform</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.1 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.3 The solution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#tech_stack">1.4 Technology stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_common_challenges">2.1. Common challenges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.2. Technology stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html#in_depth">2.3. An in-depth look at the solution&#8217;s architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_secure_data_ingestion">2.3.1. Secure Data Ingestion</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_event_driven_messaging">2.3.2. Event-Driven Messaging</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_ai_assisted_automation">2.3.3. AI-Assisted Automation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_governance_and_rate_limiting">2.3.4. Governance and Rate Limiting</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_scalability">2.3.5. Scalability</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_extensibility">2.3.6. Extensibility</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-demo.html">3. See the Solution in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_demonstration">3.1 Demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_recorded_video">3.2 Recorded Video</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_install_the_demonstration">3.3. Install the demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_walkthrough_guide">3.4. Walkthrough guide</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="04-devresources.html">4. Developer Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">5. Other Red Hat Solution Patterns</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">AI-Powered Application Integration Platform</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">AI-Powered Application Integration Platform</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-solution-patterns/solution-pattern-app-connect-ai/edit/main/documentation/modules/ROOT/pages/01-pattern.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<style>
+.doc {
+    max-width: 70rem;
+}
+
+.underline {
+  cursor: pointer;
+}
+
+u {
+    cursor: pointer;
+}
+
+summary  {
+    cursor: pointer;
+}
+
+/* Push TOC down to make room for fixed overlays */
+.toc.sidebar .toc-menu {
+  top: 13rem !important;
+}
+
+.label {
+    color: #fff;
+    padding: .2em .6em .3em;
+    font-weight: 700;
+    border-radius: .25em;
+    font-size: 90%;
+}
+
+.added {background-color: #007700;}
+.changed {background-color: #088;}
+.updated {background-color: #3344bb;}
+
+.imageblock {
+    align-items: flex-start !important;
+}
+.imageblock.text-center .content {
+    width: 100%;
+    text-align: center;
+}
+.imageblock.text-center .content img {
+    display: inline-block;
+}
+.imageblock.bordered img {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Scale Mermaid diagrams: [.mermaid-w20] through [.mermaid-w90] */
+.mermaid-w20 svg { width: 20% !important; max-width: 20% !important; }
+.mermaid-w30 svg { width: 30% !important; max-width: 30% !important; }
+.mermaid-w40 svg { width: 40% !important; max-width: 40% !important; }
+.mermaid-w50 svg { width: 50% !important; max-width: 50% !important; }
+.mermaid-w60 svg { width: 60% !important; max-width: 60% !important; }
+.mermaid-w70 svg { width: 70% !important; max-width: 70% !important; }
+.mermaid-w80 svg { width: 80% !important; max-width: 80% !important; }
+.mermaid-w90 svg { width: 90% !important; max-width: 90% !important; }
+
+/* Center Mermaid diagrams with [.text-center] role */
+.mermaid.text-center svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Inline images: vertically center with surrounding text */
+.doc span.image img {
+    vertical-align: middle;
+}
+
+/* Inline code styling — :not([style]) excludes passthrough <code> with inline styles */
+.doc code:not([style]) {
+  background-color: #DDF4FF !important;
+  font-family: monospace !important;
+}
+
+
+/* kbd styling — override Antora theme */
+.doc kbd {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 0px 1px black;
+  font-size: .85em;
+  line-height: .85em;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 3px 5px;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+/* Admonition blocks: grey left border for visibility */
+.doc .admonitionblock {
+  border-left: 4px solid #999 !important;
+}
+
+/* Inline code inside admonitions: keep same color */
+.doc .admonitionblock code {
+  background-color: #DDF4FF !important;
+}
+
+/* Copypaste textarea inside admonitions: darker background for contrast */
+.admonitionblock textarea {
+  background-color: #ddd !important;
+}
+
+/* Listing/source blocks — match copypaste textarea appearance */
+.doc .listingblock pre {
+  background-color: #f0f0f0 !important;
+  color: #333 !important;
+  padding: 10px 15px;
+  line-height: 1.4;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+/* Properties source blocks — dark theme overriding highlight.js */
+.doc .listingblock pre:has(code[data-lang="properties"]) {
+  background-color: #2b2b2b !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock pre code[data-lang="properties"] {
+  background-color: transparent !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock code[data-lang="properties"] .hljs-comment { color: #689956 !important; font-style: italic; }
+.doc .listingblock code[data-lang="properties"] .hljs-attr { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-string { color: #CBCBCB !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-meta,
+.doc .listingblock code[data-lang="properties"] .hljs-keyword { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-link { color: #CBCBCB !important; }
+
+/* Ensure topbar dropdown appears above fixed overlays */
+.navbar {
+  z-index: 1001 !important;
+}
+
+/* Right sidebar: .doc-sidebar — fixed status overlay at top-right */
+.doc-sidebar {
+  position: fixed !important;
+  top: 6.5rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  z-index: 1000;
+  border-radius: 4px !important;
+}
+.doc-sidebar .sidebarblock {
+  padding: 0.3rem 0.5rem !important;
+}
+.doc-sidebar .sidebarblock p {
+  margin: 0 !important;
+}
+
+/* Task sidebar: fixed overlay below doc-sidebar */
+.task-sidebar {
+  position: fixed !important;
+  top: 12rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  font-size: 0.85em;
+}
+.task-sidebar .sidebarblock {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.task-sidebar .sidebarblock .title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.task-sidebar .sidebarblock ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+/* Indent helper for admonitions after file listings */
+.indent2 {
+  padding-left: 2rem;
+}
+
+/* Collapsible block styling — HTML passthrough details/summary */
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+.triangle {
+  margin-right: .5em;
+}
+summary:hover .sumtext {
+  text-decoration: underline;
+}
+.triangle::before {
+  content: "\25B6";
+}
+details[open] .triangle::before {
+  content: "\25BC";
+}
+
+/* Collapsible block styling — native AsciiDoc [%collapsible] */
+.doc details > summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: inherit;
+  color: inherit;
+}
+.doc details > summary::-webkit-details-marker {
+  display: none;
+}
+.doc details > summary::before {
+  content: "\25B6";
+  margin-right: 0.5em;
+  text-decoration: none;
+  display: inline-block;
+}
+.doc details[open] > summary::before {
+  content: "\25BC";
+}
+.doc details > summary:hover {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+.doc details > summary:hover::before {
+  text-decoration: none;
+}
+
+
+</style>
+
+<script>
+(function() {
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#ee0000"/><text x="16" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="20" fill="white">S</text></svg>';
+  var dataUri = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+  // Set favicon on this document
+  var link = document.querySelector('link[rel="icon"]');
+  if (!link) { link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); }
+  link.type = 'image/svg+xml';
+  link.href = dataUri;
+
+  // If inside an iframe, also set favicon on the top-level document
+  try {
+    if (window.top !== window.self) {
+      var topLink = window.top.document.querySelector('link[rel="icon"]');
+      if (!topLink) { topLink = window.top.document.createElement('link'); topLink.rel = 'icon'; window.top.document.head.appendChild(topLink); }
+      topLink.type = 'image/svg+xml';
+      topLink.href = dataUri;
+    }
+  } catch(e) { /* cross-origin iframe — cannot access top */ }
+})();
+
+</script>
+<span id="uv-source" hidden><span class="uservar">username</span></span>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  var source = document.getElementById('uv-source');
+  if (!source) return;
+
+  // Check if uv-source contains a .uservar span (production mode)
+  // or plain text (local dev mode)
+  var innerSpan = source.querySelector('.uservar');
+
+  // Read cookies (needed by both modes)
+  var cookies = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts.length === 2) {
+      cookies[parts[0].trim()] = decodeURIComponent(parts[1].trim());
+    }
+  });
+
+  if (!innerSpan) {
+    // Local dev: attribute resolved at build time, set the cookie
+    var username = source.textContent.trim();
+    if (username) {
+      document.cookie = 'username=' + encodeURIComponent(username) + '; Path=/';
+      cookies['username'] = username;
+    }
+  } else {
+    // Production: replace .uservar spans from cookies
+    var spans = document.querySelectorAll('.uservar');
+    spans.forEach(function(span) {
+      var key = span.textContent.trim();
+      if (cookies[key] !== undefined) {
+        span.textContent = cookies[key];
+      }
+    });
+  }
+
+  // Fetch-based uservars: spans with data-fetch get their value from the docserver
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+  if (dsUrl) {
+    var fetchSpans = document.querySelectorAll('.uservar[data-fetch]');
+    var fetchPaths = {};
+    fetchSpans.forEach(function(span) {
+      var path = span.getAttribute('data-fetch');
+      if (!fetchPaths[path]) fetchPaths[path] = [];
+      fetchPaths[path].push(span);
+    });
+    var fetchHeaders = {};
+    if (cookies['username']) fetchHeaders['user'] = cookies['username'];
+    Object.keys(fetchPaths).forEach(function(path) {
+      fetch(dsUrl + path, { headers: fetchHeaders })
+        .then(function(r) { return r.text(); })
+        .then(function(data) {
+          if (data) {
+            fetchPaths[path].forEach(function(s) { s.textContent = data.trim(); });
+          }
+        })
+        .catch(function() {});
+    });
+  }
+
+  // Fix hrefs that use the SHOWROOM_USERNAME placeholder
+  // (used by {username-url} in URL attributes where HTML spans can't go)
+  if (cookies['username']) {
+    document.querySelectorAll('a[href*="SHOWROOM_USERNAME"]').forEach(function(a) {
+      a.setAttribute('href', a.getAttribute('href').replace(/SHOWROOM_USERNAME/g, cookies['username']));
+    });
+  }
+
+  // Logout: redirect to docs-proxy /logout endpoint, which clears
+  // the httponly _oauth_proxy and username cookies server-side,
+  // then redirects back to docs-proxy to trigger a fresh OAuth flow.
+  var host = window.location.hostname;
+  var appsIndex = host.indexOf('.apps.');
+  if (appsIndex !== -1) {
+    var domain = host.substring(appsIndex + 1);
+    var logoutUrl = 'https://docs.' + domain + '/logout';
+    var logoutLinks = document.querySelectorAll('.navbar-item-right-content');
+    logoutLinks.forEach(function(link) {
+      if (link.textContent.trim() === 'Log out') {
+        link.href = logoutUrl;
+        link.target = '_top';
+      }
+    });
+  }
+
+});
+</script>
+<style>
+/* Hide copypaste sidebar blocks before JS transforms them */
+.sidebarblock.copypaste {
+  display: none;
+}
+
+/* Copypaste tooltip (cp- prefix avoids collision with mytooltip) */
+.cp-tooltip {
+  position: relative;
+  display: inline-block;
+}
+.cp-tooltip .cp-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cp-tooltip .cp-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.cp-tooltip:hover .cp-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<div id="cp-docserver-url" data-url="{url-docserver}" hidden></div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Copy SVG icon
+  var copySvg = '<svg fill="currentColor" height="1em" width="1em" viewBox="0 0 448 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg>';
+
+  // Replace REPLACE tokens with fetched comma-separated values
+  function replaceTokens(templateString, values) {
+    var valueArray = values.split(',').map(function(val) { return val.trim(); });
+    var result = templateString;
+    var i = 0;
+    while (result.indexOf('REPLACE') !== -1 && i < valueArray.length) {
+      result = result.replace('REPLACE', valueArray[i]);
+      i++;
+    }
+    return result;
+  }
+
+  // Copy textarea content to clipboard
+  function cpCopy(btn) {
+    var textarea = btn.previousElementSibling;
+    textarea.select();
+    var text = textarea.textContent;
+    navigator.clipboard.writeText(text + '\n')
+      .then(function() { console.log('Copied to clipboard'); })
+      .catch(function(err) { console.error('Failed to copy:', err); });
+  }
+
+  // Read docserver base URL from hidden div
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+
+  // Read username from cookie for docserver requests
+  var dsHeaders = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts[0] === 'username') {
+      dsHeaders['user'] = decodeURIComponent(parts[1]);
+    }
+  });
+
+  // Transform all .copypaste sidebar blocks
+  var blocks = document.querySelectorAll('.sidebarblock.copypaste');
+  blocks.forEach(function(sb) {
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var paragraphs = content.querySelectorAll('.paragraph');
+    var pathValue = '';
+    var defaultValue = '';
+    var textParts = [];
+
+    paragraphs.forEach(function(p) {
+      if (p.classList.contains('path')) {
+        pathValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else if (p.classList.contains('default')) {
+        defaultValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else {
+        // Preserve <br> as newlines
+        var html = p.querySelector('p') ? p.querySelector('p').innerHTML : p.innerHTML;
+        var text = html.replace(/<br\s*\/?>/gi, '\n');
+        // Strip remaining HTML tags
+        var tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        textParts.push(tmp.textContent.trim());
+      }
+    });
+
+    var rawTemplate = textParts.join('\n\n');
+
+    // Apply defaults: use [.default] values if provided, otherwise built-in '<unavailable>'
+    var displayText = rawTemplate;
+    if (rawTemplate.indexOf('REPLACE') !== -1) {
+      var count = (rawTemplate.match(/REPLACE/g) || []).length;
+      var builtIn = Array(count).fill('<unavailable>').join(', ');
+      displayText = replaceTokens(rawTemplate, defaultValue || builtIn);
+    }
+
+    // Build replacement UI: textarea + copy button
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'border: 1px solid #f0f0f0; border-bottom-color: #8a8d90; display: flex; align-items: flex-start;';
+
+    var textarea = document.createElement('textarea');
+    textarea.readOnly = true;
+    textarea.style.cssText = 'border: none; background-color: #f0f0f0; width: 100%; resize: none; font-size: 14px; font-family: monospace; padding: 10px 15px; overflow: hidden;';
+    textarea.rows = 1;
+    textarea.textContent = displayText;
+
+    var btn = document.createElement('button');
+    btn.className = 'cp-tooltip';
+    btn.style.cssText = 'border: none; background-color: white; padding: 5px 15px; border-bottom: 1px solid transparent; transition: border-bottom-color 0.2s; cursor: pointer;';
+    btn.innerHTML = copySvg + '<span class="cp-tooltiptext">Copy to clipboard</span>';
+    btn.addEventListener('click', function() { cpCopy(this); });
+
+    wrapper.appendChild(textarea);
+    wrapper.appendChild(btn);
+
+    // Replace sidebar block with the new UI
+    sb.parentNode.replaceChild(wrapper, sb);
+
+    // Auto-size textarea height after render
+    function autoSize() {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    if (pathValue) {
+      // Dynamic: fetch from docserver then replace tokens
+      fetch(dsUrl + pathValue, { headers: dsHeaders })
+        .then(function(response) { return response.text(); })
+        .then(function(data) {
+          textarea.textContent = replaceTokens(rawTemplate, data);
+          requestAnimationFrame(autoSize);
+        })
+        .catch(function(err) { console.error('Copypaste fetch error:', err); });
+    }
+
+    requestAnimationFrame(autoSize);
+  });
+
+});
+</script>
+<style>
+/* Hide raw mermaid listing blocks before JS transforms them */
+.listingblock.mermaid {
+  display: none;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var blocks = document.querySelectorAll('.listingblock.mermaid');
+  if (!blocks.length) return;
+
+  // Load Mermaid JS from CDN
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js';
+  script.onload = function() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      sequence: {
+        mirrorActors: false
+      }
+    });
+
+    blocks.forEach(function(block) {
+      var code = block.querySelector('pre code') || block.querySelector('pre');
+      if (!code) return;
+
+      var container = document.createElement('div');
+      container.className = 'mermaid';
+      // Carry over extra classes (e.g. text-center) from the original block
+      block.classList.forEach(function(cls) {
+        if (cls !== 'listingblock' && cls !== 'mermaid') {
+          container.classList.add(cls);
+        }
+      });
+      if (block.id) container.id = block.id;
+      container.textContent = code.textContent;
+      block.parentNode.replaceChild(container, block);
+    });
+
+    mermaid.run();
+  };
+  document.head.appendChild(script);
+});
+</script>
+<style>
+/* Hide mermaid-hints sidebar blocks before JS transforms them */
+.sidebarblock[class*="mermaid-hints-"] {
+  display: none;
+}
+
+/* Mermaid hints popover */
+.mh-popover {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  background: #272822;
+  border-radius: 8px;
+  padding: 14px 20px;
+  max-width: 340px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.mh-popover-title {
+  color: #7986cb;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.mh-popover-text {
+  color: #ddd;
+  font-size: 13px;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Find all mermaid-hints-* sidebar blocks
+  var allSidebars = document.querySelectorAll('.sidebarblock');
+  var hintBlocks = [];
+  allSidebars.forEach(function(sb) {
+    var classes = sb.className.split(/\s+/);
+    for (var i = 0; i < classes.length; i++) {
+      if (classes[i].indexOf('mermaid-hints-') === 0) {
+        hintBlocks.push(sb);
+        break;
+      }
+    }
+  });
+
+  if (!hintBlocks.length) return;
+
+  // Create a single shared popover
+  var pop = document.createElement('div');
+  pop.className = 'mh-popover';
+  pop.innerHTML = '<div class="mh-popover-title"></div><div class="mh-popover-text"></div>';
+  document.body.appendChild(pop);
+
+  var popTitle = pop.querySelector('.mh-popover-title');
+  var popText = pop.querySelector('.mh-popover-text');
+
+  pop.addEventListener('mouseleave', function() {
+    pop.style.display = 'none';
+  });
+
+  function findNode(svg, key) {
+    return svg.querySelector('[id*="flowchart-' + key + '-"]')
+        || svg.getElementById(key)
+        || svg.querySelector('[id$="-' + key + '"]');
+  }
+
+  hintBlocks.forEach(function(sb) {
+    // Parse hint lines from paragraphs: "NodeId | Title | Description"
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var hints = {};
+    var hintOrder = [];
+    var lastKey = null;
+    var paragraphs = content.querySelectorAll('.paragraph p');
+    paragraphs.forEach(function(p) {
+      var lines = p.innerHTML.split(/<br\s*\/?>/gi);
+      lines.forEach(function(line) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = line;
+        var text = tmp.textContent.trim();
+        if (!text) return;
+
+        // Lines matching "NodeId | Title | Description" start a new hint.
+        // Lines without two | delimiters are continuations of the previous hint.
+        var first = text.indexOf('|');
+        var second = first !== -1 ? text.indexOf('|', first + 1) : -1;
+
+        if (first !== -1 && second !== -1) {
+          var nodeId = text.substring(0, first).trim();
+          var title = text.substring(first + 1, second).trim();
+          var desc = text.substring(second + 1).trim();
+          if (nodeId && title) {
+            hints[nodeId] = [title, desc];
+            hintOrder.push(nodeId);
+            lastKey = nodeId;
+          }
+        } else if (lastKey) {
+          // Continuation line — append to previous hint's description
+          hints[lastKey][1] += '\n' + text;
+        }
+      });
+    });
+
+    if (!Object.keys(hints).length) return;
+
+    // Find the preceding .listingblock.mermaid (the original, before mermaid.adoc
+    // replaces it). Walk backwards through siblings.
+    var diagramBlock = null;
+    var el = sb.previousElementSibling;
+    while (el) {
+      if (el.classList.contains('listingblock') && el.classList.contains('mermaid')) {
+        diagramBlock = el;
+        break;
+      }
+      el = el.previousElementSibling;
+    }
+    if (!diagramBlock) return;
+
+    // Wrap the diagram block in a container div. When mermaid.adoc later calls
+    // replaceChild on the listingblock, the replacement goes INSIDE this wrapper.
+    // This gives us a stable reference to find the rendered SVG.
+    var wrapper = document.createElement('div');
+    wrapper.className = 'mh-diagram-wrapper';
+    diagramBlock.parentNode.insertBefore(wrapper, diagramBlock);
+    wrapper.appendChild(diagramBlock);
+
+    // Remove the sidebar block
+    sb.parentNode.removeChild(sb);
+
+    // Poll until mermaid.adoc has rendered the SVG inside the wrapper
+    var firstKey = Object.keys(hints)[0];
+    var check = setInterval(function() {
+      var svg = wrapper.querySelector('svg');
+      if (!svg) return;
+
+      if (!findNode(svg, firstKey)) return;
+      clearInterval(check);
+
+      Object.keys(hints).forEach(function(key) {
+        var node = findNode(svg, key);
+        if (!node) return;
+
+        node.style.cursor = 'pointer';
+
+        node.addEventListener('mouseenter', function() {
+          var rect = node.getBoundingClientRect();
+          popTitle.textContent = hints[key][0];
+          popText.innerHTML = hints[key][1].replace(/\n/g, '<br>');
+          pop.style.display = 'block';
+
+          var popW = pop.offsetWidth;
+          var left = rect.left + (rect.width / 2) - (popW / 2);
+          if (left < 8) left = 8;
+          if (left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
+          pop.style.left = left + 'px';
+          pop.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+        });
+
+        node.addEventListener('mouseleave', function(e) {
+          var to = e.relatedTarget;
+          if (to && (to === pop || pop.contains(to))) return;
+          pop.style.display = 'none';
+        });
+      });
+    }, 200);
+  });
+
+});
+</script>
+<style>
+.sidebarblock.overlay { display: none; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function getText(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return '';
+    var p = el.querySelector('p');
+    return p ? p.textContent.trim() : '';
+  }
+
+  function parseItems(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return [];
+    var p = el.querySelector('p');
+    if (!p) return [];
+    var text = p.textContent.trim().replace(/\}\s*\{/g, '}, {');
+    try { return eval('[' + text + ']'); } catch(e) { return []; }
+  }
+
+  function drawOverlay(overlaySvg, iw, ih, arrows, numbers, labelData) {
+    if (!iw || !ih) return;
+
+    var overflow = 50;
+    overlaySvg.setAttribute('viewBox', '0 0 ' + iw + ' ' + (ih + overflow * 2));
+    overlaySvg.innerHTML = '';
+
+    var shaft = iw * 0.003, head = iw * 0.008, headLen = ih * 0.075, len = ih * 0.5;
+    arrows.forEach(function(a) {
+      var x = a.x / 100 * iw, y = a.y / 100 * ih + overflow;
+      var pts = (-shaft)+','+len+' '+(shaft)+','+len+' '+(shaft)+','+(headLen)+' '+(head)+','+(headLen)+' 0,0 '+(-head)+','+(headLen)+' '+(-shaft)+','+(headLen);
+      var p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      p.setAttribute('points', pts);
+      p.setAttribute('fill', a.color || 'red');
+      p.setAttribute('opacity', '0.85');
+      p.setAttribute('transform', 'translate(' + x + ',' + y + ') rotate(' + (a.rot||0) + ') scale(' + (a.size||1) + ')');
+      overlaySvg.appendChild(p);
+    });
+
+    var r = iw * 0.012, fontSize = r * 1.4;
+    var numCounter = 1;
+    numbers.forEach(function(n) {
+      if (n.n !== undefined) numCounter = n.n;
+      var x = n.x / 100 * iw, y = n.y / 100 * ih + overflow, s = n.size || 1;
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', r * s);
+      c.setAttribute('fill', n.color || 'red');
+      overlaySvg.appendChild(c);
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', 'white'); t.setAttribute('font-size', fontSize * s);
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      t.textContent = numCounter;
+      overlaySvg.appendChild(t);
+      numCounter++;
+    });
+
+    var labelSize = iw * 0.014;
+    labelData.forEach(function(l) {
+      var x = l.x / 100 * iw, y = l.y / 100 * ih + overflow;
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', l.color || 'red'); t.setAttribute('font-size', labelSize * (l.size||1));
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      if (l.rot) t.setAttribute('transform', 'rotate(' + l.rot + ',' + x + ',' + y + ')');
+      t.textContent = l.text;
+      overlaySvg.appendChild(t);
+    });
+  }
+
+  var overlays = [];
+  var overlaysInitialized = false;
+
+  function initOverlays() {
+    if (overlaysInitialized) return;
+    overlaysInitialized = true;
+
+    document.querySelectorAll('.sidebarblock.overlay').forEach(function(block) {
+      var targetId = getText(block, 'target');
+      var targetBlock = targetId ? document.getElementById(targetId) : null;
+      if (!targetBlock) return;
+
+      var arrows = parseItems(block, 'arrows');
+      var numbers = parseItems(block, 'numbers');
+      var labels = parseItems(block, 'labels');
+
+      var img = targetBlock.querySelector('img');
+      var pre = targetBlock.tagName === 'PRE' ? targetBlock : targetBlock.querySelector('pre');
+      var mermaidEl = targetBlock.querySelector('svg[id^="mermaid"]');
+      var target = img || pre || mermaidEl || targetBlock;
+
+      var overlayParent = target.parentElement || targetBlock;
+      overlayParent.style.position = 'relative';
+      overlayParent.style.overflow = 'visible';
+
+      var overlaySvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      overlaySvg.style.cssText = 'position: absolute; pointer-events: none; overflow: visible; z-index: 999;';
+      overlayParent.appendChild(overlaySvg);
+
+      var entry = { svg: overlaySvg, target: target, parent: overlayParent, arrows: arrows, numbers: numbers, labels: labels };
+      overlays.push(entry);
+
+      function positionAndDraw() {
+        var rect = entry.target.getBoundingClientRect();
+        var parentRect = entry.parent.getBoundingClientRect();
+        var tw = rect.width, th = rect.height;
+        var tl = rect.left - parentRect.left, tt = rect.top - parentRect.top;
+        if (!tw || !th) return;
+        var overflow = 50;
+        entry.svg.style.left = tl + 'px';
+        entry.svg.style.top = (tt - overflow) + 'px';
+        entry.svg.style.width = tw + 'px';
+        entry.svg.style.height = (th + overflow * 2) + 'px';
+        drawOverlay(entry.svg, tw, th, entry.arrows, entry.numbers, entry.labels);
+      }
+      entry.redraw = positionAndDraw;
+
+      if (img) {
+        if (img.complete) positionAndDraw();
+        else img.onload = positionAndDraw;
+      } else if (mermaidEl) {
+        setTimeout(positionAndDraw, 100);
+      } else {
+        positionAndDraw();
+      }
+    });
+  }
+
+  // Redraw all overlays on resize
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      overlays.forEach(function(entry) { entry.redraw(); });
+    }, 150);
+  });
+
+  // Mermaid renders async — wait for it, then init overlays
+  var mermaidCheck = setInterval(function() {
+    if (document.querySelector('svg[id^="mermaid"]') || !document.querySelector('.mermaid')) {
+      clearInterval(mermaidCheck);
+      setTimeout(initOverlays, 200);
+    }
+  }, 100);
+  setTimeout(initOverlays, 2000);
+});
+</script>
+<div class="sect1">
+<h2 id="use-cases"><a class="anchor" href="#use-cases"></a>Use cases</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Common use cases that can be addressed with this architecture are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Secure data ingestion from external platforms into backend databases residing on separate infrastructure</p>
+</li>
+<li>
+<p>Multi-channel customer support integrating disconnected messaging platforms</p>
+</li>
+<li>
+<p>Event-driven architecture decoupling services through Apache Kafka</p>
+</li>
+<li>
+<p>AI-assisted case resolution with natural language interaction and autonomous tool orchestration</p>
+</li>
+<li>
+<p>Token-based governance and rate limiting for large language model consumption</p>
+</li>
+<li>
+<p>Automated invoice generation and archival to object storage</p>
+</li>
+<li>
+<p>Extensible platform design enabling new communication channels without touching existing integrations</p>
+</li>
+<li>
+<p>Compliance-ready AI deployment with authentication and usage controls</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_story_behind_this_solution_pattern"><a class="anchor" href="#_the_story_behind_this_solution_pattern"></a>The story behind this solution pattern</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Organizations often face a familiar set of disconnected systems. Order data lives across disparate infrastructure. Databases reside on separate networks, inaccessible from cloud environments without complex VPN configurations or exposed endpoints. Customer support operates across multiple messaging platforms — customers connect through one channel while support agents work in another. When issues arise, agents manually jump between systems to investigate problems, update records, and regenerate documents. No AI assists them, and even if it did, there would be no controls governing access or consumption.</p>
+</div>
+<div class="paragraph">
+<p>These gaps create friction. Resolution times stretch. Manual processes introduce errors. Scaling support teams becomes expensive. Compliance requirements around data access and AI usage go unmet.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_solution"><a class="anchor" href="#_the_solution"></a>The Solution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This solution pattern implements an architecture that addresses each of these challenges through a unified platform built on Red Hat Application Foundations. The demonstration scenario uses an order processing and customer support workflow to illustrate the capabilities. The diagram below shows the complete architecture:</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div id="pattern-diagram" class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+
+    chatInner ~~~ Customer
+    chatInner ~~~ SupportAgent
+
+    Customer --&gt; Shop --&gt;|"EDI message"| Camel
+
+    Camel --&gt; ServiceInterconnect{{"Service\nInterconnect"}} --&gt; Database
+
+    Camel --- spacer1[" "]
+
+    SupportAgent --- spacer2[" "] --&gt; AgenticCamel &lt;--&gt; ConnectivityLink --&gt; LLM
+
+    AgenticCamel --- spacer1[" "] --&gt; Storage
+    AgenticCamel --&gt; ServiceInterconnect
+
+    subgraph chatOuter ["Customer Support Platform"]
+        subgraph chatInner [" "]
+        direction LR
+        ChatCustomer --- |Camel| Kafka --- |Camel| ChatAgent
+        end
+    end
+
+    chatOuter ~~~ SupportAgent
+    chatOuter ~~~ Customer
+
+    Camel@{ img: "/solution-pattern-app-connect-ai/_images/integration-icon.svg", label: "Camel Integration", pos: "b", h: 80, w: 80, constraint: "on" }
+    Customer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    Shop@{ img: "/solution-pattern-app-connect-ai/_images/shop-icon.svg", label: "Shop", pos: "b", h: 80, w: 80, constraint: "on" }
+    Storage@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "OpenShift&lt;br&gt;Data Foundation", pos: "b", h: 80, w: 80, constraint: "on" }
+    SupportAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    LLM@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "MaaS / LLM", pos: "b", h: 80, w: 80, constraint: "on" }
+    Database@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    AgenticCamel@{ img: "/solution-pattern-app-connect-ai/_images/ai-icon.svg", label: "Agentic Camel", pos: "b", h: 80, w: 80, constraint: "on" }
+    ConnectivityLink@{ img: "/solution-pattern-app-connect-ai/_images/guardrail-icon.svg", label: "Connectivity Link", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatCustomer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Kafka@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style ChatCustomer fill:none,stroke:none
+    style ChatAgent fill:none,stroke:none
+    style Kafka fill:none,stroke:none
+    style chatOuter fill:none,stroke:none
+    style chatInner fill:#fce4e4,stroke:#EE0000
+    style ServiceInterconnect fill:#f8b4b4,stroke:#EE0000,color:#333
+    style Customer fill:none,stroke:none
+    style Camel fill:none,stroke:none,font-weight:bold
+    style Shop fill:none,stroke:none
+    style Storage fill:none,stroke:none
+    style spacer1 fill:none,stroke:none,width:1px,height:1px
+    style spacer2 fill:none,stroke:none,width:1px,height:1px
+    style SupportAgent fill:none,stroke:none
+    style LLM fill:none,stroke:none
+    style Database fill:none,stroke:none
+    style AgenticCamel fill:none,stroke:none
+    style ConnectivityLink fill:none,stroke:none</pre>
+</div>
+</div>
+<div class="sidebarblock overlay">
+<div class="content">
+<div class="paragraph target">
+<p>pattern-diagram</p>
+</div>
+<div class="paragraph numbers">
+<p>{x: 63, y: 5}
+{x: 20, y: 60}
+{x: 68, y: 45}
+{x: 84, y: 103}</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>The architecture addresses the challenges as follows:</p>
+</div>
+<div class="paragraph">
+<p><span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">1</span> <strong>Secure data ingestion</strong>: An Apache Camel integration ingests EDI purchase orders from the Shop, transforms them to XML, and stores data in a backend database via Red Hat Service Interconnect — a secure connectivity solution that bridges environments without exposing databases to public networks. The same flow renders PDF invoices and uploads them to S3 object storage provided by Red Hat OpenShift Data Foundation.</p>
+</div>
+<div class="paragraph">
+<p><span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">2</span> <strong>Event-driven messaging</strong>: Red Hat Streams for Apache Kafka serves as the event-driven backbone, decoupling messaging platforms. Customers reach out through Matrix while support agents work in Rocket.Chat. Messages flow bidirectionally through Kafka topics, with each platform integrating via a standard data model. This decoupling makes the architecture extensible — new channels plug into Kafka without modifying existing flows.</p>
+</div>
+<div class="paragraph">
+<p><span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">3</span> <strong>AI-assisted automation</strong>: An AI agent powered by Agentic Apache Camel and Model-as-a-Service (MaaS) enables support agents to resolve issues through natural language. The agent interprets requests, autonomously selects tools, and executes backend operations — querying databases, updating records, regenerating invoices — all within the support chat interface.</p>
+</div>
+<div class="paragraph">
+<p><span style="display:inline-block; background:red; color:white; border-radius:50%; width:1.5em; height:1.5em; text-align:center; line-height:1.5em; font-weight:bold; margin-right:0.3em;">4</span> <strong>Governance and rate limiting</strong>: Red Hat Connectivity Link sits in front of the AI service, enforcing authentication via API keys and token-based rate limiting across service tiers. Organizations can define Gold and Silver tiers with distinct token budgets, enabling fallback strategies when high-cost tiers exhaust their quotas.</p>
+</div>
+<div class="paragraph">
+<p>The result is a platform where data flows securely, systems communicate through decoupled channels, AI automates support workflows, and governance controls AI consumption — all deployed on Red Hat OpenShift.
+<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Rocket.Chat and Matrix are open-source implementations of direct messaging platforms. While not as popular or ubiquitous as WhatsApp or Discord for example, they can be installed on an OpenShift cluster and do not require registration, making them more suitable for our solution pattern demo environment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Please see the <a href="02-architecture.html" class="xref page">Architecture</a> section for more details on the technologies involved and architecture diagrams.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

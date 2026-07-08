@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Solution Patterns from Red Hat</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-app-connect-ai/02-architecture.html">
+    <link rel="prev" href="index.html">
+    <link rel="next" href="03-demo.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWRNJP4L78"></script>
+<script>function gtag() { dataLayer.push(arguments) }; window.dataLayer = window.dataLayer || []; gtag('js', new Date()); gtag('config', 'G-FWRNJP4L78')</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns from Red Hat</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-app-connect-ai" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">AI-Powered Application Integration Platform</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.1 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.3 The solution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#tech_stack">1.4 Technology stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_common_challenges">2.1. Common challenges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#tech_stack">2.2. Technology stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#in_depth">2.3. An in-depth look at the solution&#8217;s architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_secure_data_ingestion">2.3.1. Secure Data Ingestion</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_event_driven_messaging">2.3.2. Event-Driven Messaging</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_ai_assisted_automation">2.3.3. AI-Assisted Automation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_governance_and_rate_limiting">2.3.4. Governance and Rate Limiting</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_scalability">2.3.5. Scalability</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_extensibility">2.3.6. Extensibility</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-demo.html">3. See the Solution in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_demonstration">3.1 Demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_recorded_video">3.2 Recorded Video</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_install_the_demonstration">3.3. Install the demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_walkthrough_guide">3.4. Walkthrough guide</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="04-devresources.html">4. Developer Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">5. Other Red Hat Solution Patterns</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">AI-Powered Application Integration Platform</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">AI-Powered Application Integration Platform</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">AI-Powered Application Integration Platform</a></li>
+    <li><a href="02-architecture.html">2. Architecture</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-solution-patterns/solution-pattern-app-connect-ai/edit/main/documentation/modules/ROOT/pages/02-architecture.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<style>
+.doc {
+    max-width: 70rem;
+}
+
+.underline {
+  cursor: pointer;
+}
+
+u {
+    cursor: pointer;
+}
+
+summary  {
+    cursor: pointer;
+}
+
+/* Push TOC down to make room for fixed overlays */
+.toc.sidebar .toc-menu {
+  top: 13rem !important;
+}
+
+.label {
+    color: #fff;
+    padding: .2em .6em .3em;
+    font-weight: 700;
+    border-radius: .25em;
+    font-size: 90%;
+}
+
+.added {background-color: #007700;}
+.changed {background-color: #088;}
+.updated {background-color: #3344bb;}
+
+.imageblock {
+    align-items: flex-start !important;
+}
+.imageblock.text-center .content {
+    width: 100%;
+    text-align: center;
+}
+.imageblock.text-center .content img {
+    display: inline-block;
+}
+.imageblock.bordered img {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Scale Mermaid diagrams: [.mermaid-w20] through [.mermaid-w90] */
+.mermaid-w20 svg { width: 20% !important; max-width: 20% !important; }
+.mermaid-w30 svg { width: 30% !important; max-width: 30% !important; }
+.mermaid-w40 svg { width: 40% !important; max-width: 40% !important; }
+.mermaid-w50 svg { width: 50% !important; max-width: 50% !important; }
+.mermaid-w60 svg { width: 60% !important; max-width: 60% !important; }
+.mermaid-w70 svg { width: 70% !important; max-width: 70% !important; }
+.mermaid-w80 svg { width: 80% !important; max-width: 80% !important; }
+.mermaid-w90 svg { width: 90% !important; max-width: 90% !important; }
+
+/* Center Mermaid diagrams with [.text-center] role */
+.mermaid.text-center svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Inline images: vertically center with surrounding text */
+.doc span.image img {
+    vertical-align: middle;
+}
+
+/* Inline code styling — :not([style]) excludes passthrough <code> with inline styles */
+.doc code:not([style]) {
+  background-color: #DDF4FF !important;
+  font-family: monospace !important;
+}
+
+
+/* kbd styling — override Antora theme */
+.doc kbd {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 0px 1px black;
+  font-size: .85em;
+  line-height: .85em;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 3px 5px;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+/* Admonition blocks: grey left border for visibility */
+.doc .admonitionblock {
+  border-left: 4px solid #999 !important;
+}
+
+/* Inline code inside admonitions: keep same color */
+.doc .admonitionblock code {
+  background-color: #DDF4FF !important;
+}
+
+/* Copypaste textarea inside admonitions: darker background for contrast */
+.admonitionblock textarea {
+  background-color: #ddd !important;
+}
+
+/* Listing/source blocks — match copypaste textarea appearance */
+.doc .listingblock pre {
+  background-color: #f0f0f0 !important;
+  color: #333 !important;
+  padding: 10px 15px;
+  line-height: 1.4;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+/* Properties source blocks — dark theme overriding highlight.js */
+.doc .listingblock pre:has(code[data-lang="properties"]) {
+  background-color: #2b2b2b !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock pre code[data-lang="properties"] {
+  background-color: transparent !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock code[data-lang="properties"] .hljs-comment { color: #689956 !important; font-style: italic; }
+.doc .listingblock code[data-lang="properties"] .hljs-attr { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-string { color: #CBCBCB !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-meta,
+.doc .listingblock code[data-lang="properties"] .hljs-keyword { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-link { color: #CBCBCB !important; }
+
+/* Ensure topbar dropdown appears above fixed overlays */
+.navbar {
+  z-index: 1001 !important;
+}
+
+/* Right sidebar: .doc-sidebar — fixed status overlay at top-right */
+.doc-sidebar {
+  position: fixed !important;
+  top: 6.5rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  z-index: 1000;
+  border-radius: 4px !important;
+}
+.doc-sidebar .sidebarblock {
+  padding: 0.3rem 0.5rem !important;
+}
+.doc-sidebar .sidebarblock p {
+  margin: 0 !important;
+}
+
+/* Task sidebar: fixed overlay below doc-sidebar */
+.task-sidebar {
+  position: fixed !important;
+  top: 12rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  font-size: 0.85em;
+}
+.task-sidebar .sidebarblock {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.task-sidebar .sidebarblock .title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.task-sidebar .sidebarblock ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+/* Indent helper for admonitions after file listings */
+.indent2 {
+  padding-left: 2rem;
+}
+
+/* Collapsible block styling — HTML passthrough details/summary */
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+.triangle {
+  margin-right: .5em;
+}
+summary:hover .sumtext {
+  text-decoration: underline;
+}
+.triangle::before {
+  content: "\25B6";
+}
+details[open] .triangle::before {
+  content: "\25BC";
+}
+
+/* Collapsible block styling — native AsciiDoc [%collapsible] */
+.doc details > summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: inherit;
+  color: inherit;
+}
+.doc details > summary::-webkit-details-marker {
+  display: none;
+}
+.doc details > summary::before {
+  content: "\25B6";
+  margin-right: 0.5em;
+  text-decoration: none;
+  display: inline-block;
+}
+.doc details[open] > summary::before {
+  content: "\25BC";
+}
+.doc details > summary:hover {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+.doc details > summary:hover::before {
+  text-decoration: none;
+}
+
+
+</style>
+
+<script>
+(function() {
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#ee0000"/><text x="16" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="20" fill="white">S</text></svg>';
+  var dataUri = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+  // Set favicon on this document
+  var link = document.querySelector('link[rel="icon"]');
+  if (!link) { link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); }
+  link.type = 'image/svg+xml';
+  link.href = dataUri;
+
+  // If inside an iframe, also set favicon on the top-level document
+  try {
+    if (window.top !== window.self) {
+      var topLink = window.top.document.querySelector('link[rel="icon"]');
+      if (!topLink) { topLink = window.top.document.createElement('link'); topLink.rel = 'icon'; window.top.document.head.appendChild(topLink); }
+      topLink.type = 'image/svg+xml';
+      topLink.href = dataUri;
+    }
+  } catch(e) { /* cross-origin iframe — cannot access top */ }
+})();
+
+</script>
+<span id="uv-source" hidden><span class="uservar">username</span></span>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  var source = document.getElementById('uv-source');
+  if (!source) return;
+
+  // Check if uv-source contains a .uservar span (production mode)
+  // or plain text (local dev mode)
+  var innerSpan = source.querySelector('.uservar');
+
+  // Read cookies (needed by both modes)
+  var cookies = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts.length === 2) {
+      cookies[parts[0].trim()] = decodeURIComponent(parts[1].trim());
+    }
+  });
+
+  if (!innerSpan) {
+    // Local dev: attribute resolved at build time, set the cookie
+    var username = source.textContent.trim();
+    if (username) {
+      document.cookie = 'username=' + encodeURIComponent(username) + '; Path=/';
+      cookies['username'] = username;
+    }
+  } else {
+    // Production: replace .uservar spans from cookies
+    var spans = document.querySelectorAll('.uservar');
+    spans.forEach(function(span) {
+      var key = span.textContent.trim();
+      if (cookies[key] !== undefined) {
+        span.textContent = cookies[key];
+      }
+    });
+  }
+
+  // Fetch-based uservars: spans with data-fetch get their value from the docserver
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+  if (dsUrl) {
+    var fetchSpans = document.querySelectorAll('.uservar[data-fetch]');
+    var fetchPaths = {};
+    fetchSpans.forEach(function(span) {
+      var path = span.getAttribute('data-fetch');
+      if (!fetchPaths[path]) fetchPaths[path] = [];
+      fetchPaths[path].push(span);
+    });
+    var fetchHeaders = {};
+    if (cookies['username']) fetchHeaders['user'] = cookies['username'];
+    Object.keys(fetchPaths).forEach(function(path) {
+      fetch(dsUrl + path, { headers: fetchHeaders })
+        .then(function(r) { return r.text(); })
+        .then(function(data) {
+          if (data) {
+            fetchPaths[path].forEach(function(s) { s.textContent = data.trim(); });
+          }
+        })
+        .catch(function() {});
+    });
+  }
+
+  // Fix hrefs that use the SHOWROOM_USERNAME placeholder
+  // (used by {username-url} in URL attributes where HTML spans can't go)
+  if (cookies['username']) {
+    document.querySelectorAll('a[href*="SHOWROOM_USERNAME"]').forEach(function(a) {
+      a.setAttribute('href', a.getAttribute('href').replace(/SHOWROOM_USERNAME/g, cookies['username']));
+    });
+  }
+
+  // Logout: redirect to docs-proxy /logout endpoint, which clears
+  // the httponly _oauth_proxy and username cookies server-side,
+  // then redirects back to docs-proxy to trigger a fresh OAuth flow.
+  var host = window.location.hostname;
+  var appsIndex = host.indexOf('.apps.');
+  if (appsIndex !== -1) {
+    var domain = host.substring(appsIndex + 1);
+    var logoutUrl = 'https://docs.' + domain + '/logout';
+    var logoutLinks = document.querySelectorAll('.navbar-item-right-content');
+    logoutLinks.forEach(function(link) {
+      if (link.textContent.trim() === 'Log out') {
+        link.href = logoutUrl;
+        link.target = '_top';
+      }
+    });
+  }
+
+});
+</script>
+<style>
+/* Hide copypaste sidebar blocks before JS transforms them */
+.sidebarblock.copypaste {
+  display: none;
+}
+
+/* Copypaste tooltip (cp- prefix avoids collision with mytooltip) */
+.cp-tooltip {
+  position: relative;
+  display: inline-block;
+}
+.cp-tooltip .cp-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cp-tooltip .cp-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.cp-tooltip:hover .cp-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<div id="cp-docserver-url" data-url="{url-docserver}" hidden></div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Copy SVG icon
+  var copySvg = '<svg fill="currentColor" height="1em" width="1em" viewBox="0 0 448 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg>';
+
+  // Replace REPLACE tokens with fetched comma-separated values
+  function replaceTokens(templateString, values) {
+    var valueArray = values.split(',').map(function(val) { return val.trim(); });
+    var result = templateString;
+    var i = 0;
+    while (result.indexOf('REPLACE') !== -1 && i < valueArray.length) {
+      result = result.replace('REPLACE', valueArray[i]);
+      i++;
+    }
+    return result;
+  }
+
+  // Copy textarea content to clipboard
+  function cpCopy(btn) {
+    var textarea = btn.previousElementSibling;
+    textarea.select();
+    var text = textarea.textContent;
+    navigator.clipboard.writeText(text + '\n')
+      .then(function() { console.log('Copied to clipboard'); })
+      .catch(function(err) { console.error('Failed to copy:', err); });
+  }
+
+  // Read docserver base URL from hidden div
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+
+  // Read username from cookie for docserver requests
+  var dsHeaders = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts[0] === 'username') {
+      dsHeaders['user'] = decodeURIComponent(parts[1]);
+    }
+  });
+
+  // Transform all .copypaste sidebar blocks
+  var blocks = document.querySelectorAll('.sidebarblock.copypaste');
+  blocks.forEach(function(sb) {
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var paragraphs = content.querySelectorAll('.paragraph');
+    var pathValue = '';
+    var defaultValue = '';
+    var textParts = [];
+
+    paragraphs.forEach(function(p) {
+      if (p.classList.contains('path')) {
+        pathValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else if (p.classList.contains('default')) {
+        defaultValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else {
+        // Preserve <br> as newlines
+        var html = p.querySelector('p') ? p.querySelector('p').innerHTML : p.innerHTML;
+        var text = html.replace(/<br\s*\/?>/gi, '\n');
+        // Strip remaining HTML tags
+        var tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        textParts.push(tmp.textContent.trim());
+      }
+    });
+
+    var rawTemplate = textParts.join('\n\n');
+
+    // Apply defaults: use [.default] values if provided, otherwise built-in '<unavailable>'
+    var displayText = rawTemplate;
+    if (rawTemplate.indexOf('REPLACE') !== -1) {
+      var count = (rawTemplate.match(/REPLACE/g) || []).length;
+      var builtIn = Array(count).fill('<unavailable>').join(', ');
+      displayText = replaceTokens(rawTemplate, defaultValue || builtIn);
+    }
+
+    // Build replacement UI: textarea + copy button
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'border: 1px solid #f0f0f0; border-bottom-color: #8a8d90; display: flex; align-items: flex-start;';
+
+    var textarea = document.createElement('textarea');
+    textarea.readOnly = true;
+    textarea.style.cssText = 'border: none; background-color: #f0f0f0; width: 100%; resize: none; font-size: 14px; font-family: monospace; padding: 10px 15px; overflow: hidden;';
+    textarea.rows = 1;
+    textarea.textContent = displayText;
+
+    var btn = document.createElement('button');
+    btn.className = 'cp-tooltip';
+    btn.style.cssText = 'border: none; background-color: white; padding: 5px 15px; border-bottom: 1px solid transparent; transition: border-bottom-color 0.2s; cursor: pointer;';
+    btn.innerHTML = copySvg + '<span class="cp-tooltiptext">Copy to clipboard</span>';
+    btn.addEventListener('click', function() { cpCopy(this); });
+
+    wrapper.appendChild(textarea);
+    wrapper.appendChild(btn);
+
+    // Replace sidebar block with the new UI
+    sb.parentNode.replaceChild(wrapper, sb);
+
+    // Auto-size textarea height after render
+    function autoSize() {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    if (pathValue) {
+      // Dynamic: fetch from docserver then replace tokens
+      fetch(dsUrl + pathValue, { headers: dsHeaders })
+        .then(function(response) { return response.text(); })
+        .then(function(data) {
+          textarea.textContent = replaceTokens(rawTemplate, data);
+          requestAnimationFrame(autoSize);
+        })
+        .catch(function(err) { console.error('Copypaste fetch error:', err); });
+    }
+
+    requestAnimationFrame(autoSize);
+  });
+
+});
+</script>
+<style>
+/* Hide raw mermaid listing blocks before JS transforms them */
+.listingblock.mermaid {
+  display: none;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var blocks = document.querySelectorAll('.listingblock.mermaid');
+  if (!blocks.length) return;
+
+  // Load Mermaid JS from CDN
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js';
+  script.onload = function() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      sequence: {
+        mirrorActors: false
+      }
+    });
+
+    blocks.forEach(function(block) {
+      var code = block.querySelector('pre code') || block.querySelector('pre');
+      if (!code) return;
+
+      var container = document.createElement('div');
+      container.className = 'mermaid';
+      // Carry over extra classes (e.g. text-center) from the original block
+      block.classList.forEach(function(cls) {
+        if (cls !== 'listingblock' && cls !== 'mermaid') {
+          container.classList.add(cls);
+        }
+      });
+      if (block.id) container.id = block.id;
+      container.textContent = code.textContent;
+      block.parentNode.replaceChild(container, block);
+    });
+
+    mermaid.run();
+  };
+  document.head.appendChild(script);
+});
+</script>
+<style>
+/* Hide mermaid-hints sidebar blocks before JS transforms them */
+.sidebarblock[class*="mermaid-hints-"] {
+  display: none;
+}
+
+/* Mermaid hints popover */
+.mh-popover {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  background: #272822;
+  border-radius: 8px;
+  padding: 14px 20px;
+  max-width: 340px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.mh-popover-title {
+  color: #7986cb;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.mh-popover-text {
+  color: #ddd;
+  font-size: 13px;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Find all mermaid-hints-* sidebar blocks
+  var allSidebars = document.querySelectorAll('.sidebarblock');
+  var hintBlocks = [];
+  allSidebars.forEach(function(sb) {
+    var classes = sb.className.split(/\s+/);
+    for (var i = 0; i < classes.length; i++) {
+      if (classes[i].indexOf('mermaid-hints-') === 0) {
+        hintBlocks.push(sb);
+        break;
+      }
+    }
+  });
+
+  if (!hintBlocks.length) return;
+
+  // Create a single shared popover
+  var pop = document.createElement('div');
+  pop.className = 'mh-popover';
+  pop.innerHTML = '<div class="mh-popover-title"></div><div class="mh-popover-text"></div>';
+  document.body.appendChild(pop);
+
+  var popTitle = pop.querySelector('.mh-popover-title');
+  var popText = pop.querySelector('.mh-popover-text');
+
+  pop.addEventListener('mouseleave', function() {
+    pop.style.display = 'none';
+  });
+
+  function findNode(svg, key) {
+    return svg.querySelector('[id*="flowchart-' + key + '-"]')
+        || svg.getElementById(key)
+        || svg.querySelector('[id$="-' + key + '"]');
+  }
+
+  hintBlocks.forEach(function(sb) {
+    // Parse hint lines from paragraphs: "NodeId | Title | Description"
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var hints = {};
+    var hintOrder = [];
+    var lastKey = null;
+    var paragraphs = content.querySelectorAll('.paragraph p');
+    paragraphs.forEach(function(p) {
+      var lines = p.innerHTML.split(/<br\s*\/?>/gi);
+      lines.forEach(function(line) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = line;
+        var text = tmp.textContent.trim();
+        if (!text) return;
+
+        // Lines matching "NodeId | Title | Description" start a new hint.
+        // Lines without two | delimiters are continuations of the previous hint.
+        var first = text.indexOf('|');
+        var second = first !== -1 ? text.indexOf('|', first + 1) : -1;
+
+        if (first !== -1 && second !== -1) {
+          var nodeId = text.substring(0, first).trim();
+          var title = text.substring(first + 1, second).trim();
+          var desc = text.substring(second + 1).trim();
+          if (nodeId && title) {
+            hints[nodeId] = [title, desc];
+            hintOrder.push(nodeId);
+            lastKey = nodeId;
+          }
+        } else if (lastKey) {
+          // Continuation line — append to previous hint's description
+          hints[lastKey][1] += '\n' + text;
+        }
+      });
+    });
+
+    if (!Object.keys(hints).length) return;
+
+    // Find the preceding .listingblock.mermaid (the original, before mermaid.adoc
+    // replaces it). Walk backwards through siblings.
+    var diagramBlock = null;
+    var el = sb.previousElementSibling;
+    while (el) {
+      if (el.classList.contains('listingblock') && el.classList.contains('mermaid')) {
+        diagramBlock = el;
+        break;
+      }
+      el = el.previousElementSibling;
+    }
+    if (!diagramBlock) return;
+
+    // Wrap the diagram block in a container div. When mermaid.adoc later calls
+    // replaceChild on the listingblock, the replacement goes INSIDE this wrapper.
+    // This gives us a stable reference to find the rendered SVG.
+    var wrapper = document.createElement('div');
+    wrapper.className = 'mh-diagram-wrapper';
+    diagramBlock.parentNode.insertBefore(wrapper, diagramBlock);
+    wrapper.appendChild(diagramBlock);
+
+    // Remove the sidebar block
+    sb.parentNode.removeChild(sb);
+
+    // Poll until mermaid.adoc has rendered the SVG inside the wrapper
+    var firstKey = Object.keys(hints)[0];
+    var check = setInterval(function() {
+      var svg = wrapper.querySelector('svg');
+      if (!svg) return;
+
+      if (!findNode(svg, firstKey)) return;
+      clearInterval(check);
+
+      Object.keys(hints).forEach(function(key) {
+        var node = findNode(svg, key);
+        if (!node) return;
+
+        node.style.cursor = 'pointer';
+
+        node.addEventListener('mouseenter', function() {
+          var rect = node.getBoundingClientRect();
+          popTitle.textContent = hints[key][0];
+          popText.innerHTML = hints[key][1].replace(/\n/g, '<br>');
+          pop.style.display = 'block';
+
+          var popW = pop.offsetWidth;
+          var left = rect.left + (rect.width / 2) - (popW / 2);
+          if (left < 8) left = 8;
+          if (left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
+          pop.style.left = left + 'px';
+          pop.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+        });
+
+        node.addEventListener('mouseleave', function(e) {
+          var to = e.relatedTarget;
+          if (to && (to === pop || pop.contains(to))) return;
+          pop.style.display = 'none';
+        });
+      });
+    }, 200);
+  });
+
+});
+</script>
+<style>
+.sidebarblock.overlay { display: none; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function getText(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return '';
+    var p = el.querySelector('p');
+    return p ? p.textContent.trim() : '';
+  }
+
+  function parseItems(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return [];
+    var p = el.querySelector('p');
+    if (!p) return [];
+    var text = p.textContent.trim().replace(/\}\s*\{/g, '}, {');
+    try { return eval('[' + text + ']'); } catch(e) { return []; }
+  }
+
+  function drawOverlay(overlaySvg, iw, ih, arrows, numbers, labelData) {
+    if (!iw || !ih) return;
+
+    var overflow = 50;
+    overlaySvg.setAttribute('viewBox', '0 0 ' + iw + ' ' + (ih + overflow * 2));
+    overlaySvg.innerHTML = '';
+
+    var shaft = iw * 0.003, head = iw * 0.008, headLen = ih * 0.075, len = ih * 0.5;
+    arrows.forEach(function(a) {
+      var x = a.x / 100 * iw, y = a.y / 100 * ih + overflow;
+      var pts = (-shaft)+','+len+' '+(shaft)+','+len+' '+(shaft)+','+(headLen)+' '+(head)+','+(headLen)+' 0,0 '+(-head)+','+(headLen)+' '+(-shaft)+','+(headLen);
+      var p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      p.setAttribute('points', pts);
+      p.setAttribute('fill', a.color || 'red');
+      p.setAttribute('opacity', '0.85');
+      p.setAttribute('transform', 'translate(' + x + ',' + y + ') rotate(' + (a.rot||0) + ') scale(' + (a.size||1) + ')');
+      overlaySvg.appendChild(p);
+    });
+
+    var r = iw * 0.012, fontSize = r * 1.4;
+    var numCounter = 1;
+    numbers.forEach(function(n) {
+      if (n.n !== undefined) numCounter = n.n;
+      var x = n.x / 100 * iw, y = n.y / 100 * ih + overflow, s = n.size || 1;
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', r * s);
+      c.setAttribute('fill', n.color || 'red');
+      overlaySvg.appendChild(c);
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', 'white'); t.setAttribute('font-size', fontSize * s);
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      t.textContent = numCounter;
+      overlaySvg.appendChild(t);
+      numCounter++;
+    });
+
+    var labelSize = iw * 0.014;
+    labelData.forEach(function(l) {
+      var x = l.x / 100 * iw, y = l.y / 100 * ih + overflow;
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', l.color || 'red'); t.setAttribute('font-size', labelSize * (l.size||1));
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      if (l.rot) t.setAttribute('transform', 'rotate(' + l.rot + ',' + x + ',' + y + ')');
+      t.textContent = l.text;
+      overlaySvg.appendChild(t);
+    });
+  }
+
+  var overlays = [];
+  var overlaysInitialized = false;
+
+  function initOverlays() {
+    if (overlaysInitialized) return;
+    overlaysInitialized = true;
+
+    document.querySelectorAll('.sidebarblock.overlay').forEach(function(block) {
+      var targetId = getText(block, 'target');
+      var targetBlock = targetId ? document.getElementById(targetId) : null;
+      if (!targetBlock) return;
+
+      var arrows = parseItems(block, 'arrows');
+      var numbers = parseItems(block, 'numbers');
+      var labels = parseItems(block, 'labels');
+
+      var img = targetBlock.querySelector('img');
+      var pre = targetBlock.tagName === 'PRE' ? targetBlock : targetBlock.querySelector('pre');
+      var mermaidEl = targetBlock.querySelector('svg[id^="mermaid"]');
+      var target = img || pre || mermaidEl || targetBlock;
+
+      var overlayParent = target.parentElement || targetBlock;
+      overlayParent.style.position = 'relative';
+      overlayParent.style.overflow = 'visible';
+
+      var overlaySvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      overlaySvg.style.cssText = 'position: absolute; pointer-events: none; overflow: visible; z-index: 999;';
+      overlayParent.appendChild(overlaySvg);
+
+      var entry = { svg: overlaySvg, target: target, parent: overlayParent, arrows: arrows, numbers: numbers, labels: labels };
+      overlays.push(entry);
+
+      function positionAndDraw() {
+        var rect = entry.target.getBoundingClientRect();
+        var parentRect = entry.parent.getBoundingClientRect();
+        var tw = rect.width, th = rect.height;
+        var tl = rect.left - parentRect.left, tt = rect.top - parentRect.top;
+        if (!tw || !th) return;
+        var overflow = 50;
+        entry.svg.style.left = tl + 'px';
+        entry.svg.style.top = (tt - overflow) + 'px';
+        entry.svg.style.width = tw + 'px';
+        entry.svg.style.height = (th + overflow * 2) + 'px';
+        drawOverlay(entry.svg, tw, th, entry.arrows, entry.numbers, entry.labels);
+      }
+      entry.redraw = positionAndDraw;
+
+      if (img) {
+        if (img.complete) positionAndDraw();
+        else img.onload = positionAndDraw;
+      } else if (mermaidEl) {
+        setTimeout(positionAndDraw, 100);
+      } else {
+        positionAndDraw();
+      }
+    });
+  }
+
+  // Redraw all overlays on resize
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      overlays.forEach(function(entry) { entry.redraw(); });
+    }, 150);
+  });
+
+  // Mermaid renders async — wait for it, then init overlays
+  var mermaidCheck = setInterval(function() {
+    if (document.querySelector('svg[id^="mermaid"]') || !document.querySelector('.mermaid')) {
+      clearInterval(mermaidCheck);
+      setTimeout(initOverlays, 200);
+    }
+  }, 100);
+  setTimeout(initOverlays, 2000);
+});
+</script>
+<h1 id="_architecture" class="sect0"><a class="anchor" href="#_architecture"></a>Architecture</h1>
+<div class="paragraph">
+<p>This section provides a comprehensive look at the technologies, architectural patterns, and design decisions that enable the AI-powered application integration platform.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="sect1">
+<h2 id="tech_stack"><a class="anchor" href="#tech_stack"></a>Technology Stack</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift Container Platform, Red Hat OpenShift Data Foundation, Red Hat Application Foundations, and connectivity solutions combine to deliver a unified platform for AI-powered integration.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/en/products/application-foundations" target="_blank" rel="noopener">Red Hat Application Foundations</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a href="https://developers.redhat.com/products/red-hat-build-of-apache-camel" target="_blank" rel="noopener">Red Hat build of Apache Camel</a>:</strong> A versatile toolkit for streamlined application integration that simplifies connecting diverse systems. Runs in Quarkus and Spring Boot runtimes with optimized performance and fast startup.</p>
+</li>
+<li>
+<p><strong><a href="https://developers.redhat.com/products/streams-for-apache-kafka" target="_blank" rel="noopener">Red Hat Streams for Apache Kafka</a>:</strong> Based on the Apache Kafka project, offers a distributed backbone for microservices and applications to share data with high throughput and low latency. Enables event-driven architectures and system decoupling.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank" rel="noopener">Red Hat OpenShift</a>: A unified application platform for building, modernizing, and deploying applications at scale on hybrid cloud infrastructure.</p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation" target="_blank" rel="noopener">Red Hat OpenShift Data Foundation</a>: Persistent software-defined storage integrated with OpenShift, providing S3-compatible object storage for archival and document management.</p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/connectivity-link" target="_blank" rel="noopener">Red Hat Connectivity Link</a>: A secure, scalable API gateway solution enabling authentication, authorization, and rate limiting across services. Built on Kubernetes Gateway API and Kuadrant for cloud-native governance.</p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/service-interconnect" target="_blank" rel="noopener">Red Hat Service Interconnect</a>: Secure connectivity solution allowing applications in OpenShift to access databases and services on separate infrastructure without exposing them to public networks. Enables zero-trust application-level connections.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="in_depth"><a class="anchor" href="#in_depth"></a>An in-depth look at the solution&#8217;s architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The architecture integrates data ingestion, event-driven messaging, AI-assisted automation, and governance into a unified platform. Each capability addresses a specific challenge while building on the layers beneath it.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="sect2">
+<h3 id="_secure_data_ingestion"><a class="anchor" href="#_secure_data_ingestion"></a>Secure Data Ingestion</h3>
+<div class="paragraph">
+<p>Backend databases often reside on infrastructure separate from cloud environments — legacy on-premises systems, managed database services, or security-isolated namespaces. Exposing these databases to public networks creates security vulnerabilities. Traditional VPN configurations add operational complexity and require firewall rule management across teams.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Service Interconnect solves this by establishing encrypted, application-level connections between OpenShift and remote databases. No VPNs. No exposed ports. The solution creates a local Kubernetes service proxy that transparently forwards traffic to the remote database.</p>
+</div>
+<div class="paragraph">
+<p>Service Interconnect uses a set of resources to establish and manage the connection. Here&#8217;s how it looks:</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Hover over each component in the diagram to learn what it does.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+    subgraph yoursLabel ["Openshift"]
+        subgraph yours [" "]
+            Client[DB Client]
+            SVC2((svc))
+            subgraph S2 ["Site(2)"]
+                Listener((Listener))
+                Grant["🪪 AccessGrant"]
+            end
+        end
+    end
+
+    Client --> SVC2 --> Listener
+    S2 ~~~ S1
+    S2 -.-|"🔒 secure link"| S1
+
+    subgraph sharedLabel [Remote Database]
+        subgraph shared [" "]
+            subgraph S1 ["Site(1)"]
+                Connector((Connector))
+                Token["🔑 AccessToken"]
+            end
+            SVC((svc))
+            SVC --- DB[(Database)]
+        end
+    end
+
+    Connector --> SVC
+    Grant ~~~ Token
+
+    style yoursLabel fill:none,stroke:none
+    style sharedLabel fill:none,stroke:none
+    style S2 fill:#e8eaf6,stroke:#7986cb
+    style S1 fill:#e8eaf6,stroke:#7986cb
+    style Grant fill:#fff,stroke:#7986cb
+    style Listener fill:#fff,stroke:#7986cb
+    style Token fill:#fff,stroke:#7986cb
+    style Connector fill:#fff,stroke:#7986cb
+    style DB fill:#336,color:#fff</pre>
+</div>
+</div>
+<div class="sidebarblock mermaid-hints-simple">
+<div class="content">
+<div class="paragraph">
+<p>S2 | Site | The foundation of the Skupper network. Each participating namespace runs a Site. Sites discover each other through AccessGrants and AccessTokens.<br>
+S1 | Site | The foundation of the Skupper network. Each participating namespace runs a Site. Sites discover each other through AccessGrants and AccessTokens.<br>
+Grant | AccessGrant | Created on the receiving side. It generates credentials that allow a remote Site to connect. Think of it as an invitation to join the network.<br>
+Token | AccessToken | Created on the connecting side using the grant details. It establishes the encrypted link between two Sites.<br>
+Listener | Listener | Exposes a remote service locally in your namespace. It matches a Connector on the other side by routing key, making the remote service appear as a local one.<br>
+Connector | Connector | Connects a local service to the Skupper network. It publishes the service so that matching Listeners in other namespaces can reach it.<br>
+SVC2 | Service (auto-created) | When a Listener is created, Service Interconnect automatically creates a local Kubernetes service. Your application connects to this service as if the database were local.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The database lives in a secure, air-tight environment — no inbound ports are exposed. To keep it that way, the link is initiated <strong>from</strong> the database side <strong>outward</strong> to your site. This is why you create an AccessGrant on your side: it gives the database site permission to connect to you and establish a bidirectional communication link. Its environment never opens an entrypoint that could be exploited.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once configured, Apache Camel integrations connect to the database as if it were local — standard PostgreSQL connection strings, no special network configuration. The Service Interconnect layer handles routing, encryption, and access control beneath the application.</p>
+</div>
+<div class="paragraph">
+<p>This pattern extends to multi-site deployments spanning clusters, regions, and cloud providers. Sites discover each other through credentials (AccessGrant/AccessToken), creating secure meshes that persist across all exposed services.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<details>
+<summary class="title">Beyond this demo: Service Interconnect at scale</summary>
+<div class="content">
+<div class="paragraph">
+<p>In the real world, Service Interconnect shines when connecting services across multiple clusters, regions, and cloud providers — all sharing the same secure mesh.</p>
+</div>
+<div class="paragraph">
+<p>Consider a retail organization with stores across different regions, each running AI-powered services. Edge sites collect training data and run inference against locally deployed models. Redundant on-prem data centers handle the heavy lifting — training new AI/ML models and pushing updated versions back to the stores. Regional hubs aggregate traffic from nearby edges before forwarding it to the core.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock text-center mermaid">
+<div class="content">
+<pre>flowchart LR
+    subgraph left [" "]
+        direction TB
+        subgraph E1L ["London"]
+            E1["AI data →\nAI model ←"]
+        end
+        subgraph E2L ["Berlin"]
+            E2["AI data →\nAI model ←"]
+        end
+    end
+
+    HL((Hub\nFrankfurt))
+
+    subgraph coreLabel [" "]
+        direction TB
+        subgraph DC1 ["Data Center 1"]
+            AI1(AI Model Training)
+        end
+        subgraph DC2 ["Data Center 2"]
+            AI2(AI Model Training)
+        end
+    end
+
+    HR((Hub\nSingapore))
+
+    subgraph right [" "]
+        direction TB
+        subgraph E3L ["Tokyo"]
+            E3["← AI data\n→ AI model"]
+        end
+        subgraph E4L ["Sydney"]
+            E4["← AI data\n→ AI model"]
+        end
+    end
+
+    E1 -.-|"🔒 N links"| HL
+    E2 -.-|"🔒 N links"| HL
+    HL -.-|"🔒 N links"| AI1
+    HL -.-|"🔒 N links"| AI2
+    AI1 -.-|"🔒 N links"| HR
+    AI2 -.-|"🔒 N links"| HR
+    HR -.-|"🔒 N links"| E3
+    HR -.-|"🔒 N links"| E4
+
+    style left fill:none,stroke:none
+    style right fill:none,stroke:none
+    style E1L fill:none,stroke:none
+    style E2L fill:none,stroke:none
+    style E3L fill:none,stroke:none
+    style E4L fill:none,stroke:none
+    style coreLabel fill:none,stroke:none
+    style DC1 fill:#e8eaf6,stroke:#7986cb
+    style DC2 fill:#e8eaf6,stroke:#7986cb
+    style AI1 fill:#fff,stroke:#7986cb
+    style AI2 fill:#fff,stroke:#7986cb
+    style HL fill:#e8eaf6,stroke:#7986cb
+    style HR fill:#e8eaf6,stroke:#7986cb
+    style E1 fill:#f5f5f5,stroke:#ccc
+    style E2 fill:#f5f5f5,stroke:#ccc
+    style E3 fill:#f5f5f5,stroke:#ccc
+    style E4 fill:#f5f5f5,stroke:#ccc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each edge site pushes training data to the core and pulls updated models back. Multiple links between sites provide redundant routing — if one path fails, traffic flows through another. Hubs add a further layer of resilience: if the Frankfurt hub goes down, edges can reroute through Singapore. Redundant data centers ensure the AI pipeline stays available even during maintenance or outages.</p>
+</div>
+</div>
+</details>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A typical data ingestion flow follows this pattern: the platform exposes an API endpoint via Apache Camel to receive incoming data. The integration transforms data as needed, stores it in backend databases via Service Interconnect, and generates documents that are uploaded to object storage provided by OpenShift Data Foundation. All data movement happens over encrypted connections without direct database exposure.</p>
+</div>
+<div class="paragraph">
+<p>In the demonstration scenario, this pattern is applied to order processing: EDI purchase orders arrive at the Camel endpoint, are transformed to XML format, stored in a database, and rendered as PDF invoices uploaded to S3 storage.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+
+    Customer --&gt; Shop --&gt;|"EDI message"| Camel
+
+    subgraph LocalEnvironment [OpenShift]
+        Shop
+        Camel --&gt; |"① XML data"|ServiceInterconnect{{"Service\nInterconnect"}}
+        Camel --&gt; |"② PDF Invoices"|Storage
+    end
+
+    subgraph RemoteEnvironment [Remote Environment]
+        ServiceInterconnect2{{"Service\nInterconnect"}} --&gt; Database
+    end
+
+    ServiceInterconnect --- |"🔒 secure link"| ServiceInterconnect2{{"Service\nInterconnect"}}
+
+    Camel@{ img: "/solution-pattern-app-connect-ai/_images/integration-icon.svg", label: "Camel Integration", pos: "b", h: 80, w: 80, constraint: "on" }
+    Customer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    Shop@{ img: "/solution-pattern-app-connect-ai/_images/shop-icon.svg", label: "Shop", pos: "b", h: 80, w: 80, constraint: "on" }
+    Storage@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "OpenShift&lt;br&gt;Data Foundation", pos: "b", h: 80, w: 80, constraint: "on" }
+    Database@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+
+    style LocalEnvironment fill:#fce4e4,stroke:#EE0000
+    style RemoteEnvironment fill:#fce4e4,stroke:#EE0000
+    style ServiceInterconnect2 fill:#f8b4b4,stroke:#EE0000,color:#333
+    style ServiceInterconnect fill:#f8b4b4,stroke:#EE0000,color:#333
+    style Customer fill:none,stroke:none
+    style Camel fill:none,stroke:none,font-weight:bold
+    style Shop fill:none,stroke:none
+    style Storage fill:none,stroke:none
+    style Database fill:none,stroke:none</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_driven_messaging"><a class="anchor" href="#_event_driven_messaging"></a>Event-Driven Messaging</h3>
+<div class="paragraph">
+<p>Connecting messaging platforms directly to each other creates tight coupling. When two platforms depend on each other&#8217;s APIs, adding a third platform requires modifying both existing integrations. The number of point-to-point connections grows exponentially as the platform expands.</p>
+</div>
+<div class="paragraph">
+<p>The architecture decouples messaging platforms by introducing Apache Kafka as a streaming backbone. Neither platform requires direct awareness of the other — they publish and consume messages through common Kafka topics. This decoupling enables independent scaling and simplifies extensibility.</p>
+</div>
+<div class="listingblock text-center mermaid mermaid-w60">
+<div class="content">
+<pre>flowchart LR
+
+    subgraph chatOuter ["Customer Support Platform"]
+        subgraph chatInner [" "]
+        direction LR
+        ChatCustomer --- |Camel| Kafka --- |Camel| ChatAgent
+        end
+    end
+
+    ChatCustomer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Kafka@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style ChatCustomer fill:none,stroke:none
+    style ChatAgent fill:none,stroke:none
+    style Kafka fill:none,stroke:none
+    style chatOuter fill:none,stroke:none
+    style chatInner fill:#fce4e4,stroke:#EE0000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To make this pattern work cleanly, the architecture adopts a <strong>standard data model</strong> as the common language on Kafka. Instead of translating directly between platform-specific formats, each integration transforms in two steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Inbound</strong>: platform-specific format → standard data model (into Kafka)</p>
+</li>
+<li>
+<p><strong>Outbound</strong>: standard data model → platform-specific format (from Kafka)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This means every system integrates with one common interface, not with every other system individually. Adding a new messaging platform requires implementing only two flows: platform → Kafka (inbound) and Kafka → platform (outbound). The existing infrastructure and other integrations remain untouched.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/standard-data-model.png" alt="standard data model" width="70%">
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>In the demonstration scenario, bidirectional messaging between Matrix (customer-facing) and Rocket.Chat (support agents) illustrates this pattern with four distinct flows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Matrix → Kafka</p>
+</li>
+<li>
+<p>Kafka → Rocket.Chat</p>
+</li>
+<li>
+<p>Rocket.Chat → Kafka</p>
+</li>
+<li>
+<p>Kafka → Matrix</p>
+</li>
+</ul>
+</div>
+<div class="listingblock mermaid mermaid-w40">
+<div class="content">
+<pre>flowchart LR
+    MX --&gt;|"flow 1"| K --&gt;|"flow 2"| RC
+    RC --&gt;|"flow 3"| K --&gt;|"flow 4"| MX
+
+    MX@{ img: "/solution-pattern-app-connect-ai/_images/element-icon.svg", label: "Matrix", pos: "b", h: 100, w: 80, constraint: "on" }
+    K@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 100, w: 80, constraint: "on" }
+    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 100, w: 100, constraint: "on" }
+
+    style MX fill:none,stroke:none
+    style K fill:none,stroke:none
+    style RC fill:none,stroke:none
+
+    linkStyle 0 stroke:#66bb6a,stroke-width:2px
+    linkStyle 1 stroke:#66bb6a,stroke-width:2px
+    linkStyle 2 stroke:#ef5350,stroke-width:2px
+    linkStyle 3 stroke:#ef5350,stroke-width:2px</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Rocket.Chat and Matrix are open-source implementations of direct messaging platforms. While not as popular or ubiquitous as WhatsApp or Discord for example, they can be installed on an OpenShift cluster and do not require registration, making them more suitable for our solution pattern demo environment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Each flow is an independent Apache Camel integration. Kafka partitions enable parallel processing. Message ordering is preserved within partitions while allowing horizontal scaling across consumer groups.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ai_assisted_automation"><a class="anchor" href="#_ai_assisted_automation"></a>AI-Assisted Automation</h3>
+<div class="paragraph">
+<p>Support agents resolving customer issues typically query databases manually, update records across systems, and regenerate documents. The process is time-consuming and error-prone. Scaling support operations requires hiring proportionally more agents.</p>
+</div>
+<div class="paragraph">
+<p>The platform enables support agents to interact with an AI assistant using natural language directly within their messaging interface. Powered by Agentic Apache Camel and Model-as-a-Service (MaaS), the agent interprets requests, autonomously selects tools, and executes backend operations.</p>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+
+    Agent --&gt;|① message| RC &lt;--&gt;|② forward| INTLabel
+
+    INTLabel -- ⑤ reply--&gt; RC
+
+    RC -- ⑥ response --&gt; Agent
+
+    INTLabel &lt;--&gt; |"③ reason"| MaaSLabel
+    INTLabel --&gt; |"④ tool calls\n(MCP)"| ToolsInner
+
+    INTLabel[⚙️ &lt;span style='font-weight:bold;font-size:1.2em;color: #EE0000'&gt;Agentic Integration\n&lt;/span&gt;&lt;p style='margin-top:5px'/&gt;&lt;div style='border: solid 1px red; padding: 10px;background-color: #fce4e4'&gt;&lt;div style='padding: 5px 0px 5px 25px;text-align:left;color: black;'&gt;• AI reasoning&lt;br&gt;• Tool calling&lt;br&gt;• Integrations&lt;/div&gt;&lt;/div&gt;\n]
+
+    subgraph ToolsLabel ["MCP &amp; Backend Systems&amp;nbsp;&amp;nbsp;"]
+        subgraph ToolsInner [" "]
+            direction LR
+            DB ~~~ S3 ~~~ HD
+        end
+    end
+
+    subgraph MaaSLabel [" "]
+        MaaS
+    end
+
+    Agent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 80, w: 80, constraint: "on" }
+    MaaS@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    S3@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
+    HD@{ img: "/solution-pattern-app-connect-ai/_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
+
+    style Agent fill:none,stroke:none
+    style RC fill:none,stroke:none
+    style MaaS fill:none,stroke:none
+    style DB fill:none,stroke:none
+    style S3 fill:none,stroke:none
+    style HD fill:none,stroke:none
+    style INTLabel fill:none,stroke:none
+    style MaaSLabel fill:none,stroke:none
+    style ToolsLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style ToolsInner fill:#fce4e4,stroke:#EE0000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The AI agent follows a reasoning loop — it consults the LLM via MaaS, which decides what actions to take. Camel then executes the appropriate tools via <strong>MCP</strong> (update the database, regenerate a PDF invoice in S3), feeds the results back to the LLM, and returns the final answer to the support agent in Rocket.Chat.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>What is MCP?</strong> The Model Context Protocol (MCP) is an open standard that lets AI agents interact with external systems — databases, APIs, file storage, and more — using a consistent set of tools. In this lab, Apache Camel implements an MCP server that exposes backend actions (e.g. update database, upload to S3) as callable tools. The AI model decides which tools to invoke based on the user&#8217;s natural language request.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The diagram illustrates the agentic reasoning loop:</p>
+</div>
+<div class="paragraph">
+<p><strong>①</strong> The support agent sends a natural language request via Rocket.Chat</p>
+</div>
+<div class="paragraph">
+<p><strong>②</strong> Rocket.Chat forwards the message to the Agentic Camel integration</p>
+</div>
+<div class="paragraph">
+<p><strong>③</strong> The Agentic Integration reasons with the AI Model (MaaS) to determine the appropriate actions</p>
+</div>
+<div class="paragraph">
+<p><strong>④</strong> Based on the reasoning, Camel executes MCP tools which are connected to backend systems (Database, S3/ODF, HelpDesk)</p>
+</div>
+<div class="paragraph">
+<p><strong>⑤</strong> Results flow back to the Agentic Integration</p>
+</div>
+<div class="paragraph">
+<p><strong>⑥</strong> The final synthesized response returns to the support agent</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>The diagram below shows how the Agentic Integration (once MCP is active) routes tool calls from the AI model. Two MCP servers provide distinct toolsets — Node.js and Camel Quarkus. When the AI model needs a tool, the Agentic Integration routes the request to the appropriate MCP server, which executes the tool against the backend systems and returns the result.</p>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+
+    MaaS &lt;--&gt;|Tool calls| INTLabel
+
+    INTLabel &lt;--&gt; |"Toolset 1"| NodeJSLabel
+    INTLabel &lt;--&gt; |"Toolset 2"| CamelQuarkusLabel
+    NodeJSLabel --&gt; |"Integrations"| ToolsInner
+    CamelQuarkusLabel --&gt; |"Integrations"| ToolsInner
+
+    INTLabel[⚙️ &lt;span style='font-weight:bold;font-size:1.2em;color: #EE0000'&gt;Agentic Integration\n&lt;/span&gt;&lt;p style='margin-top:5px'/&gt;&lt;div style='border: solid 1px red; padding: 10px;background-color: #fce4e4'&gt;&lt;div style='padding: 5px 0px 5px 25px;text-align:left;color: black;'&gt;• AI reasoning&lt;br&gt;• Tool calling&lt;br&gt;• Integrations&lt;/div&gt;&lt;/div&gt;\n]
+
+    subgraph ToolsLabel ["&lt;br&gt;&lt;br&gt;&lt;br&gt;Backend Systems&amp;nbsp;"]
+        subgraph ToolsInner [" "]
+            direction LR
+            DB ~~~ S3 ~~~ HD
+        end
+    end
+
+    subgraph NodeJSLabel [" "]
+        NodeJS
+    end
+
+  subgraph CamelQuarkusLabel [" "]
+        CamelQuarkus
+    end
+
+    MaaS@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
+    NodeJS@{ img: "/solution-pattern-app-connect-ai/_images/nodejs-icon.svg", label: "MCP NodeJS", pos: "b", h: 80, w: 80, constraint: "on" }
+    CamelQuarkus@{ img: "/solution-pattern-app-connect-ai/_images/camel-quarkus-icon.svg", label: "MCP Camel Quarkus", pos: "b", h: 80, w: 80, constraint: "on" }
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    S3@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
+    HD@{ img: "/solution-pattern-app-connect-ai/_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
+
+    style MaaS fill:none,stroke:none
+    style NodeJS fill:none,stroke:none
+    style CamelQuarkus fill:none,stroke:none
+    style DB fill:none,stroke:none
+    style S3 fill:none,stroke:none
+    style HD fill:none,stroke:none
+    style INTLabel fill:none,stroke:none
+    style NodeJSLabel fill:none,stroke:none
+    style CamelQuarkusLabel fill:none,stroke:none
+    style ToolsLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style ToolsInner fill:#fce4e4,stroke:#EE0000</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Agentic Integration can work with MCP servers implemented in different languages. This demonstration includes a Node.js MCP server and a Camel Quarkus MCP server — each providing distinct tools to the AI model.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the demonstration scenario, a support agent might ask "Fix invoice 1025 shipping address to 123 Main St and regenerate the PDF." The LLM recognizes this requires three operations: query the invoice, update the shipping address, regenerate the PDF. Camel executes each operation, validates the update succeeded, renders the new PDF, uploads it to S3, and reports completion back to the agent.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_governance_and_rate_limiting"><a class="anchor" href="#_governance_and_rate_limiting"></a>Governance and Rate Limiting</h3>
+<div class="paragraph">
+<p>Once AI agents operate in production, organizations need controls. Who can access the LLM endpoint? How many tokens can each service tier consume? Without governance, uncontrolled API usage can exhaust budgets in hours.</p>
+</div>
+<div class="paragraph">
+<p>The architecture applies a governance layer in front of LLM endpoints using Red Hat Connectivity Link. Built on the Kubernetes Gateway API standard and the Kuadrant project, Connectivity Link enforces infrastructure-level policies without requiring application code changes.</p>
+</div>
+<div class="paragraph">
+<p>Two policy types control AI access:</p>
+</div>
+<div class="paragraph">
+<p><strong>AuthPolicy</strong> manages identity and authorization. API keys identify callers and assign them to groups (for example, service tiers such as Gold and Silver). The policy validates keys, extracts group membership, and passes that context downstream for rate limiting decisions.</p>
+</div>
+<div class="paragraph">
+<p><strong>TokenRateLimitPolicy</strong> enforces consumption limits based on actual token usage, not request counts. Each service tier gets its own token budget. Organizations can define fallback strategies when higher-cost tiers exhaust their quotas — for instance, falling back from Gold tier to Silver tier with reduced analysis depth, or deferring requests when all tiers are exhausted.</p>
+</div>
+<div class="paragraph">
+<p>This token-aware rate limiting is critical for AI workloads. Traditional request-count limits don&#8217;t account for the fact that one request can consume 100 tokens while another consumes 10,000. Token-based policies measure actual consumption, enabling fair allocation across tiers.</p>
+</div>
+<div class="paragraph">
+<p>Policies attach directly to HTTPRoute resources in the Gateway API model:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>GatewayClass + Gateway</strong> — owned by the platform team, defines how traffic enters the cluster</p>
+</li>
+<li>
+<p><strong>HTTPRoute</strong> — defines where traffic routes (in this case, the LLM endpoint)</p>
+</li>
+<li>
+<p><strong>Policies</strong> — layer onto HTTPRoutes, enforced at the infrastructure level</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>---
+config:
+  markdownAutoWrap: false
+---
+flowchart LR
+    Client([App])
+    Gateway[Gateway]
+
+    subgraph S1 ["HTTPRoute"]
+        direction LR
+        subgraph S2 [" "]
+            direction LR
+            Auth[Auth Policy]
+            RateLimit[Token Rate Limit Policy]
+            Auth ~~~ RateLimit
+        end
+
+        A@{ shape: braces, label: "&lt;i&gt;Connectivity Link policies attach to Gateway API resources&lt;/i&gt;" }
+    end
+
+    Service[Service]
+    Pod1[Pod]
+    Pod2[Pod]
+
+    Client -.-&gt;|HTTP request| Gateway --&gt; S2 --&gt;|routing rule| Service
+    Service --&gt; Pod1
+    Service --&gt; Pod2
+
+
+    style S2 fill:#e8eaf6,stroke:#7986cb
+    style S1 fill:none,stroke:none
+    style Client fill:#f5f5f5,stroke:#ccc
+    style Gateway fill:#fff,stroke:#7986cb
+    style Auth fill:#fff3e0,stroke:#fb8c00
+    style RateLimit fill:#fff3e0,stroke:#fb8c00
+    style Service fill:#fff,stroke:#7986cb
+    style Pod1 fill:#336,color:#fff
+    style Pod2 fill:#336,color:#fff</pre>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Application code sees none of this. The AI agent makes requests to the LLM endpoint. Connectivity Link intercepts traffic at the gateway, enforces authentication, tracks token consumption, and applies rate limits before forwarding requests to the LLM service.</p>
+</div>
+<div class="paragraph">
+<p>The end-to-end request flow shows how the support agent&#8217;s interaction flows through the governance layer:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+    Agent --&gt; Bot
+    Bot --&gt;|api key| Gateway
+    Gateway --&gt; S2
+    Auth --&gt;|userid + group| Token
+    S2 --&gt; LLM
+
+    subgraph S2 ["HTTPRoute"]
+        subgraph S3 ["Connectivity Link"]
+            Auth[Auth Policy]
+            Token[Token Rate Limit]
+        end
+    end
+
+    Agent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Bot@{ img: "/solution-pattern-app-connect-ai/_images/ai-icon.svg", label: "AI Assistant", pos: "b", h: 80, w: 80, constraint: "on" }
+    LLM@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "LLM", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style Agent fill:none,stroke:none
+    style S2 fill:#e8eaf6,stroke:#7986cb
+    style S3 fill:#e3f2fd,stroke:#7986cb
+    style Bot fill:none,stroke:none
+    style Gateway fill:#fff,stroke:#7986cb
+    style LLM fill:none,stroke:none
+    style Auth fill:#fff3e0,stroke:#fb8c00
+    style Token fill:#fff3e0,stroke:#fb8c00</pre>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Policies are defined as Kubernetes Custom Resources, applied with <code>oc apply</code>, stored in Git, and reviewed through standard change management processes. No separate management console. No vendor control plane. Governance follows the same operational patterns as application deployment.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scalability"><a class="anchor" href="#_scalability"></a>Scalability</h3>
+<div class="paragraph">
+<p>The architecture is designed for horizontal scaling across all components:</p>
+</div>
+<div class="paragraph">
+<p><strong>Apache Camel integrations</strong> scale by increasing replica counts. Each instance subscribes to the same Kafka consumer group. Kafka automatically load-balances partitions across available consumers. Adding replicas increases throughput without configuration changes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Kafka</strong> scales through partitioning. Topics are divided into partitions distributed across brokers. Consumers process partitions in parallel. Producers distribute messages across partitions using configurable strategies (round-robin, key-based hashing, custom logic).</p>
+</div>
+<div class="paragraph">
+<p><strong>Service Interconnect</strong> supports multiple Sites in a mesh topology. Sites can be added dynamically without disrupting existing connections. Traffic routes across the mesh automatically.</p>
+</div>
+<div class="paragraph">
+<p><strong>Connectivity Link</strong> gateways handle high request throughput. Rate limiting state is distributed across gateway instances. Token budgets are tracked consistently across the deployment.</p>
+</div>
+<div class="paragraph">
+<p><strong>OpenShift Data Foundation</strong> provides distributed object storage that scales independently of compute resources. S3-compatible endpoints support parallel uploads and downloads.</p>
+</div>
+<div class="paragraph">
+<p>Under increasing traffic volumes, each component scales independently. If outbound traffic to support agents increases, scale the Kafka → Rocket.Chat Camel integration without touching Matrix integrations or the AI agent.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extensibility"><a class="anchor" href="#_extensibility"></a>Extensibility</h3>
+<div class="paragraph">
+<p>The decoupled architecture makes adding new systems straightforward. Once the standard data model is defined, integrating new platforms follows a consistent pattern.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding a new messaging platform</strong>: Implement two Camel integrations — one transforms from the platform&#8217;s native format to the standard model and publishes to Kafka, the other consumes from Kafka and transforms to the platform&#8217;s format. No changes to existing integrations. No modifications to Kafka topics. The new platform participates in all existing message flows automatically.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding a new AI tool</strong>: Define the tool&#8217;s signature and implement it as a Camel route. Register the tool with the Agentic Camel configuration. The LLM can now invoke it autonomously during reasoning loops. Existing tools remain unaffected.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding a new service tier</strong>: Define a new HTTPRoute with distinct rate limit policies. Assign API keys to the new tier&#8217;s group. Token budgets are enforced independently from existing tiers.</p>
+</div>
+<div class="paragraph">
+<p>This extensibility comes from architectural choices made early in the design:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Standard data model</strong> — new systems integrate with one common interface</p>
+</li>
+<li>
+<p><strong>Event-driven backbone</strong> — Kafka decouples producers from consumers</p>
+</li>
+<li>
+<p><strong>Policy-based governance</strong> — adding tiers requires configuration, not code changes</p>
+</li>
+<li>
+<p><strong>Tool-based AI architecture</strong> — new capabilities are registered tools, not embedded logic</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The pattern supports both horizontal expansion (more messaging platforms, more tools, more tiers) and vertical enhancement (richer analysis, deeper integrations, additional governance controls).</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html" class="query-params-link">1. Home page</a></span>
+  <span class="next"><a href="03-demo.html" class="query-params-link">3. See the Solution in Action</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,3654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Solution Patterns from Red Hat</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-app-connect-ai/03-demo.html">
+    <link rel="prev" href="02-architecture.html">
+    <link rel="next" href="04-devresources.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWRNJP4L78"></script>
+<script>function gtag() { dataLayer.push(arguments) }; window.dataLayer = window.dataLayer || []; gtag('js', new Date()); gtag('config', 'G-FWRNJP4L78')</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns from Red Hat</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-app-connect-ai" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">AI-Powered Application Integration Platform</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.1 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.3 The solution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#tech_stack">1.4 Technology stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_common_challenges">2.1. Common challenges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.2. Technology stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html#in_depth">2.3. An in-depth look at the solution&#8217;s architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_secure_data_ingestion">2.3.1. Secure Data Ingestion</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_event_driven_messaging">2.3.2. Event-Driven Messaging</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_ai_assisted_automation">2.3.3. AI-Assisted Automation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_governance_and_rate_limiting">2.3.4. Governance and Rate Limiting</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_scalability">2.3.5. Scalability</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-architecture.html#_extensibility">2.3.6. Extensibility</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-demo.html">3. See the Solution in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_demonstration">3.1 Demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_recorded_video">3.2 Recorded Video</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_install_the_demonstration">3.3. Install the demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_walkthrough_guide">3.4. Walkthrough guide</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="04-devresources.html">4. Developer Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">5. Other Red Hat Solution Patterns</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">AI-Powered Application Integration Platform</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">AI-Powered Application Integration Platform</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">AI-Powered Application Integration Platform</a></li>
+    <li><a href="03-demo.html">3. See the Solution in Action</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-solution-patterns/solution-pattern-app-connect-ai/edit/main/documentation/modules/ROOT/pages/03-demo.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<style>
+.doc {
+    max-width: 70rem;
+}
+
+.underline {
+  cursor: pointer;
+}
+
+u {
+    cursor: pointer;
+}
+
+summary  {
+    cursor: pointer;
+}
+
+/* Push TOC down to make room for fixed overlays */
+.toc.sidebar .toc-menu {
+  top: 13rem !important;
+}
+
+.label {
+    color: #fff;
+    padding: .2em .6em .3em;
+    font-weight: 700;
+    border-radius: .25em;
+    font-size: 90%;
+}
+
+.added {background-color: #007700;}
+.changed {background-color: #088;}
+.updated {background-color: #3344bb;}
+
+.imageblock {
+    align-items: flex-start !important;
+}
+.imageblock.text-center .content {
+    width: 100%;
+    text-align: center;
+}
+.imageblock.text-center .content img {
+    display: inline-block;
+}
+.imageblock.bordered img {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Scale Mermaid diagrams: [.mermaid-w20] through [.mermaid-w90] */
+.mermaid-w20 svg { width: 20% !important; max-width: 20% !important; }
+.mermaid-w30 svg { width: 30% !important; max-width: 30% !important; }
+.mermaid-w40 svg { width: 40% !important; max-width: 40% !important; }
+.mermaid-w50 svg { width: 50% !important; max-width: 50% !important; }
+.mermaid-w60 svg { width: 60% !important; max-width: 60% !important; }
+.mermaid-w70 svg { width: 70% !important; max-width: 70% !important; }
+.mermaid-w80 svg { width: 80% !important; max-width: 80% !important; }
+.mermaid-w90 svg { width: 90% !important; max-width: 90% !important; }
+
+/* Center Mermaid diagrams with [.text-center] role */
+.mermaid.text-center svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Inline images: vertically center with surrounding text */
+.doc span.image img {
+    vertical-align: middle;
+}
+
+/* Inline code styling — :not([style]) excludes passthrough <code> with inline styles */
+.doc code:not([style]) {
+  background-color: #DDF4FF !important;
+  font-family: monospace !important;
+}
+
+
+/* kbd styling — override Antora theme */
+.doc kbd {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 0px 1px black;
+  font-size: .85em;
+  line-height: .85em;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 3px 5px;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+/* Admonition blocks: grey left border for visibility */
+.doc .admonitionblock {
+  border-left: 4px solid #999 !important;
+}
+
+/* Inline code inside admonitions: keep same color */
+.doc .admonitionblock code {
+  background-color: #DDF4FF !important;
+}
+
+/* Copypaste textarea inside admonitions: darker background for contrast */
+.admonitionblock textarea {
+  background-color: #ddd !important;
+}
+
+/* Listing/source blocks — match copypaste textarea appearance */
+.doc .listingblock pre {
+  background-color: #f0f0f0 !important;
+  color: #333 !important;
+  padding: 10px 15px;
+  line-height: 1.4;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+/* Properties source blocks — dark theme overriding highlight.js */
+.doc .listingblock pre:has(code[data-lang="properties"]) {
+  background-color: #2b2b2b !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock pre code[data-lang="properties"] {
+  background-color: transparent !important;
+  color: #CBCBCB !important;
+}
+.doc .listingblock code[data-lang="properties"] .hljs-comment { color: #689956 !important; font-style: italic; }
+.doc .listingblock code[data-lang="properties"] .hljs-attr { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-string { color: #CBCBCB !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-meta,
+.doc .listingblock code[data-lang="properties"] .hljs-keyword { color: #569DD6 !important; }
+.doc .listingblock code[data-lang="properties"] .hljs-link { color: #CBCBCB !important; }
+
+/* Ensure topbar dropdown appears above fixed overlays */
+.navbar {
+  z-index: 1001 !important;
+}
+
+/* Right sidebar: .doc-sidebar — fixed status overlay at top-right */
+.doc-sidebar {
+  position: fixed !important;
+  top: 6.5rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  z-index: 1000;
+  border-radius: 4px !important;
+}
+.doc-sidebar .sidebarblock {
+  padding: 0.3rem 0.5rem !important;
+}
+.doc-sidebar .sidebarblock p {
+  margin: 0 !important;
+}
+
+/* Task sidebar: fixed overlay below doc-sidebar */
+.task-sidebar {
+  position: fixed !important;
+  top: 12rem;
+  right: 1rem;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  font-size: 0.85em;
+}
+.task-sidebar .sidebarblock {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.task-sidebar .sidebarblock .title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.task-sidebar .sidebarblock ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+/* Indent helper for admonitions after file listings */
+.indent2 {
+  padding-left: 2rem;
+}
+
+/* Collapsible block styling — HTML passthrough details/summary */
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+.triangle {
+  margin-right: .5em;
+}
+summary:hover .sumtext {
+  text-decoration: underline;
+}
+.triangle::before {
+  content: "\25B6";
+}
+details[open] .triangle::before {
+  content: "\25BC";
+}
+
+/* Collapsible block styling — native AsciiDoc [%collapsible] */
+.doc details > summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: inherit;
+  color: inherit;
+}
+.doc details > summary::-webkit-details-marker {
+  display: none;
+}
+.doc details > summary::before {
+  content: "\25B6";
+  margin-right: 0.5em;
+  text-decoration: none;
+  display: inline-block;
+}
+.doc details[open] > summary::before {
+  content: "\25BC";
+}
+.doc details > summary:hover {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+.doc details > summary:hover::before {
+  text-decoration: none;
+}
+
+
+</style>
+
+<script>
+(function() {
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#ee0000"/><text x="16" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="20" fill="white">S</text></svg>';
+  var dataUri = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+  // Set favicon on this document
+  var link = document.querySelector('link[rel="icon"]');
+  if (!link) { link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); }
+  link.type = 'image/svg+xml';
+  link.href = dataUri;
+
+  // If inside an iframe, also set favicon on the top-level document
+  try {
+    if (window.top !== window.self) {
+      var topLink = window.top.document.querySelector('link[rel="icon"]');
+      if (!topLink) { topLink = window.top.document.createElement('link'); topLink.rel = 'icon'; window.top.document.head.appendChild(topLink); }
+      topLink.type = 'image/svg+xml';
+      topLink.href = dataUri;
+    }
+  } catch(e) { /* cross-origin iframe — cannot access top */ }
+})();
+
+</script>
+<span id="uv-source" hidden><span class="uservar">username</span></span>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  var source = document.getElementById('uv-source');
+  if (!source) return;
+
+  // Check if uv-source contains a .uservar span (production mode)
+  // or plain text (local dev mode)
+  var innerSpan = source.querySelector('.uservar');
+
+  // Read cookies (needed by both modes)
+  var cookies = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts.length === 2) {
+      cookies[parts[0].trim()] = decodeURIComponent(parts[1].trim());
+    }
+  });
+
+  if (!innerSpan) {
+    // Local dev: attribute resolved at build time, set the cookie
+    var username = source.textContent.trim();
+    if (username) {
+      document.cookie = 'username=' + encodeURIComponent(username) + '; Path=/';
+      cookies['username'] = username;
+    }
+  } else {
+    // Production: replace .uservar spans from cookies
+    var spans = document.querySelectorAll('.uservar');
+    spans.forEach(function(span) {
+      var key = span.textContent.trim();
+      if (cookies[key] !== undefined) {
+        span.textContent = cookies[key];
+      }
+    });
+  }
+
+  // Fetch-based uservars: spans with data-fetch get their value from the docserver
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+  if (dsUrl) {
+    var fetchSpans = document.querySelectorAll('.uservar[data-fetch]');
+    var fetchPaths = {};
+    fetchSpans.forEach(function(span) {
+      var path = span.getAttribute('data-fetch');
+      if (!fetchPaths[path]) fetchPaths[path] = [];
+      fetchPaths[path].push(span);
+    });
+    var fetchHeaders = {};
+    if (cookies['username']) fetchHeaders['user'] = cookies['username'];
+    Object.keys(fetchPaths).forEach(function(path) {
+      fetch(dsUrl + path, { headers: fetchHeaders })
+        .then(function(r) { return r.text(); })
+        .then(function(data) {
+          if (data) {
+            fetchPaths[path].forEach(function(s) { s.textContent = data.trim(); });
+          }
+        })
+        .catch(function() {});
+    });
+  }
+
+  // Fix hrefs that use the SHOWROOM_USERNAME placeholder
+  // (used by {username-url} in URL attributes where HTML spans can't go)
+  if (cookies['username']) {
+    document.querySelectorAll('a[href*="SHOWROOM_USERNAME"]').forEach(function(a) {
+      a.setAttribute('href', a.getAttribute('href').replace(/SHOWROOM_USERNAME/g, cookies['username']));
+    });
+  }
+
+  // Logout: redirect to docs-proxy /logout endpoint, which clears
+  // the httponly _oauth_proxy and username cookies server-side,
+  // then redirects back to docs-proxy to trigger a fresh OAuth flow.
+  var host = window.location.hostname;
+  var appsIndex = host.indexOf('.apps.');
+  if (appsIndex !== -1) {
+    var domain = host.substring(appsIndex + 1);
+    var logoutUrl = 'https://docs.' + domain + '/logout';
+    var logoutLinks = document.querySelectorAll('.navbar-item-right-content');
+    logoutLinks.forEach(function(link) {
+      if (link.textContent.trim() === 'Log out') {
+        link.href = logoutUrl;
+        link.target = '_top';
+      }
+    });
+  }
+
+});
+</script>
+<style>
+/* Hide copypaste sidebar blocks before JS transforms them */
+.sidebarblock.copypaste {
+  display: none;
+}
+
+/* Copypaste tooltip (cp- prefix avoids collision with mytooltip) */
+.cp-tooltip {
+  position: relative;
+  display: inline-block;
+}
+.cp-tooltip .cp-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cp-tooltip .cp-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.cp-tooltip:hover .cp-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<div id="cp-docserver-url" data-url="{url-docserver}" hidden></div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Copy SVG icon
+  var copySvg = '<svg fill="currentColor" height="1em" width="1em" viewBox="0 0 448 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg>';
+
+  // Replace REPLACE tokens with fetched comma-separated values
+  function replaceTokens(templateString, values) {
+    var valueArray = values.split(',').map(function(val) { return val.trim(); });
+    var result = templateString;
+    var i = 0;
+    while (result.indexOf('REPLACE') !== -1 && i < valueArray.length) {
+      result = result.replace('REPLACE', valueArray[i]);
+      i++;
+    }
+    return result;
+  }
+
+  // Copy textarea content to clipboard
+  function cpCopy(btn) {
+    var textarea = btn.previousElementSibling;
+    textarea.select();
+    var text = textarea.textContent;
+    navigator.clipboard.writeText(text + '\n')
+      .then(function() { console.log('Copied to clipboard'); })
+      .catch(function(err) { console.error('Failed to copy:', err); });
+  }
+
+  // Read docserver base URL from hidden div
+  var dsDiv = document.getElementById('cp-docserver-url');
+  var dsUrl = dsDiv ? dsDiv.getAttribute('data-url') : '';
+
+  // Read username from cookie for docserver requests
+  var dsHeaders = {};
+  document.cookie.split(';').forEach(function(c) {
+    var parts = c.trim().split('=');
+    if (parts[0] === 'username') {
+      dsHeaders['user'] = decodeURIComponent(parts[1]);
+    }
+  });
+
+  // Transform all .copypaste sidebar blocks
+  var blocks = document.querySelectorAll('.sidebarblock.copypaste');
+  blocks.forEach(function(sb) {
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var paragraphs = content.querySelectorAll('.paragraph');
+    var pathValue = '';
+    var defaultValue = '';
+    var textParts = [];
+
+    paragraphs.forEach(function(p) {
+      if (p.classList.contains('path')) {
+        pathValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else if (p.classList.contains('default')) {
+        defaultValue = (p.querySelector('p') ? p.querySelector('p').textContent : p.textContent).trim();
+      } else {
+        // Preserve <br> as newlines
+        var html = p.querySelector('p') ? p.querySelector('p').innerHTML : p.innerHTML;
+        var text = html.replace(/<br\s*\/?>/gi, '\n');
+        // Strip remaining HTML tags
+        var tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        textParts.push(tmp.textContent.trim());
+      }
+    });
+
+    var rawTemplate = textParts.join('\n\n');
+
+    // Apply defaults: use [.default] values if provided, otherwise built-in '<unavailable>'
+    var displayText = rawTemplate;
+    if (rawTemplate.indexOf('REPLACE') !== -1) {
+      var count = (rawTemplate.match(/REPLACE/g) || []).length;
+      var builtIn = Array(count).fill('<unavailable>').join(', ');
+      displayText = replaceTokens(rawTemplate, defaultValue || builtIn);
+    }
+
+    // Build replacement UI: textarea + copy button
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'border: 1px solid #f0f0f0; border-bottom-color: #8a8d90; display: flex; align-items: flex-start;';
+
+    var textarea = document.createElement('textarea');
+    textarea.readOnly = true;
+    textarea.style.cssText = 'border: none; background-color: #f0f0f0; width: 100%; resize: none; font-size: 14px; font-family: monospace; padding: 10px 15px; overflow: hidden;';
+    textarea.rows = 1;
+    textarea.textContent = displayText;
+
+    var btn = document.createElement('button');
+    btn.className = 'cp-tooltip';
+    btn.style.cssText = 'border: none; background-color: white; padding: 5px 15px; border-bottom: 1px solid transparent; transition: border-bottom-color 0.2s; cursor: pointer;';
+    btn.innerHTML = copySvg + '<span class="cp-tooltiptext">Copy to clipboard</span>';
+    btn.addEventListener('click', function() { cpCopy(this); });
+
+    wrapper.appendChild(textarea);
+    wrapper.appendChild(btn);
+
+    // Replace sidebar block with the new UI
+    sb.parentNode.replaceChild(wrapper, sb);
+
+    // Auto-size textarea height after render
+    function autoSize() {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    if (pathValue) {
+      // Dynamic: fetch from docserver then replace tokens
+      fetch(dsUrl + pathValue, { headers: dsHeaders })
+        .then(function(response) { return response.text(); })
+        .then(function(data) {
+          textarea.textContent = replaceTokens(rawTemplate, data);
+          requestAnimationFrame(autoSize);
+        })
+        .catch(function(err) { console.error('Copypaste fetch error:', err); });
+    }
+
+    requestAnimationFrame(autoSize);
+  });
+
+});
+</script>
+<style>
+/* Hide raw mermaid listing blocks before JS transforms them */
+.listingblock.mermaid {
+  display: none;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var blocks = document.querySelectorAll('.listingblock.mermaid');
+  if (!blocks.length) return;
+
+  // Load Mermaid JS from CDN
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js';
+  script.onload = function() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      sequence: {
+        mirrorActors: false
+      }
+    });
+
+    blocks.forEach(function(block) {
+      var code = block.querySelector('pre code') || block.querySelector('pre');
+      if (!code) return;
+
+      var container = document.createElement('div');
+      container.className = 'mermaid';
+      // Carry over extra classes (e.g. text-center) from the original block
+      block.classList.forEach(function(cls) {
+        if (cls !== 'listingblock' && cls !== 'mermaid') {
+          container.classList.add(cls);
+        }
+      });
+      if (block.id) container.id = block.id;
+      container.textContent = code.textContent;
+      block.parentNode.replaceChild(container, block);
+    });
+
+    mermaid.run();
+  };
+  document.head.appendChild(script);
+});
+</script>
+<style>
+/* Hide mermaid-hints sidebar blocks before JS transforms them */
+.sidebarblock[class*="mermaid-hints-"] {
+  display: none;
+}
+
+/* Mermaid hints popover */
+.mh-popover {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  background: #272822;
+  border-radius: 8px;
+  padding: 14px 20px;
+  max-width: 340px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.mh-popover-title {
+  color: #7986cb;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.mh-popover-text {
+  color: #ddd;
+  font-size: 13px;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Find all mermaid-hints-* sidebar blocks
+  var allSidebars = document.querySelectorAll('.sidebarblock');
+  var hintBlocks = [];
+  allSidebars.forEach(function(sb) {
+    var classes = sb.className.split(/\s+/);
+    for (var i = 0; i < classes.length; i++) {
+      if (classes[i].indexOf('mermaid-hints-') === 0) {
+        hintBlocks.push(sb);
+        break;
+      }
+    }
+  });
+
+  if (!hintBlocks.length) return;
+
+  // Create a single shared popover
+  var pop = document.createElement('div');
+  pop.className = 'mh-popover';
+  pop.innerHTML = '<div class="mh-popover-title"></div><div class="mh-popover-text"></div>';
+  document.body.appendChild(pop);
+
+  var popTitle = pop.querySelector('.mh-popover-title');
+  var popText = pop.querySelector('.mh-popover-text');
+
+  pop.addEventListener('mouseleave', function() {
+    pop.style.display = 'none';
+  });
+
+  function findNode(svg, key) {
+    return svg.querySelector('[id*="flowchart-' + key + '-"]')
+        || svg.getElementById(key)
+        || svg.querySelector('[id$="-' + key + '"]');
+  }
+
+  hintBlocks.forEach(function(sb) {
+    // Parse hint lines from paragraphs: "NodeId | Title | Description"
+    var content = sb.querySelector('.content');
+    if (!content) return;
+
+    var hints = {};
+    var hintOrder = [];
+    var lastKey = null;
+    var paragraphs = content.querySelectorAll('.paragraph p');
+    paragraphs.forEach(function(p) {
+      var lines = p.innerHTML.split(/<br\s*\/?>/gi);
+      lines.forEach(function(line) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = line;
+        var text = tmp.textContent.trim();
+        if (!text) return;
+
+        // Lines matching "NodeId | Title | Description" start a new hint.
+        // Lines without two | delimiters are continuations of the previous hint.
+        var first = text.indexOf('|');
+        var second = first !== -1 ? text.indexOf('|', first + 1) : -1;
+
+        if (first !== -1 && second !== -1) {
+          var nodeId = text.substring(0, first).trim();
+          var title = text.substring(first + 1, second).trim();
+          var desc = text.substring(second + 1).trim();
+          if (nodeId && title) {
+            hints[nodeId] = [title, desc];
+            hintOrder.push(nodeId);
+            lastKey = nodeId;
+          }
+        } else if (lastKey) {
+          // Continuation line — append to previous hint's description
+          hints[lastKey][1] += '\n' + text;
+        }
+      });
+    });
+
+    if (!Object.keys(hints).length) return;
+
+    // Find the preceding .listingblock.mermaid (the original, before mermaid.adoc
+    // replaces it). Walk backwards through siblings.
+    var diagramBlock = null;
+    var el = sb.previousElementSibling;
+    while (el) {
+      if (el.classList.contains('listingblock') && el.classList.contains('mermaid')) {
+        diagramBlock = el;
+        break;
+      }
+      el = el.previousElementSibling;
+    }
+    if (!diagramBlock) return;
+
+    // Wrap the diagram block in a container div. When mermaid.adoc later calls
+    // replaceChild on the listingblock, the replacement goes INSIDE this wrapper.
+    // This gives us a stable reference to find the rendered SVG.
+    var wrapper = document.createElement('div');
+    wrapper.className = 'mh-diagram-wrapper';
+    diagramBlock.parentNode.insertBefore(wrapper, diagramBlock);
+    wrapper.appendChild(diagramBlock);
+
+    // Remove the sidebar block
+    sb.parentNode.removeChild(sb);
+
+    // Poll until mermaid.adoc has rendered the SVG inside the wrapper
+    var firstKey = Object.keys(hints)[0];
+    var check = setInterval(function() {
+      var svg = wrapper.querySelector('svg');
+      if (!svg) return;
+
+      if (!findNode(svg, firstKey)) return;
+      clearInterval(check);
+
+      Object.keys(hints).forEach(function(key) {
+        var node = findNode(svg, key);
+        if (!node) return;
+
+        node.style.cursor = 'pointer';
+
+        node.addEventListener('mouseenter', function() {
+          var rect = node.getBoundingClientRect();
+          popTitle.textContent = hints[key][0];
+          popText.innerHTML = hints[key][1].replace(/\n/g, '<br>');
+          pop.style.display = 'block';
+
+          var popW = pop.offsetWidth;
+          var left = rect.left + (rect.width / 2) - (popW / 2);
+          if (left < 8) left = 8;
+          if (left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
+          pop.style.left = left + 'px';
+          pop.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+        });
+
+        node.addEventListener('mouseleave', function(e) {
+          var to = e.relatedTarget;
+          if (to && (to === pop || pop.contains(to))) return;
+          pop.style.display = 'none';
+        });
+      });
+    }, 200);
+  });
+
+});
+</script>
+<style>
+.sidebarblock.overlay { display: none; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function getText(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return '';
+    var p = el.querySelector('p');
+    return p ? p.textContent.trim() : '';
+  }
+
+  function parseItems(block, role) {
+    var el = block.querySelector('.paragraph.' + role);
+    if (!el) return [];
+    var p = el.querySelector('p');
+    if (!p) return [];
+    var text = p.textContent.trim().replace(/\}\s*\{/g, '}, {');
+    try { return eval('[' + text + ']'); } catch(e) { return []; }
+  }
+
+  function drawOverlay(overlaySvg, iw, ih, arrows, numbers, labelData) {
+    if (!iw || !ih) return;
+
+    var overflow = 50;
+    overlaySvg.setAttribute('viewBox', '0 0 ' + iw + ' ' + (ih + overflow * 2));
+    overlaySvg.innerHTML = '';
+
+    var shaft = iw * 0.003, head = iw * 0.008, headLen = ih * 0.075, len = ih * 0.5;
+    arrows.forEach(function(a) {
+      var x = a.x / 100 * iw, y = a.y / 100 * ih + overflow;
+      var pts = (-shaft)+','+len+' '+(shaft)+','+len+' '+(shaft)+','+(headLen)+' '+(head)+','+(headLen)+' 0,0 '+(-head)+','+(headLen)+' '+(-shaft)+','+(headLen);
+      var p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      p.setAttribute('points', pts);
+      p.setAttribute('fill', a.color || 'red');
+      p.setAttribute('opacity', '0.85');
+      p.setAttribute('transform', 'translate(' + x + ',' + y + ') rotate(' + (a.rot||0) + ') scale(' + (a.size||1) + ')');
+      overlaySvg.appendChild(p);
+    });
+
+    var r = iw * 0.012, fontSize = r * 1.4;
+    var numCounter = 1;
+    numbers.forEach(function(n) {
+      if (n.n !== undefined) numCounter = n.n;
+      var x = n.x / 100 * iw, y = n.y / 100 * ih + overflow, s = n.size || 1;
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', r * s);
+      c.setAttribute('fill', n.color || 'red');
+      overlaySvg.appendChild(c);
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', 'white'); t.setAttribute('font-size', fontSize * s);
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      t.textContent = numCounter;
+      overlaySvg.appendChild(t);
+      numCounter++;
+    });
+
+    var labelSize = iw * 0.014;
+    labelData.forEach(function(l) {
+      var x = l.x / 100 * iw, y = l.y / 100 * ih + overflow;
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+      t.setAttribute('fill', l.color || 'red'); t.setAttribute('font-size', labelSize * (l.size||1));
+      t.setAttribute('font-weight', 'bold'); t.setAttribute('font-family', 'sans-serif');
+      if (l.rot) t.setAttribute('transform', 'rotate(' + l.rot + ',' + x + ',' + y + ')');
+      t.textContent = l.text;
+      overlaySvg.appendChild(t);
+    });
+  }
+
+  var overlays = [];
+  var overlaysInitialized = false;
+
+  function initOverlays() {
+    if (overlaysInitialized) return;
+    overlaysInitialized = true;
+
+    document.querySelectorAll('.sidebarblock.overlay').forEach(function(block) {
+      var targetId = getText(block, 'target');
+      var targetBlock = targetId ? document.getElementById(targetId) : null;
+      if (!targetBlock) return;
+
+      var arrows = parseItems(block, 'arrows');
+      var numbers = parseItems(block, 'numbers');
+      var labels = parseItems(block, 'labels');
+
+      var img = targetBlock.querySelector('img');
+      var pre = targetBlock.tagName === 'PRE' ? targetBlock : targetBlock.querySelector('pre');
+      var mermaidEl = targetBlock.querySelector('svg[id^="mermaid"]');
+      var target = img || pre || mermaidEl || targetBlock;
+
+      var overlayParent = target.parentElement || targetBlock;
+      overlayParent.style.position = 'relative';
+      overlayParent.style.overflow = 'visible';
+
+      var overlaySvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      overlaySvg.style.cssText = 'position: absolute; pointer-events: none; overflow: visible; z-index: 999;';
+      overlayParent.appendChild(overlaySvg);
+
+      var entry = { svg: overlaySvg, target: target, parent: overlayParent, arrows: arrows, numbers: numbers, labels: labels };
+      overlays.push(entry);
+
+      function positionAndDraw() {
+        var rect = entry.target.getBoundingClientRect();
+        var parentRect = entry.parent.getBoundingClientRect();
+        var tw = rect.width, th = rect.height;
+        var tl = rect.left - parentRect.left, tt = rect.top - parentRect.top;
+        if (!tw || !th) return;
+        var overflow = 50;
+        entry.svg.style.left = tl + 'px';
+        entry.svg.style.top = (tt - overflow) + 'px';
+        entry.svg.style.width = tw + 'px';
+        entry.svg.style.height = (th + overflow * 2) + 'px';
+        drawOverlay(entry.svg, tw, th, entry.arrows, entry.numbers, entry.labels);
+      }
+      entry.redraw = positionAndDraw;
+
+      if (img) {
+        if (img.complete) positionAndDraw();
+        else img.onload = positionAndDraw;
+      } else if (mermaidEl) {
+        setTimeout(positionAndDraw, 100);
+      } else {
+        positionAndDraw();
+      }
+    });
+  }
+
+  // Redraw all overlays on resize
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      overlays.forEach(function(entry) { entry.redraw(); });
+    }, 150);
+  });
+
+  // Mermaid renders async — wait for it, then init overlays
+  var mermaidCheck = setInterval(function() {
+    if (document.querySelector('svg[id^="mermaid"]') || !document.querySelector('.mermaid')) {
+      clearInterval(mermaidCheck);
+      setTimeout(initOverlays, 200);
+    }
+  }, 100);
+  setTimeout(initOverlays, 2000);
+});
+</script>
+<h1 id="_solution_pattern_ai_powered_application_integration_platform" class="sect0"><a class="anchor" href="#_solution_pattern_ai_powered_application_integration_platform"></a>Solution Pattern: AI-Powered Application Integration Platform</h1>
+
+<h1 id="_see_the_solution_in_action" class="sect0"><a class="anchor" href="#_see_the_solution_in_action"></a><a class="link" href="#_see_the_solution_in_action">See the Solution in Action</a></h1>
+<div class="sect1">
+<h2 id="_demonstration"><a class="anchor" href="#_demonstration"></a><a class="link" href="#_demonstration">1. Demonstration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The demo showcases how Red Hat Application Foundations technologies combine to deliver a cloud-native, AI-powered integration platform. The demonstration focuses on:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ingesting purchase orders and storing them securely across infrastructure boundaries via Service Interconnect</p>
+</li>
+<li>
+<p>Bridging disconnected messaging platforms through a Kafka-based event-driven architecture</p>
+</li>
+<li>
+<p>Automating support workflows with AI-assisted case resolution using natural language</p>
+</li>
+<li>
+<p>Enforcing token-based governance on LLM consumption through Connectivity Link</p>
+</li>
+<li>
+<p>Extending the platform with new communication channels following a standard integration pattern</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_recorded_video"><a class="anchor" href="#_recorded_video"></a><a class="link" href="#_recorded_video">2. Recorded Video</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Watch the recorded video of the solution pattern, and find below instructions on how to install the demo and run it.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe width="800" height="480" src="https://www.youtube.com/embed/PLACEHOLDER?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_the_demonstration"><a class="anchor" href="#_install_the_demonstration"></a><a class="link" href="#_install_the_demonstration">3. Install the demonstration</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_provision_the_demonstration_environment"><a class="anchor" href="#_provision_the_demonstration_environment"></a><a class="link" href="#_provision_the_demonstration_environment">3.1. Provision the demonstration environment</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Provision the following <em>Red Hat Demo Platform</em> (RHDP) item:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.ai-data-flows.prod&amp;utm_source=webapp&amp;utm_medium=share-link" target="_blank" rel="noopener"><strong>Build fast and secure AI data flows with Red Hat Application Foundations and Connectivity Link</strong></a></p>
+<div class="paragraph">
+<p><span class="image"><a class="image" href="https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.ai-data-flows.prod&amp;utm_source=webapp&amp;utm_medium=share-link" target="_blank" rel="noopener"><img src="_images/rhdp-tile-ai-data-flows.png" alt="rhdp tile ai data flows" width="30%"></a></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The RHDP catalog item provisions a complete OpenShift environment with all demonstration components pre-installed and configured. You can begin exploring the solution immediately after provisioning completes.</p>
+</li>
+<li>
+<p>The provisioning process takes approximately 60-90 minutes to complete. You will receive an email notification when your environment is ready.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_access_the_demonstration_environment"><a class="anchor" href="#_access_the_demonstration_environment"></a><a class="link" href="#_access_the_demonstration_environment">3.2. Access the demonstration environment</a></h3>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="admonitionblock important indent2">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The RHDP environment serves two distinct purposes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Hands-on Lab</strong> — Students can follow the detailed Lab Instructions step-by-step to complete hands-on exercises</p>
+</li>
+<li>
+<p><strong>Solution Pattern Demonstration</strong> — Architects and decision-makers can follow the walkthrough guide below to understand the architecture in action</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>For this solution pattern</strong>: Follow the walkthrough guide provided in the sections below, not the Lab Instructions. The Lab Instructions contain important reference information (such as credentials, URLs, and environment details) that the walkthrough may reference, but treat them as support material rather than the primary guide.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Once your RHDP environment is provisioned, you will receive an email with access details. You can find the <strong>Lab Instructions</strong> link in both the email notification and on the RHDP cluster details page. Clicking this link opens the hands-on workshop guide in a new browser tab.</p>
+</div>
+<div class="imageblock bordered">
+<div class="content">
+<img src="_images/rhdp-lab-instructions-link.png" alt="Lab Instructions link" width="60%">
+</div>
+</div>
+<div class="paragraph">
+<p>Use your RHDP-provided credentials to access the lab instructions. Once inside, you&#8217;ll find a <strong>Resources</strong> panel on the right side of the page. Click to expand it and reveal links to all the demonstration components:</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock text-center bordered">
+<div class="content">
+<img src="_images/rhdp-resources-panel.png" alt="Resources panel with access links" width="60%">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Resources panel provides quick access to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>OpenShift Credentials</strong> — Your username and password for the OpenShift cluster</p>
+</li>
+<li>
+<p><strong>Dev Spaces Console</strong> — Click to open Red Hat OpenShift Dev Spaces in a new tab</p>
+</li>
+<li>
+<p><strong>Developer Console</strong> — Direct link to the OpenShift Topology View</p>
+</li>
+<li>
+<p><strong>Matrix Web Client</strong> — Customer-facing messaging platform</p>
+</li>
+<li>
+<p><strong>Rocket.Chat Web Client</strong> — Support agent messaging platform</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_open_dev_spaces_and_access_the_terminal"><a class="anchor" href="#_open_dev_spaces_and_access_the_terminal"></a><a class="link" href="#_open_dev_spaces_and_access_the_terminal">3.2.1. Open Dev Spaces and access the terminal</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click the <strong>Dev Spaces Console</strong> link from the Resources panel</p>
+</li>
+<li>
+<p>Click <strong>Open</strong> to launch the <code>camel-lab</code> workspace (wait a few moments while it initializes)</p>
+<div class="imageblock bordered">
+<div class="content">
+<img src="_images/devspaces-dashboard-open.png" alt="Open Dev Spaces workspace" width="60%">
+</div>
+</div>
+</li>
+<li>
+<p>When the IDE loads, open a terminal by clicking the menu button (three horizontal lines) in the top-left, then select <strong>Terminal</strong> → <strong>New Terminal</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/toggle-terminal.png" alt="Open terminal in Dev Spaces" width="40%">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The workspace contains pre-configured setup scripts for each demonstration phase. You&#8217;ll execute these scripts from the terminal as you progress through the walkthrough.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_walkthrough_guide"><a class="anchor" href="#_walkthrough_guide"></a><a class="link" href="#_walkthrough_guide">4. Walkthrough guide</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The guide below demonstrates the key capabilities of this Solution Pattern in action.</p>
+</div>
+<div class="paragraph">
+<p>The walkthrough follows a story. Each phase solves a problem that sets up the next one.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Hover over each phase in the diagram to learn more.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div id="journey-diagram" class="listingblock mermaid">
+<div class="content">
+<pre>flowchart LR
+    A["Ingest purchase\norders"] --&gt;|"customer spots\na problem"| B["Multi-channel\ncommunication"]
+    B --&gt;|"agent needs\nhelp resolving"| C["AI-assisted\nsupport"]
+    C --&gt;|"AI usage must\nbe controlled"| D["Govern AI\nconsumption"]
+
+    style A fill:#e8f5e9,stroke:#66bb6a,color:#000
+    style B fill:#e3f2fd,stroke:#42a5f5,color:#000
+    style C fill:#fff3e0,stroke:#fb8c00,color:#000
+    style D fill:#fce4ec,stroke:#ef5350,color:#000</pre>
+</div>
+</div>
+<div class="sidebarblock overlay">
+<div class="content">
+<div class="paragraph target">
+<p>journey-diagram</p>
+</div>
+<div class="paragraph numbers">
+<p>{x: 8.6, y: 96}<br>
+{x: 38, y: 96}<br>
+{x: 66, y: 96}<br>
+{x: 92, y: 96}</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock mermaid-hints-simple">
+<div class="content">
+<div class="paragraph">
+<p>A | ① Secure Data Ingestion | The commerce platform sends purchase orders in EDI format. A Camel flow transforms the EDI into XML and stores the data in a backend database. The database lives on separate infrastructure, so Service Interconnect provides a secure link without exposing anything to the public network. The flow also renders PDF invoices and pushes them to S3 storage.<br>
+B | ② Multi-Channel Communication | A customer reviews their invoice and spots a mistake. They reach out to support, but customer and support team use different messaging platforms.<br>
+You connect both so that messages from one show up in the other. Agents can respond from their own portal without caring which platform the customer is on.<br>
+C | ③ AI-assisted Issue Resolution | The support agent needs to look up the order, fix it in the database, and regenerate the invoice. Instead of doing it manually, the agent talks to an AI bot right inside their messaging portal.<br>
+The integration layer sends the request to an LLM, which decides what to do (query the database, update the record, regenerate the PDF) and reports back. The whole thing happens using natural language.<br>
+D | ④ Governing AI Consumption | Once AI is part of the workflow, you need controls. Who can call the LLM? How many tokens can it consume?<br>
+A gateway sits in front of the AI service and enforces authentication and token-based rate limits. Multiple tiers of service, each with its own token budget. When one tier runs out, the system falls back to the next.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The walkthrough below provides a narrative overview of the solution architecture in action. Each phase section describes <strong>what happens</strong> and <strong>why it demonstrates the pattern</strong>, without detailed execution steps.</p>
+</div>
+<div class="paragraph">
+<p>To actually run the demonstration yourself with step-by-step commands and setup scripts, open the <strong>Lab Instructions</strong> from your RHDP environment. The lab chapters map directly to the phases below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Phase 1: Data Ingestion</strong> → Lab Module 1</p>
+</li>
+<li>
+<p><strong>Phase 2: Multi-Channel Communication</strong> → Lab Modules 2-3</p>
+</li>
+<li>
+<p><strong>Phase 3: AI-Assisted Support</strong> → Lab Module 4</p>
+</li>
+<li>
+<p><strong>Phase 4: Governance</strong> → Lab Module 5</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="sect2">
+<h3 id="_phase_1_data_ingestion_flow"><a class="anchor" href="#_phase_1_data_ingestion_flow"></a><a class="link" href="#_phase_1_data_ingestion_flow">4.1. Phase 1: Data Ingestion Flow</a></h3>
+<div class="paragraph">
+<p>Follow the steps below to complete a run through that demonstrates the data ingestion flow.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Enable access to the database</strong></p>
+<div class="paragraph">
+<p>The first capability at play in this phase is the ability to securely connect the integration platform to the database. This is achieved using Service Interconnect.</p>
+</div>
+<div class="paragraph">
+<p>Unfold the instructions below and follow the steps to enable access to the database.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<details>
+<summary class="title">Click this link to unfold instructions.</summary>
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The database is unreachable by default.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock mermaid mermaid-w50">
+<div class="content">
+<pre>flowchart LR
+    subgraph yoursLabel ["<span class="uservar">username</span>-devspaces ."]
+        subgraph yours [" "]
+            Camel[⚙️ Integration]
+        end
+    end
+
+    Camel -.-x|"❌ unreachable"| SVC
+
+    subgraph sharedLabel ["shared-database ."]
+        subgraph shared [" "]
+            %% SI2{{"Service\nInterconnect"}}
+            SVC((svc))
+            SVC --> DB
+        end
+    end
+
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style yoursLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style Camel fill:#f8b4b4,stroke:#EE0000,font-weight:bold
+    style sharedLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style yours fill:#fce4e4,stroke:#EE0000
+    style shared fill:#fce4e4,stroke:#EE0000
+    style DB fill:none,stroke:none
+    style SVC fill:#fce4e4,stroke:#EE0000,color:#333</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable access to the database, run the following command in your terminal in <em>Dev Spaces</em>:</p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>si-setup</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see all resources reporting <code>ready OK</code>:</p>
+</div>
+<pre style="background-color: #181818; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: #CBCBCB">Namespace: <span class="uservar">username</span>-devspaces
+    <span style="color: #07BC7A">✓</span> Site                    ready  OK
+    <span style="color: #07BC7A">✓</span> AccessGrant             ready  OK
+    <span style="color: #07BC7A">✓</span> Listener                ready  OK
+
+Namespace: shared-database
+    <span style="color: #07BC7A">✓</span> AccessToken             ready  OK
+    <span style="color: #07BC7A">✓</span> Link                    ready  OK</pre>
+<div class="paragraph">
+<p>The above output indicates a Service Interconnect link has been established between your namespace and the database namespace.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock mermaid mermaid-w80">
+<div class="content">
+<pre>flowchart LR
+    subgraph yoursLabel ["<span class="uservar">username</span>-devspaces ."]
+        subgraph yours [" "]
+            Camel[⚙️ Integration]
+
+            SI1{{"Service\nInterconnect"}}
+        end
+    end
+
+    Camel --> SI1
+
+    SI1 -.-|"🔒 secure link"| SI2
+
+    subgraph sharedLabel ["shared-database ."]
+        subgraph shared [" "]
+            SI2{{"Service\nInterconnect"}}
+            SVC((svc))
+            SVC --> DB
+        end
+    end
+
+    SI2 --> SVC
+
+    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style yoursLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style sharedLabel fill:none,stroke:none,color:#EE0000,font-weight:bold
+    style yours fill:#fce4e4,stroke:#EE0000
+    style shared fill:#fce4e4,stroke:#EE0000
+    style Camel fill:#f8b4b4,stroke:#EE0000,font-weight:bold
+    style DB fill:none,stroke:none
+    style SI1 fill:#f8b4b4,stroke:#EE0000,color:#333
+    style SI2 fill:#f8b4b4,stroke:#EE0000,color:#333
+    style SVC fill:#fce4e4,stroke:#EE0000,color:#333</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Setup and run the data ingestion flow</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>To setup the processeing flow, run the following command in your terminal in <em>Dev Spaces</em>:</p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>step 3</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To run the process, run it with the following command:</p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>camel run *</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>DevSpaces will detect that port 8080 is open and show a notification — click <strong>Open In New Tab</strong> to open the embedded Test Shop in your browser.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock bordered">
+<div class="content">
+<img src="_images/devspaces-port-notification.png" alt="devspaces port notification" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The Test Shop will now be open in your browser.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Submit a purchase order</strong></p>
+<div class="paragraph">
+<p>From the Test Shop web page, follow the steps below to submit a purchase order:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div id="testshop-order" class="imageblock bordered">
+<div class="content">
+<img src="_images/testshop-order.png" alt="testshop order" width="60%">
+</div>
+</div>
+<div class="sidebarblock overlay">
+<div class="content">
+<div class="paragraph target">
+<p>testshop-order</p>
+</div>
+<div class="paragraph numbers">
+<p>{x: 82, y: 12, size: 1.5}
+{x: 35, y: 86, size: 1.5}
+{x: 63, y: 58, size: 1.5}</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add an item to the basket — note the total amount</p>
+</li>
+<li>
+<p>Expand <strong>EDI X12 850 Preview</strong> to peek at the raw EDI message — no need to fully understand it, but you may spot the item name, quantity, and total amount in the data</p>
+</li>
+<li>
+<p>Click <strong>Place Order</strong> — the shop sends the Purchase Order to your Camel route</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>View the invoice</strong></p>
+<div class="paragraph">
+<p>The order above is processed, records are added to the database (via Service Interconnect) and an invoice is generated and stored in S3.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 12px; max-width: 480px; font-family: sans-serif; overflow: hidden">
+  <div style="display: flex; align-items: center; gap: 8px; color: #3a7d44; font-weight: 700; font-size: 17px; padding: 16px 24px; border-bottom: 1px solid #e0e0e0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    Invoice Generated
+  </div>
+  <div style="padding: 24px; text-align: center">
+    <p style="color: #555; font-size: 15px; margin: 0 0 20px 0">Your order has been processed and an invoice is ready.</p>
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: #3a7d44; color: white; font-weight: 700; font-size: 15px; padding: 12px 28px; border-radius: 8px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      View Invoice (PDF)
+    </div>
+    <div style="color: #aaa; font-size: 13px; font-family: monospace; margin-top: 10px">invoice_66507812.pdf</div>
+    <div style="margin-top: 16px">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; font-weight: 700; font-size: 15px; padding: 12px 28px; border-radius: 8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+        Check Database
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Click <strong>View Invoice (PDF)</strong> to open it in your browser. The Seller section should display the default mapping values mapped from the EDI message:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 20px 28px; max-width: 380px; font-family: sans-serif; color: #222; line-height: 1.6">
+  <div style="display: flex; align-items: center; margin-bottom: 8px; margin-left: 38px">
+    <div style="width: 28px; height: 14px; background: #aaa; border-radius: 2px; margin-right: 10px; margin-left: -38px"></div>
+    <span style="font-weight: bold; font-size: 15px">Seller:</span>
+  </div>
+  <div style="font-size: 14px; margin-left: 38px">
+    Test Shop Warehouse<br/>
+    456 Warehouse Blvd<br/>
+    Stockton, CA 95202
+  </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Editing the mapping values in the data mapper will update the invoice PDF accordingly. If you want to know more explore the lab instructions.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>When you&#8217;re done, press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> in the terminal to stop Camel.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_phase2_multi_channel_communication"><a class="anchor" href="#_phase2_multi_channel_communication"></a><a class="link" href="#_phase2_multi_channel_communication">4.2. Phase2: Multi-Channel Communication</a></h3>
+<div class="paragraph">
+<p>The diagram below shows the four flows enabling bidirectional communication between customer and support agent:</p>
+</div>
+<div class="listingblock mermaid mermaid-w40">
+<div class="content">
+<pre>flowchart LR
+    MX --&gt;|"flow 1"| K --&gt;|"flow 2"| RC
+    RC --&gt;|"flow 3"| K --&gt;|"flow 4"| MX
+
+    MX@{ img: "/solution-pattern-app-connect-ai/_images/element-icon.svg", label: "Matrix", pos: "b", h: 100, w: 80, constraint: "on" }
+    K@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 100, w: 80, constraint: "on" }
+    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 100, w: 100, constraint: "on" }
+
+    style MX fill:none,stroke:none
+    style K fill:none,stroke:none
+    style RC fill:none,stroke:none
+
+    linkStyle 0 stroke:#66bb6a,stroke-width:2px
+    linkStyle 1 stroke:#66bb6a,stroke-width:2px
+    linkStyle 2 stroke:#ef5350,stroke-width:2px
+    linkStyle 3 stroke:#ef5350,stroke-width:2px</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Follow the steps below to complete a run through that demonstrates the multi-channel communication flow.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Scale up the flows involved</strong></p>
+<div class="paragraph">
+<p>The flows have been pre-deployed on <em>OpenShift</em>, but are not scaled up. You need to scale them up to enable inter-platform communication.</p>
+</div>
+<div class="paragraph">
+<p>Unfold the instructions below and follow the steps to enable access to the database.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<details>
+<summary class="title">Click this link to unfold instructions.</summary>
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>From your <em>Dev Spaces</em> terminal, scale up all four deployments to start the flows:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>oc scale deployment m2k r2k k2m k2r --replicas=1</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Once all pods are up and running, the Topology view should show blue rings around each deployment:</p>
+</div>
+<div class="imageblock bordered">
+<div class="content">
+<img src="_images/openshift-topology-running.png" alt="openshift topology running" width="60%">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Access the Topology view from the resources overview on the right side of the lab instructions. <span class="image"><img src="_images/resources-topology-view.png" alt="resources topology view" width="200"></span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Try the flows</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Now that all flows are running, it&#8217;s time to simulate a conversation between customer and support agent.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For easy onboarding onto Matrix and Rocket.Chat, follow the lab instructions <em>"Lab 2 - Messaging Access"</em> containing the following chapters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Matrix platform onboarding</strong> — the customer side</p>
+</li>
+<li>
+<p><strong>Rocket.Chat platform onboarding</strong> — the support agent side</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s simulate a brief exchange between a customer and a support agent(you will impersonate both personas).</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Customer sends a message</strong> — go to your <em>Matrix</em> room and type:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Hi, I need some help with a purchase order I placed recently.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+</li>
+<li>
+<p><strong>Agent responds</strong> — go to your <em>Rocket.Chat</em> room, you should see the customer&#8217;s message. Reply with:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Of course! Could you share your order reference so we can look into it?</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>If all goes well, both platforms should show the full exchange. You should see something similar to:</p>
+</div>
+<div class="matrix-flow-wrapper">
+  <style>
+    .matrix-flow-wrapper {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+      background-color: white;
+    }
+    .platform-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      margin-left: 15px;
+      z-index: 2;
+    }
+    .icon-label {
+      font-size: 18px;
+      color: #000;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+    .matrix-bg { background-color: #33C69D; }
+    .rocket-bg { background-color: #f5455c; padding: 5px; box-sizing: border-box; }
+    .msg-bubble-light {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fcfcfc;
+      width: 260px;
+      padding: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+
+  <div style="display: flex; align-items: flex-end; margin-left: -150px; transform: scale(.8)">
+    <div style="margin-right: -200px; margin-bottom: 35px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <div class="platform-row">
+        <!-- Matrix Icon -->
+        <div class="icon-container" style="transform: scale(1.8); margin-top: 35px; margin-right: 31px">
+          <div class="icon-box matrix-bg" style="margin-top: 5px; transform: scale(1);">
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <g transform="translate(-11 -11) scale(0.09)">
+                <path stroke-width="30" d="m153.25 277.15c.47-46.35 37.79-81.6 81.6-81.6m0-42.3c46.35.47 81.6 37.79 81.6 81.6m42.3 0c-.47 46.35-37.79 81.6-81.6 81.6m0 42.3c-46.35 0-81.6-37.79-81.6-81.6"/>
+              </g>
+            </svg>
+          </div>
+          <span class="icon-label">Matrix</span>
+        </div>
+        <!-- Matrix Messages -->
+        <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 480px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 5px 5px; gap: 2px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+          <div style="display: flex; align-items: center;">
+            <div style="width: 30px; height: 30px; background-color: #4a90e2; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0;">
+              U
+            </div>
+            <div style="margin-left: 12px; font-weight: bold; font-size: 15px; color: #00d781; line-height: 1.4;">
+              user1
+            </div>
+          </div>
+          <div style="background-color: white; display: flex; align-items: baseline; padding: 5px 0px;">
+            <div style="width: 30px; text-align: center; font-size: 10px; color: #6c757d; flex-shrink: 0;">
+              4:10
+            </div>
+            <div style="margin-left: 12px; font-size: 15px; color: #333; line-height: 1.2;">
+              Hi, I need some help with a purchase order I placed recently.
+            </div>
+          </div>
+          <div style="background-color: #eee; display: flex; align-items: baseline; padding: 5px 0px;">
+            <div style="width: 30px; text-align: center; font-size: 10px; color: #6c757d; flex-shrink: 0;">
+              4:11
+            </div>
+            <div style="margin-left: 12px; font-size: 15px; color: #333; line-height: 1.2;">
+              <span style="font-weight:700">user1@rocketchat:</span> Of course! Could you share your order reference so we can look into it?
+            </div>
+          </div>
+        </div>
+        <!-- Bidirectional Arrow -->
+        <div style="margin-top: 15px">
+          <svg width="150" height="60" viewBox="0 0 150 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <path d="M5 30 L25 10 V20 H100 V10 L120 30 L100 50 V40 H25 V50 L5 30 Z" fill="#EDEDED" stroke="#777" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <!-- Rocket.Chat Icon -->
+        <div class="icon-container" style="margin-left:-85px; transform: scale(1.8); margin-top: 45px; position: relative; z-index: 20">
+          <div style="margin-left: 720px;">
+            <div class="icon-box rocket-bg">
+              <svg style="z-index: 10" width="45" height="45" viewBox="0 0 24 24" fill="white">
+                <g transform="translate(-2 -2) scale(.9)">
+                <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+              </svg>
+            </div>
+            <span class="icon-label" style="margin-left: -0px">Rocket.Chat</span>
+          </div>
+        </div>
+        <!-- Rocket.Chat Messages -->
+        <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 560px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; z-index: 1; background-color: white">
+          <div style="gap:10px; display: flex; flex-direction: row;">
+            <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; flex-shrink: 0; z-index: 1">
+              U
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; z-index: 1">
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+                <span style="font-weight: bold; font-size: 14px; color: #333;">user1</span>
+                <span style="font-size: 11px; color: #aaa;">4:10 PM</span>
+              </div>
+              <div style="font-size: 14px; color: #333; line-height: 1.4; margin: 0; padding: 0;">
+                <span style="font-weight:700">user1@matrix:</span> Hi, I need some help with a purchase order I placed recently.
+              </div>
+            </div>
+          </div>
+          <div style="gap:10px; display: flex; flex-direction: row;">
+            <div style="width: 32px; height: 32px; background-color: #6c757d; color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; flex-shrink: 0;">
+              U
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+                <span style="font-weight: bold; font-size: 14px; color: #333;">user1</span>
+                <span style="font-size: 11px; color: #aaa;">4:11 PM</span>
+              </div>
+              <div style="font-size: 14px; color: #333; line-height: 1.4; margin: 0; padding: 0;">
+                Of course! Could you share your order reference so we can look into it?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_phase_3_ai_assisted_case_resolution"><a class="anchor" href="#_phase_3_ai_assisted_case_resolution"></a><a class="link" href="#_phase_3_ai_assisted_case_resolution">4.3. Phase 3: AI-Assisted Case Resolution</a></h3>
+<div class="paragraph">
+<p>The following phase demonstrates how the AI-powered integration platform can assist support agents with complex case resolution tasks.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Setup and run the data ingestion flow</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>To setup the processeing flow, run the following command in your terminal in <em>Dev Spaces</em>:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>step 8</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+</li>
+<li>
+<p>Now, use the <code>mcp</code> script to start the MCP servers, as follows:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>./mcp start</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The first time you run the MCP servers, it&#8217;ll take some time to download dependencies and start.<br>
+Run <code>./mcp help</code> to explore options and troubleshoot issues.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>To run the process, run it with the following command:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>camel run agent</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Wait for the process to start.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Try it out</strong></p>
+<div class="paragraph">
+<p>Go through the following steps to recreate the the full resulution process:</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><strong>Pull the invoice</strong></p>
+<div class="paragraph">
+<p>From <em>Rocket.Chat</em>, as the support agent, enter the following message:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Can you show me invoice 61356291?</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<details>
+<summary class="title">What if the AI still says it can&#8217;t help?</summary>
+<div class="content">
+<div class="paragraph">
+<p>The workshop uses a small LLM that can be inconsistent. The system prompt tells it to re-evaluate its tools before responding, but sometimes it replies as if no tools are available, for example:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- User message -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #6c757d; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;"><span class="uservar">username</span></span>
+          <span style="font-size: 11px; color: #aaa;">5:10 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Can you show me invoice 61356291
+        </div>
+      </div>
+    </div>
+    <!-- Bot response -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">5:10 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          I'm sorry, I don't have the capability to retrieve that PDF right now.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p>If that happens, try one or both of these options:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Send a more specific request:</p>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Please try again using the tool to get invoices</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This points the LLM to the right tool, which is usually enough to get it working.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+</li>
+<li>
+<p>Stop the process with <span class="keyseq"><kbd>CTRL</kbd>+<kbd>C</kbd></span> and restart it. A fresh start gives the LLM a clean tool list.</p>
+</li>
+</ol>
+</div>
+</div>
+</details>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If all goes well, this time the LLM discovers the tool, calls it, and responds with the invoice:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- User message -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #6c757d; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;"><span class="uservar">username</span></span>
+          <span style="font-size: 11px; color: #aaa;">6:47 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Can you show me invoice 61356291
+        </div>
+      </div>
+    </div>
+    <!-- Bot response with attachment -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:47 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Here is the PDF for Invoice 61356291.
+        </div>
+        <!-- Attachment block -->
+        <div style="border-left: 3px solid #3ea18e; padding: 8px 12px; margin-top: 6px;">
+          <div style="font-size: 14px; color: #1d74f5; margin-bottom: 4px;">
+            Invoice 61356291 PDF ▾
+          </div>
+          <div style="font-size: 13px; color: #555;">
+            Click to view or download
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>The bot identified the right tool, retrieved the invoice, and returned a download link to the support agent. Clicking the link opens the PDF in a new tab.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<details>
+<summary class="title">See the sample invoice</summary>
+<div class="content">
+<div class="paragraph">
+<p></p>
+</div>
+<div style="width: 500px; aspect-ratio: 1 / 1.414; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); font-family: 'Times New Roman', serif; padding: 30px 35px; font-size: 12px; color: #333; line-height: 1.5;">
+
+  <div style="font-size: 16px; font-weight: bold; color: #1a3c6e;">Invoice no: 61356291</div>
+  <div style="margin-top: 4px; color: #8b6914;">Date of issue: <span style="margin-left: 40px;">09/06/2012</span></div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 12px 0;">
+
+  <div style="display: flex; gap: 30px;">
+    <div style="flex: 1;">
+      <div style="font-weight: bold; font-size: 13px;">Seller:</div>
+      <div style="color: #8b6914; font-size: 11px;">
+        Georgia World Congress Center<br>
+        285 Andrew Young International Blvd NW<br>
+        Atlanta, Georgia GA 30313<br><br>
+        <span style="color: #555;">Tax Id: 939-98-8477</span><br>
+        <span style="color: #555;">IBAN: GB50ACIE59715038217063</span>
+      </div>
+    </div>
+    <div style="flex: 1;">
+      <div style="font-weight: bold; font-size: 13px;">Client:</div>
+      <div style="color: #8b6914; font-size: 11px;">
+        Chapman, Kim and Green<br>
+        64751 James Branch<br>
+        Smithmouth, NC 26872<br><br>
+        <span style="color: #555;">Tax Id: 949-84-9105</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-weight: bold; font-size: 14px; margin-top: 15px; color: #1a3c6e;">ITEMS</div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 11px;">
+    <thead>
+      <tr style="background: #f0f0f0; border-bottom: 2px solid #999;">
+        <th style="text-align: left; padding: 4px;">No.</th>
+        <th style="text-align: left; padding: 4px;">Description</th>
+        <th style="text-align: right; padding: 4px;">Qty</th>
+        <th style="text-align: left; padding: 4px;">UM</th>
+        <th style="text-align: right; padding: 4px;">Net price</th>
+        <th style="text-align: right; padding: 4px;">Net worth</th>
+        <th style="text-align: right; padding: 4px;">VAT [%]</th>
+        <th style="text-align: right; padding: 4px;">Gross worth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">1.</td>
+        <td style="padding: 4px;">Wine Glasses Goblets Pair Clear Glass</td>
+        <td style="text-align: right; padding: 4px;">5,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">12,00</td>
+        <td style="text-align: right; padding: 4px;">60,00</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">66,00</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">2.</td>
+        <td style="padding: 4px;">With Hooks Stemware Storage Multiple Uses Iron Wine Rack Hanging Glass</td>
+        <td style="text-align: right; padding: 4px;">4,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">28,08</td>
+        <td style="text-align: right; padding: 4px;">112,32</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">123,55</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">3.</td>
+        <td style="padding: 4px;">Replacement Corkscrew Parts Spiral Worm Wine Opener Bottle Houdini</td>
+        <td style="text-align: right; padding: 4px;">1,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">7,50</td>
+        <td style="text-align: right; padding: 4px;">7,50</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">8,25</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">4.</td>
+        <td style="padding: 4px;">HOME ESSENTIALS GRADIENT STEMLESS WINE GLASSES SET OF 4 20 FL OZ (591 ml) NEW</td>
+        <td style="text-align: right; padding: 4px;">1,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">12,99</td>
+        <td style="text-align: right; padding: 4px;">12,99</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">14,29</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-weight: bold; font-size: 14px; margin-top: 15px; color: #1a3c6e;">SUMMARY</div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 11px;">
+    <thead>
+      <tr style="background: #f0f0f0; border-bottom: 2px solid #999;">
+        <th style="text-align: right; padding: 4px;">VAT [%]</th>
+        <th style="text-align: right; padding: 4px;">Net worth</th>
+        <th style="text-align: right; padding: 4px;">VAT</th>
+        <th style="text-align: right; padding: 4px;">Gross worth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">192,81</td>
+        <td style="text-align: right; padding: 4px;">19,28</td>
+        <td style="text-align: right; padding: 4px;">212,09</td>
+      </tr>
+      <tr style="border-top: 2px solid #999; font-weight: bold;">
+        <td style="text-align: right; padding: 4px;">Total</td>
+        <td style="text-align: right; padding: 4px;">$ 192,81</td>
+        <td style="text-align: right; padding: 4px;">$ 19,28</td>
+        <td style="text-align: right; padding: 4px;">$ 212,09</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Amend the invoice</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The ai-bot can do more than just retrieve data — it can act on it. Imagine the customer has changed their mind and wants to return one of the items. Ask the AI assistant to amend the invoice:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>The customer would like to return stemless wine glasses, could you please adjust the invoice?</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The agentic system inspects the invoice, identifies the matching item, triggers the necessary tools to update the database, and responds with a summary of the changes:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- User message -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #6c757d; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;"><span class="uservar">username</span></span>
+          <span style="font-size: 11px; color: #aaa;">6:49 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          The customer would like to return stemless wine glasses, could you please adjust the invoice?
+        </div>
+      </div>
+    </div>
+    <!-- Bot response -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:49 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          The database records have been updated. The stemless wine glasses item (Item 4) has been removed, and the summary values have been recalculated. Would you like to see the new PDF invoice?
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p>The agentic system acted autonomously — it inspected the invoice, identified the item, updated the quantity in the database, recalculated the totals, and confirmed the changes. All from a single natural language request.</p>
+</div>
+<div class="paragraph">
+<p>Notice the bot&#8217;s response — it may suggest viewing the updated invoice (LLMs are unpredictable, so the exact wording varies). If it does, simply reply <code>yes</code>. If it doesn&#8217;t, ask to see the amended invoice:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Can you show me the updated invoice?</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Either way, the bot responds with the updated PDF link:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- Bot response with attachment -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:50 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Here is the updated PDF for Invoice 61356291.
+        </div>
+        <!-- Attachment block -->
+        <div style="border-left: 3px solid #3ea18e; padding: 8px 12px; margin-top: 6px;">
+          <div style="font-size: 14px; color: #1d74f5; margin-bottom: 4px;">
+            Invoice 61356291 PDF ▾
+          </div>
+          <div style="font-size: 13px; color: #555;">
+            Click to view or download
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p>Click the link to open the regenerated invoice.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<details>
+<summary class="title">See a sample of the amended invoice</summary>
+<div class="content">
+<div class="paragraph">
+<p></p>
+</div>
+<div style="width: 500px; aspect-ratio: 1 / 1.414; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); font-family: 'Times New Roman', serif; padding: 30px 35px; font-size: 12px; color: #333; line-height: 1.5; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; top: 14px; right: -35px; background: #e74c3c; color: #fff; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; padding: 4px 45px; transform: rotate(35deg); box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 1;">Amended</div>
+
+  <div style="font-size: 16px; font-weight: bold; color: #1a3c6e;">Invoice no: 61356291</div>
+  <div style="margin-top: 4px; color: #8b6914;">Date of issue: <span style="margin-left: 40px;">09/06/2012</span></div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 12px 0;">
+
+  <div style="display: flex; gap: 30px;">
+    <div style="flex: 1;">
+      <div style="font-weight: bold; font-size: 13px;">Seller:</div>
+      <div style="color: #8b6914; font-size: 11px;">
+        Georgia World Congress Center<br>
+        285 Andrew Young International Blvd NW<br>
+        Atlanta, Georgia GA 30313<br><br>
+        <span style="color: #555;">Tax Id: 939-98-8477</span><br>
+        <span style="color: #555;">IBAN: GB50ACIE59715038217063</span>
+      </div>
+    </div>
+    <div style="flex: 1;">
+      <div style="font-weight: bold; font-size: 13px;">Client:</div>
+      <div style="color: #8b6914; font-size: 11px;">
+        Chapman, Kim and Green<br>
+        64751 James Branch<br>
+        Smithmouth, NC 26872<br><br>
+        <span style="color: #555;">Tax Id: 949-84-9105</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-weight: bold; font-size: 14px; margin-top: 15px; color: #1a3c6e;">ITEMS</div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 11px;">
+    <thead>
+      <tr style="background: #f0f0f0; border-bottom: 2px solid #999;">
+        <th style="text-align: left; padding: 4px;">No.</th>
+        <th style="text-align: left; padding: 4px;">Description</th>
+        <th style="text-align: right; padding: 4px;">Qty</th>
+        <th style="text-align: left; padding: 4px;">UM</th>
+        <th style="text-align: right; padding: 4px;">Net price</th>
+        <th style="text-align: right; padding: 4px;">Net worth</th>
+        <th style="text-align: right; padding: 4px;">VAT [%]</th>
+        <th style="text-align: right; padding: 4px;">Gross worth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">1.</td>
+        <td style="padding: 4px;">Wine Glasses Goblets Pair Clear Glass</td>
+        <td style="text-align: right; padding: 4px;">5,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">12,00</td>
+        <td style="text-align: right; padding: 4px;">60,00</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">66,00</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">2.</td>
+        <td style="padding: 4px;">With Hooks Stemware Storage Multiple Uses Iron Wine Rack Hanging Glass</td>
+        <td style="text-align: right; padding: 4px;">4,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">28,08</td>
+        <td style="text-align: right; padding: 4px;">112,32</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">123,55</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 4px;">3.</td>
+        <td style="padding: 4px;">Replacement Corkscrew Parts Spiral Worm Wine Opener Bottle Houdini</td>
+        <td style="text-align: right; padding: 4px;">1,00</td>
+        <td style="padding: 4px;">each</td>
+        <td style="text-align: right; padding: 4px;">7,50</td>
+        <td style="text-align: right; padding: 4px;">7,50</td>
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px;">8,25</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-weight: bold; font-size: 14px; margin-top: 15px; color: #1a3c6e;">SUMMARY</div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 11px;">
+    <thead>
+      <tr style="background: #f0f0f0; border-bottom: 2px solid #999;">
+        <th style="text-align: right; padding: 4px;">VAT [%]</th>
+        <th style="text-align: right; padding: 4px;">Net worth</th>
+        <th style="text-align: right; padding: 4px;">VAT</th>
+        <th style="text-align: right; padding: 4px;">Gross worth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="text-align: right; padding: 4px;">10%</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f; font-weight: bold;">179,82</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f; font-weight: bold;">17,98</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f; font-weight: bold;">197,80</td>
+      </tr>
+      <tr style="border-top: 2px solid #999; font-weight: bold;">
+        <td style="text-align: right; padding: 4px;">Total</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f;">$ 179,82</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f;">$ 17,98</td>
+        <td style="text-align: right; padding: 4px; color: #d32f2f;">$ 197,80</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>
+</details>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Notice the red <strong>Amended</strong> tag in the upper-right corner of the invoice — this indicates the document has been modified from the original.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Inspect the document and verify the modifications are correct — the stemless wine glasses (item 4) should be removed, and the totals recalculated accordingly.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Raise a ticket</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>A customer support process rarely ends with a single action. Returning an item involves multiple departments — confirming the goods were received, processing the refund, updating inventory, notifying the customer. Rather than handling each step manually, ask the AI agent to raise a ticket that coordinates everything:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Could you please raise a ticket? Include the details explained, and ask the right departments to refund the customer accordingly.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The agentic system gathers the context from the conversation, creates a ticket in the HelpDesk system, and responds with a confirmation:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- User message -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #6c757d; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;"><span class="uservar">username</span></span>
+          <span style="font-size: 11px; color: #aaa;">6:52 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Could you please raise a ticket? Include the details explained, and ask the right departments to refund the customer accordingly.
+        </div>
+      </div>
+    </div>
+    <!-- Bot response -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:52 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          A ticket has been created with ID 1025. Would you like to share this ticket with the customer?
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p>At this point, the bot has created a ticket and asks permission to share it with the customer. You can either reply with "Yes, please share it with the customer." or "Could you share the ticket with the customer?" depending on the bot&#8217;s response.</p>
+</div>
+<div class="paragraph">
+<p>Either way, the final outcome is the same — the bot shares the ticket and the customer receives a link to the HelpDesk system:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- Bot response with attachment -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:53 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          The ticket #1025 has been successfully shared with the customer. They will receive a link to the HelpDesk system.
+        </div>
+        <!-- Attachment block -->
+        <div style="border-left: 3px solid #3ea18e; padding: 8px 12px; margin-top: 6px;">
+          <div style="font-size: 14px; color: #1d74f5; margin-bottom: 4px;">
+            Ticket 1025 ▾
+          </div>
+          <div style="font-size: 13px; color: #555;">
+            Click to open HelpDesk and select ticket 1025
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paragraph">
+<p>Remember — the customer communicates from the <em>Matrix</em> messaging platform. The bot indicated the ticket was shared, which means the customer should have received a message with the ticket reference. Switch to your <em>Matrix</em> window and check.</p>
+</div>
+<div class="paragraph">
+<p>You should see a message like this:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <!-- Matrix icon -->
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #33C69D; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 33 33" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(-18.1 -18.1) scale(0.135)"> <path stroke-width="30" d="m153.25 277.15c.47-46.35 37.79-81.6 81.6-81.6m0-42.3c46.35.47 81.6 37.79 81.6 81.6m42.3 0c-.47 46.35-37.79 81.6-81.6 81.6m0 42.3c-46.35 0-81.6-37.79-81.6-81.6"/> </g> </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">matrix</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 400px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 10px 12px; gap: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- Row 1: Avatar + Username -->
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 12px; margin-bottom: 6px;">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6, #A78BFA); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <span style="font-weight: bold; font-size: 15px; color: #6D28D9;"><span class="uservar">username</span></span>
+    </div>
+    <!-- Row 2: Timestamp + sender -->
+    <div style="display: flex; flex-direction: row; align-items: baseline; gap: 12px; margin-bottom: 6px;">
+      <span style="width: 36px; text-align: center; font-size: 11px; color: #aaa; flex-shrink: 0;">11:05</span>
+      <span style="font-size: 15px; color: #333; font-weight: 500;">ai@rocketchat:</span>
+    </div>
+    <!-- Row 3+: Message content (indented) -->
+    <div style="font-size: 15px; color: #333; line-height: 1.6; padding-left: 48px;">
+      &#x1F4C4; Ticket <span style="color: #6D28D9; font-weight: bold;">#1025</span> created.<br>(Click to open in HelpDesk)
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Verify the ticket from the customer&#8217;s perspective</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Now put yourself in the customer&#8217;s shoes. The customer received a message in <em>Matrix</em> with a link to the <em>Globex HelpDesk</em> ticketing system. Click the ticket link in the <em>Matrix</em> window.</p>
+</div>
+<div class="paragraph">
+<p>A new tab opens with the <em>Globex HelpDesk</em> login page:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="width: 420px; background: #f0f0f0; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); padding: 40px 40px 50px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-align: center;">
+
+  <!-- Logo + Title -->
+  <div style="margin-bottom: 40px;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px;">
+      <!-- Globe icon -->
+      <svg width="70" height="70" viewBox="0 0 100 100" fill="none" stroke="#8B1A1A" stroke-width="3">
+        <circle cx="50" cy="50" r="40"/>
+        <ellipse cx="50" cy="50" rx="20" ry="40"/>
+        <line x1="10" y1="50" x2="90" y2="50"/>
+        <path d="M16 30 Q50 25 84 30"/>
+        <path d="M16 70 Q50 75 84 70"/>
+      </svg>
+      <span style="font-size: 48px; font-weight: 900; color: #8B1A1A; letter-spacing: 2px;">GLOBEX</span>
+    </div>
+    <div style="font-size: 28px; font-weight: 300; color: #666; letter-spacing: 12px;">HELPDESK</div>
+  </div>
+
+  <!-- Login form -->
+  <div style="text-align: left; padding: 0 10px;">
+    <div style="margin-bottom: 30px;">
+      <div style="font-size: 14px; color: #999; margin-bottom: 8px;">Username</div>
+      <div style="border-bottom: 3px solid #d32f2f; padding-bottom: 8px;">
+        <span style="font-size: 16px; color: #333; border-left: 2px solid #333; padding-left: 4px;">&nbsp;</span>
+      </div>
+    </div>
+    <div style="margin-bottom: 35px;">
+      <div style="font-size: 14px; color: #999; margin-bottom: 8px;">Password</div>
+      <div style="border-bottom: 1px solid #ccc; padding-bottom: 8px;">&nbsp;</div>
+    </div>
+    <div style="text-align: center;">
+      <span style="font-size: 16px; font-weight: 600; color: #d32f2f; letter-spacing: 2px; cursor: pointer;">LOGIN</span>
+    </div>
+  </div>
+
+</div>
+<div class="paragraph">
+<p>To login, run the following command to obtain your <em>HelpDesk</em> credentials:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>grep -E "helpdesk_(username|password)" /tmp/lab-config.cache</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The command above should display your credentials, similar to:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<pre style="background-color: #181818; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: #CBCBCB"><span style="color: #F14C4B;font-weight:bold">helpdesk_username</span>=user1
+<span style="color: #F14C4B;font-weight:bold">helpdesk_password</span>=59QwdxEM
+</pre>
+<div class="paragraph">
+<p>Log in using the credentials displayed in your terminal</p>
+</div>
+<div class="paragraph">
+<p>Once logged in, the <em>Globex HelpDesk</em> displays the list of open tickets. You should see the ticket the AI agent just created:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="width: 100%; max-width: 800px; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; overflow: hidden;">
+
+  <!-- Top bar -->
+  <div style="background: #8B1A1A; padding: 10px 16px; display: flex; align-items: center; gap: 10px;">
+    <svg width="28" height="28" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="4">
+      <circle cx="50" cy="50" r="35"/>
+      <ellipse cx="50" cy="50" rx="17" ry="35"/>
+      <line x1="15" y1="50" x2="85" y2="50"/>
+      <path d="M20 33 Q50 28 80 33"/>
+      <path d="M20 67 Q50 72 80 67"/>
+    </svg>
+    <div>
+      <span style="font-size: 20px; font-weight: 900; color: white; letter-spacing: 1px;">GLOBEX</span><br>
+      <span style="font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 4px;">HELPDESK</span>
+    </div>
+  </div>
+
+  <!-- Content area with sidebar -->
+  <div style="display: flex;">
+    <!-- Sidebar -->
+    <div style="width: 44px; background: #f5f5f5; border-right: 1px solid #ddd; display: flex; flex-direction: column; align-items: center; padding-top: 8px; gap: 14px; flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #d32f2f; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="4" y="3" width="16" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/><line x1="8" y1="8" x2="16" y2="8" stroke="white" stroke-width="1.5"/><line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="1.5"/><line x1="8" y1="16" x2="12" y2="16" stroke="white" stroke-width="1.5"/></svg>
+      </div>
+      <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M4 4h16v12H7l-3 4V4z"/></svg>
+      </div>
+      <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2.5-3 5"/><circle cx="12" cy="18" r="0.5" fill="#888"/></svg>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div style="flex: 1; padding: 10px 20px;">
+      <div style="font-size: 26px; font-weight: 300; color: #333; margin-bottom: 10px;">Tickets</div>
+
+      <!-- Table header -->
+      <div style="display: flex; align-items: center; padding: 8px 0; border-bottom: 2px solid #eee; color: #888; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+        <div style="width: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <div style="width: 14px; height: 14px; border: 2px solid #bbb; border-radius: 2px;"></div>
+        </div>
+        <div style="width: 65px;">Status</div>
+        <div style="width: 50px;">#</div>
+        <div style="flex: 1;">Subject</div>
+        <div style="width: 90px;">Created</div>
+        <div style="width: 80px;">Requester</div>
+      </div>
+
+      <!-- Ticket row -->
+      <div style="display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; border-left: 4px solid #4caf50;">
+        <div style="width: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <div style="width: 14px; height: 14px; border: 2px solid #bbb; border-radius: 2px;"></div>
+        </div>
+        <div style="width: 65px; display: flex; align-items: center;">
+          <div style="width: 24px; height: 24px; background: #4caf50; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 13px;">N</div>
+        </div>
+        <div style="width: 50px; font-size: 13px; color: #555;">1025</div>
+        <div style="flex: 1; font-size: 13px; color: #333;">Refund Request for Invoice 61356291</div>
+        <div style="width: 90px; font-size: 12px; color: #999;">03/28/2026</div>
+        <div style="width: 80px; font-size: 12px; color: #999;"><span class="uservar">username</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="paragraph">
+<p>Click the ticket to inspect its details. The AI agent composed the ticket body from the conversation — it includes a summary of the changes and a link to the updated invoice:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="width: 100%; max-width: 800px; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; padding: 16px 24px;">
+
+  <div style="display: flex; align-items: flex-start; gap: 14px;">
+    <!-- Avatar -->
+    <div style="flex-shrink: 0; position: relative;">
+      <div style="width: 48px; height: 48px; border-radius: 50%; background: #4a5568; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="9" r="3.5" fill="#b0b8c4"/>
+          <path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6" fill="#b0b8c4"/>
+        </svg>
+      </div>
+      <div style="width: 11px; height: 11px; background: #4caf50; border-radius: 50%; border: 2px solid #fff; position: absolute; bottom: 0; right: 0;"></div>
+    </div>
+
+    <!-- Content -->
+    <div style="flex: 1;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 18px; font-weight: bold; color: #222;">Refund Request for Invoice 61356291</span>
+      </div>
+      <div style="font-size: 13px; color: #d32f2f;"><span class="uservar">username</span> &lt;<span class="uservar">username</span>@globex.com&gt;</div>
+      <div style="font-size: 12px; color: #999; margin-bottom: 10px;">Mar 28, 2026, 07:05am</div>
+      <div style="font-size: 13px; color: #333; line-height: 1.5;">
+        The customer would like to return stemless wine glasses. The item has been removed from the invoice, and the summary calculations have been updated accordingly. Please process the refund for the customer.
+      </div>
+      <div style="margin-top: 8px; display: flex; align-items: center; gap: 5px;">
+        <span style="font-size: 16px;">&#x1F4C4;</span>
+        <a style="font-size: 13px; color: #d32f2f; text-decoration: none; cursor: pointer;">View Invoice PDF</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="paragraph">
+<p>The full circle is complete: the AI assistant retrieved an invoice, amended it, raised a ticket with all the relevant details, and shared it with the customer across messaging platforms. All from natural conversation.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_phase_4_governance_and_rate_limiting"><a class="anchor" href="#_phase_4_governance_and_rate_limiting"></a><a class="link" href="#_phase_4_governance_and_rate_limiting">4.4. Phase 4: Governance and Rate Limiting</a></h3>
+<div class="paragraph">
+<p>The following phase demonstrates how the AI-powered integration platform can be used to implement governance and rate limiting policies.</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Review and apply the AuthPolicy</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Create an AuthPolicy that is applied to the HTTPRoute (ai-proxy-route) and enforces a key-based authentication scheme. This will ensure that only authorized users with a valid API key can access the LLM.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<details>
+<summary class="title">Click this link to unfold the actions.</summary>
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Examine the AuthPolicy and <strong>apply</strong> it by pasting the following command in your terminal:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>oc apply -f - &lt;&lt;EOF
+apiVersion: kuadrant.io/v1
+kind: AuthPolicy
+metadata:
+  name: ai-proxy-auth
+  namespace: $WORKSPACE_NAMESPACE
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: ai-proxy-route
+  rules:
+    authentication:
+      api-key-users:
+        apiKey:
+          selector:
+            matchLabels:
+              app: my-llm-${WORKSPACE_NAMESPACE%-devspaces}
+        credentials:
+          authorizationHeader:
+            prefix: Bearer
+    response:
+      success:
+        filters:
+          identity:
+            json:
+              properties:
+                groups:
+                  selector: auth.identity.metadata.annotations.kuadrant\.io/groups
+                userid:
+                  selector: auth.identity.metadata.annotations.secret\.kuadrant\.io/user-id
+        headers:
+          authorization:
+            plain:
+              selector: auth.identity.metadata.annotations.secret\.kuadrant\.io/upstream-token
+      unauthenticated:
+        headers:
+          "content-type":
+            value: application/json
+        body:
+          value: |
+            {
+              "error": "Unauthenticated",
+              "message": "Invalid or missing API Key."
+            }
+      unauthorized:
+        headers:
+          "content-type":
+            value: application/json
+        body:
+          value: |
+            {
+              "error": "Forbidden",
+              "message": "Access denied. Your account does not have the required permissions (gold/silver)."
+            }
+    authorization:
+      allow-groups:
+        opa:
+          rego: |
+            groups := split(object.get(input.auth.identity.metadata.annotations, "kuadrant.io/groups", ""), ",")
+            allow { groups[_] == "gold" }
+            allow { groups[_] == "silver" }
+EOF</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Review and apply the TokenRateLimitPolicy</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The TokenRateLimitPolicy is a gateway-level resource. It defines token budgets per tier and lets the gateway enforce them independently of the running application.</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<details>
+<summary class="title">Click this link to unfold the actions.</summary>
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The policy defines two token budgets that reflect the cost of each tier:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Gold</strong> — richer analysis, higher compute cost. A stricter token allowance with a slower renewal window.</p>
+</li>
+<li>
+<p><strong>Silver</strong> — lighter analysis, lower compute cost. A more generous token allowance that renews faster.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Review the TokenRateLimitPolicy below and <strong>apply it by pasting</strong> the following yaml in your new terminal tab:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>oc apply -f - &lt;&lt;EOF
+apiVersion: kuadrant.io/v1alpha1
+kind: TokenRateLimitPolicy
+metadata:
+  name: openai-token-limits
+  namespace: $WORKSPACE_NAMESPACE
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: ai-proxy-route
+  limits:
+    gold:
+      rates:
+        - limit: 50
+          window: 4m
+      when:
+        - predicate: |
+            auth.identity.groups.split(",").exists(g, g == "gold")
+      counters:
+        - expression: auth.identity.userid
+    silver:
+      rates:
+        - limit: 500
+          window: 2m
+      when:
+        - predicate: |
+            auth.identity.groups.split(",").exists(g, g == "silver")
+      counters:
+        - expression: auth.identity.userid
+EOF</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how the YAML matches the tier budgets described above:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gold</code> with a tighter limit and longer window</p>
+</li>
+<li>
+<p><code>silver</code> with a more generous allowance that renews faster.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Setup and run the customer AI assistant</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>To setup the processeing flow, run the following command in your terminal in <em>Dev Spaces</em>:</p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>step 10</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To run the process, run it with the following command:</p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>camel run * --local-kamelet-dir ../support/kamelets</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Generate a customer profile</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>From <em>Rocket.Chat</em> issue the following message:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Please, generate a customer profile for order 61356291</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The order number in this request is illustrative&#8201;&#8212;&#8201;the Customer Profile Tool uses simulated input data from JSON files in the <code>data/</code> folder of your project. You can explore these files in the source code to see the mock CRM, history, audit, and ticket data that feeds the analysis.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The system should respond and default to Gold&#8201;&#8212;&#8201;the richer of the two analysis tiers. You should see a <strong>GOLD TIER ANALYSIS</strong> with a full customer profile, similar to:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 600px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- Bot response — Gold Profile -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:49 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.5;">
+          <hr style="border: none; border-top: 2px solid #333; margin: 6px 0 10px 0;">
+          <div style="font-size: 22px; font-weight: bold; margin-bottom: 4px;">&#x1F3C5; GOLD TIER ANALYSIS</div>
+          <hr style="border: none; border-top: 2px solid #333; margin: 0 0 12px 0;">
+
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F4CA; Customer Profile</div>
+            <ul style="margin: 2px 0; padding-left: 20px; line-height: 1.5; list-style-type: disc; color: #000;">
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">Chapman, Kim and Green</span>, Gold, <span style="font-weight:bold">3.5 years</span></li>
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">$48,200</span> annual revenue, Net 30 terms, FedEx Ground preferred</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F50D; Sentiment &amp; Risk</div>
+            <ul style="margin: 2px 0; padding-left: 20px; line-height: 1.5; list-style-type: disc; color: #000;">
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">Positive</span> sentiment overall, with one <span style="font-weight:bold">Negative</span> interaction</li>
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">Low</span> retention risk, with active engagement and resolution of issues</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F4CB; Open Issues</div>
+            <ul style="margin: 2px 0; padding-left: 20px; line-height: 1.5; list-style-type: disc; color: #000;">
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">TKT-1025</span>: Refund request &#x2014; Stemless wine glasses returned (Invoice 61356291), pending confirmation and processing</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 4px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F4A1; Recommended Action</div>
+            <div style="padding-left: 4px;"><span style="font-weight:bold">Follow up with Dana Kim</span> to confirm receipt of returned goods and finalize refund.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Because LLM responses are non-deterministic, the exact wording may differ from the sample above. What matters is the <strong>GOLD TIER ANALYSIS</strong> banner and the four sections: Customer Profile, Sentiment &amp; Risk, Open Issues, and Recommended Action.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>At this point, authentication is enforced. Both Gold and Silver keys are configured, and the AuthPolicy validates them before allowing access to the LLM. In the next exercise, you&#8217;ll discover how the gateway controls how much each tier can consume, and what happens when a tier reaches its limit.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Force a rate limit</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>In the previous step, the generated profile was based on the Gold tier. Because the rate limit is enforced, the next request will be downgraded to the Silver tier. Credit for gold tier was consumed and the system will default to the Silver tier.</p>
+</div>
+<div class="paragraph">
+<p>From <em>Rocket.Chat</em> issue the following message:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Please try again</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The system should generate back a Silver profile&#8201;&#8212;&#8201;the poorer of the two analysis tiers. You should see a <strong>SILVER TIER ANALYSIS</strong> with a full customer profile, similar to:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 660px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- Bot response — Silver Profile -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">6:49 PM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.5;">
+          <hr style="border: none; border-top: 2px solid #333; margin: 6px 0 10px 0;">
+          <div style="font-size: 22px; font-weight: bold; margin-bottom: 4px;">&#x1F948; SILVER TIER ANALYSIS</div>
+          <hr style="border: none; border-top: 2px solid #333; margin: 0 0 12px 0;">
+
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F4CA; Customer Profile</div>
+            <ul style="margin: 2px 0; padding-left: 20px; line-height: 1.5; list-style-type: disc; color: #000;">
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">Chapman, Kim and Green</span>, Gold membership, <span style="font-weight:bold">US-East</span> region</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 4px;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">&#x1F4CB; Open Issues</div>
+            <ul style="margin: 2px 0; padding-left: 20px; line-height: 1.5; list-style-type: disc; color: #000;">
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">TKT-1025</span> &#x2014; Refund request &#x2014; Stemless wine glasses returned (Invoice 61356291)</li>
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">TKT-0871</span> &#x2014; Delayed shipment &#x2014; Order 58201437 (resolved)</li>
+              <li style="margin-bottom: 2px;"><span style="font-weight:bold">TKT-0943</span> &#x2014; Pricing correction &#x2014; Order 59843102 (resolved)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+<li>
+<p><strong>Force a rate limit exhaustion</strong></p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Again, from <em>Rocket.Chat</em> issue the same message:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock copypaste">
+<div class="content">
+<div class="paragraph">
+<p>Please try again</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once both budgets are consumed, the system has no remaining capacity. You should see a <strong>SERVICE NOTICE</strong> with a <code>429 Too Many Requests</code> status, confirming that the token rate limiting policy is fully enforced:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 15px;">
+  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+    <div style="width: 90px; height: 90px; background-color: #f5455c; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <g transform="translate(-2 -2) scale(.9)">
+          <path d="M 7.5488281 5 C 6.2638281 5 5.055 5.3086094 4 5.8496094 C 5.422467 6.9694938 6.4322525 8.5274703 6.8359375 10.300781 C 5.0652471 11.854193 4 13.838545 4 16 C 4 18.1 5.0028438 20.110797 6.8398438 21.716797 C 6.5498438 22.966797 5.9480312 24.134047 5.0820312 25.123047 L 4.0136719 26.345703 L 5.5859375 26.751953 C 6.2259375 26.917953 6.8868281 27 7.5488281 27 C 9.7768281 27 11.841828 26.197516 13.423828 24.728516 C 14.425828 24.908516 15.458 25 16.5 25 C 23.393 25 29 20.962 29 16 C 29 11.038 23.393 7 16.5 7 C 15.440923 7 14.418235 7.1058017 13.435547 7.2851562 C 11.913547 5.8774278 9.8442485 5 7.5488281 5 z M 16.5 9 C 22.29 9 27 12.14 27 16 C 27 19.86 22.29 23 16.5 23 C 15.412 23 14.338594 22.888969 13.308594 22.667969 L 12.757812 22.548828 L 12.371094 22.957031 C 11.147094 24.252031 9.469625 24.976 7.640625 25 C 8.290625 23.917 8.727875 22.724516 8.921875 21.478516 L 9.0136719 20.896484 L 8.5488281 20.535156 C 6.9058281 19.256156 6 17.646 6 16 C 6 12.14 10.71 9 16.5 9 z M 11.5 15 A 1.5 1.5 0 0 0 11.5 18 A 1.5 1.5 0 0 0 11.5 15 z M 16.5 15 A 1.5 1.5 0 0 0 16.5 18 A 1.5 1.5 0 0 0 16.5 15 z M 21.5 15 A 1.5 1.5 0 0 0 21.5 18 A 1.5 1.5 0 0 0 21.5 15 z"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size: 16px; color: #000; font-weight: 500; margin-top: 5px;">rocket.chat</span>
+  </div>
+  <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; width: 550px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; flex-direction: column; padding: 8px 10px; gap: 10px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <!-- User message -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #6c757d; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        U
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;"><span class="uservar">username</span></span>
+          <span style="font-size: 11px; color: #aaa;">11:25 AM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.4;">
+          Please try again
+        </div>
+      </div>
+    </div>
+    <!-- Bot response — SERVICE NOTICE -->
+    <div style="gap: 10px; display: flex; flex-direction: row;">
+      <div style="width: 36px; height: 36px; background-color: #3ea18e; color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">
+        A
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; line-height: 1.2;">
+          <span style="font-weight: bold; font-size: 14px; color: #333;">ai-bot</span>
+          <span style="font-size: 11px; color: #aaa;">11:25 AM</span>
+        </div>
+        <div style="font-size: 14px; color: #333; line-height: 1.6;">
+          <hr style="border: none; border-top: 2px solid #333; margin: 6px 0 10px 0;">
+          <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">&#x26A0;&#xFE0F; SERVICE NOTICE</div>
+          <hr style="border: none; border-top: 2px solid #333; margin: 0 0 14px 0;">
+          <div style="margin-bottom: 6px;">
+            <span style="font-size: 20px; font-weight: bold;">&#x1F4E1; System Insight</span>
+          </div>
+          <ul style="margin: 4px 0 4px 0; padding-left: 20px; line-height: 1.4; list-style-type: disc; color: #000;">
+            <li style="margin-bottom: 2px;"><span style="font-weight:bold">Status:</span> 429 Too Many Requests</li>
+            <li style="margin-bottom: 2px;"><span style="font-weight:bold">Action:</span> Intelligence Service is currently paused due to high traffic.</li>
+            <li style="margin-bottom: 2px;"><span style="font-weight:bold">Notice:</span> Please try your request again in a few moments.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Token budgets are not permanent. They operate on a time window basis, so after enough time passes the budgets get replenished. If you wait a few minutes and try again, the system will resume producing profiles following the same fallback strategy: Gold first, then Silver.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><h2>🎉 Well done! 🎉</h2></p>
+</div>
+<div class="paragraph">
+<p>You have completed the walkthrough of the AI-Powered Application Integration Platform solution pattern.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This walkthrough provided a narrative overview of the architecture and key capabilities. To experience the platform hands-on with detailed, self-guided instructions, step-by-step commands, and in-depth explanations of each component, explore the <strong>Lab Instructions</strong> from your RHDP environment.</p>
+</div>
+<div class="paragraph">
+<p>The hands-on lab is designed as a comprehensive workshop experience, perfect for team training sessions or workshop days where multiple students can work collaboratively on the same environment. It offers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Detailed setup instructions for each phase</p>
+</li>
+<li>
+<p>Step-by-step command sequences with explanations</p>
+</li>
+<li>
+<p>In-depth exploration of Service Interconnect, Kafka, Agentic Camel, and Connectivity Link</p>
+</li>
+<li>
+<p>Troubleshooting guidance and verification steps</p>
+</li>
+<li>
+<p>Extended scenarios demonstrating additional capabilities</p>
+</li>
+<li>
+<p>Multi-user support for workshop environments where teams can learn together</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Visit the Lab Instructions to discover all the capabilities in practice — whether individually or as part of a workshop.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="02-architecture.html" class="query-params-link">2. Architecture</a></span>
+  <span class="next"><a href="04-devresources.html" class="query-params-link">4. Developer Resources</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
