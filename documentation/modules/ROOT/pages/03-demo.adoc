@@ -72,7 +72,12 @@ Once your RHDP environment is provisioned, you will receive an email with access
 [.bordered]
 image::rhdp-lab-instructions-link.png[Lab Instructions link,60%]
 
-Use your RHDP-provided credentials to access the lab instructions. Once inside, you'll find a **Resources** panel on the right side of the page. Click to expand it and reveal links to all the demonstration components:
+Use your RHDP-provided credentials to access the lab instructions. In your RHDP instance you'll find the usernames that have been provisioned, for instance, `user1`, `user2`, etc. See below the sample credentials for the `user1` username.
+
+[.bordered]
+image::sample-user-credentials.png[Sample user credentials,60%]
+
+Once inside, you'll find a **Resources** panel on the right side of the page. Click to expand it and reveal links to all the demonstration components:
 
 [cols="1,2",frame=none,grid=none]
 |===
@@ -174,9 +179,11 @@ Follow the steps below to complete a run through that demonstrates the data inge
 +
 The first capability at play in this phase is the ability to securely connect the integration platform to the database. This is achieved using Service Interconnect.
 +
-Unfold the instructions below and follow the steps to enable access to the database.
-+
+
+[IMPORTANT]
 --
+Unfold the instructions below and follow the steps to enable access to the database.
+
 .Click this link to unfold instructions.
 [%collapsible]
 ====
@@ -445,9 +452,10 @@ Follow the steps below to complete a run through that demonstrates the multi-cha
 +
 The flows have been pre-deployed on _OpenShift_, but are not scaled up. You need to scale them up to enable inter-platform communication.
 +
-Unfold the instructions below and follow the steps to enable access to the database.
-+
+[IMPORTANT]
 --
+Unfold the instructions below and follow the steps to enable access to the database.
+
 .Click this link to unfold instructions.
 [%collapsible]
 ====
@@ -730,6 +738,36 @@ Go through the following steps to recreate the the full resulution process:
 {empty} +
 +
 [lowerroman]
+.. *Switch to the `ai-support` channel*
++
+From _Rocket.Chat_, as the support agent, find and select the `ai-support` channel in the left sidebar:
++
+[subs=attributes]
+++++
+<div style="display: inline-flex; align-items: center; gap: 8px; background: #2f343d; border-radius: 4px; padding: 6px 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 8px 0;">
+  <span style="width: 32px; height: 32px; background: #6c757d; color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px;">A</span>
+  <span style="color: #ccc; font-size: 15px;">&#x2317; <b>ai-support<span id="rc-channel-num"></span></b></span>
+</div>
+<script>
+(function() {
+  var el = document.getElementById('rc-channel-num');
+  function resolve() {
+    var name = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    if (!name) {
+      var uv = document.querySelector('.uservar');
+      if (uv) name = uv.textContent;
+    }
+    var num = (name || '').replace(/\D/g, '');
+    el.textContent = num || 'N';
+  }
+  if (document.readyState === 'complete') resolve();
+  else window.addEventListener('load', resolve);
+})();
+</script>
+++++
++
+{empty} +
+
 .. *Pull the invoice*
 +
 From _Rocket.Chat_, as the support agent, enter the following message:
