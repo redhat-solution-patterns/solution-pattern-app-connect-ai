@@ -213,11 +213,11 @@ flowchart LR
 
     ServiceInterconnect --- |"🔒 secure link"| ServiceInterconnect2{{"Service\nInterconnect"}}
 
-    Camel@{ img: "/solution-pattern-app-connect-ai/_images/integration-icon.svg", label: "Camel Integration", pos: "b", h: 80, w: 80, constraint: "on" }
-    Customer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
-    Shop@{ img: "/solution-pattern-app-connect-ai/_images/shop-icon.svg", label: "Shop", pos: "b", h: 80, w: 80, constraint: "on" }
-    Storage@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "OpenShift<br>Data Foundation", pos: "b", h: 80, w: 80, constraint: "on" }
-    Database@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    Camel@{ img: "_images/integration-icon.svg", label: "Camel Integration", pos: "b", h: 80, w: 80, constraint: "on" }
+    Customer@{ img: "_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    Shop@{ img: "_images/shop-icon.svg", label: "Shop", pos: "b", h: 80, w: 80, constraint: "on" }
+    Storage@{ img: "_images/s3-icon.svg", label: "OpenShift<br>Data Foundation", pos: "b", h: 80, w: 80, constraint: "on" }
+    Database@{ img: "_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
 
     style LocalEnvironment fill:#fce4e4,stroke:#EE0000
     style RemoteEnvironment fill:#fce4e4,stroke:#EE0000
@@ -250,9 +250,9 @@ flowchart LR
         end
     end
 
-    ChatCustomer@{ img: "/solution-pattern-app-connect-ai/_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
-    ChatAgent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
-    Kafka@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatCustomer@{ img: "_images/customer-icon.svg", label: "Customer", pos: "b", h: 80, w: 80, constraint: "on" }
+    ChatAgent@{ img: "_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Kafka@{ img: "_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 80, w: 80, constraint: "on" }
 
     style ChatCustomer fill:none,stroke:none
     style ChatAgent fill:none,stroke:none
@@ -288,9 +288,9 @@ flowchart LR
     MX -->|"flow 1"| K -->|"flow 2"| RC
     RC -->|"flow 3"| K -->|"flow 4"| MX
 
-    MX@{ img: "/solution-pattern-app-connect-ai/_images/element-icon.svg", label: "Matrix", pos: "b", h: 100, w: 80, constraint: "on" }
-    K@{ img: "/solution-pattern-app-connect-ai/_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 100, w: 80, constraint: "on" }
-    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 100, w: 100, constraint: "on" }
+    MX@{ img: "_images/element-icon.svg", label: "Matrix", pos: "b", h: 100, w: 80, constraint: "on" }
+    K@{ img: "_images/kafka-icon.svg", label: "Kafka", pos: "b", h: 100, w: 80, constraint: "on" }
+    RC@{ img: "_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 100, w: 100, constraint: "on" }
 
     style MX fill:none,stroke:none
     style K fill:none,stroke:none
@@ -343,12 +343,12 @@ flowchart LR
         MaaS
     end
 
-    Agent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
-    RC@{ img: "/solution-pattern-app-connect-ai/_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 80, w: 80, constraint: "on" }
-    MaaS@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
-    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
-    S3@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
-    HD@{ img: "/solution-pattern-app-connect-ai/_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
+    Agent@{ img: "_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    RC@{ img: "_images/rocketchat-icon.svg", label: "Rocket.Chat", pos: "b", h: 80, w: 80, constraint: "on" }
+    MaaS@{ img: "_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
+    DB@{ img: "_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    S3@{ img: "_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
+    HD@{ img: "_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
 
     style Agent fill:none,stroke:none
     style RC fill:none,stroke:none
@@ -415,12 +415,12 @@ flowchart LR
         CamelQuarkus
     end
 
-    MaaS@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
-    NodeJS@{ img: "/solution-pattern-app-connect-ai/_images/nodejs-icon.svg", label: "MCP NodeJS", pos: "b", h: 80, w: 80, constraint: "on" }
-    CamelQuarkus@{ img: "/solution-pattern-app-connect-ai/_images/camel-quarkus-icon.svg", label: "MCP Camel Quarkus", pos: "b", h: 80, w: 80, constraint: "on" }
-    DB@{ img: "/solution-pattern-app-connect-ai/_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
-    S3@{ img: "/solution-pattern-app-connect-ai/_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
-    HD@{ img: "/solution-pattern-app-connect-ai/_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
+    MaaS@{ img: "_images/ai-model-icon.svg", label: "AI Model", pos: "b", h: 80, w: 80, constraint: "on" }
+    NodeJS@{ img: "_images/nodejs-icon.svg", label: "MCP NodeJS", pos: "b", h: 80, w: 80, constraint: "on" }
+    CamelQuarkus@{ img: "_images/camel-quarkus-icon.svg", label: "MCP Camel Quarkus", pos: "b", h: 80, w: 80, constraint: "on" }
+    DB@{ img: "_images/database-icon.svg", label: "Database", pos: "b", h: 70, w: 70, constraint: "on" }
+    S3@{ img: "_images/s3-icon.svg", label: "S3 / ODF", pos: "b", h: 70, w: 70, constraint: "on" }
+    HD@{ img: "_images/helpdesk-icon.svg", label: "HelpDesk", pos: "b", h: 70, w: 70, constraint: "on" }
 
     style MaaS fill:none,stroke:none
     style NodeJS fill:none,stroke:none
@@ -530,9 +530,9 @@ flowchart LR
         end
     end
 
-    Agent@{ img: "/solution-pattern-app-connect-ai/_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
-    Bot@{ img: "/solution-pattern-app-connect-ai/_images/ai-icon.svg", label: "AI Assistant", pos: "b", h: 80, w: 80, constraint: "on" }
-    LLM@{ img: "/solution-pattern-app-connect-ai/_images/ai-model-icon.svg", label: "LLM", pos: "b", h: 80, w: 80, constraint: "on" }
+    Agent@{ img: "_images/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Bot@{ img: "_images/ai-icon.svg", label: "AI Assistant", pos: "b", h: 80, w: 80, constraint: "on" }
+    LLM@{ img: "_images/ai-model-icon.svg", label: "LLM", pos: "b", h: 80, w: 80, constraint: "on" }
 
     style Agent fill:none,stroke:none
     style S2 fill:#e8eaf6,stroke:#7986cb
