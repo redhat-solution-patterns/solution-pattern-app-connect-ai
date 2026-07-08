@@ -17,6 +17,7 @@ asciidoc:
   attributes:
     release-version: master
     page-pagination: true
+    username: user1
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
