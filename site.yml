@@ -6,7 +6,7 @@ site:
   url: https://redhat-solution-patterns.github.io/solution-patterns/
   start_page: solution-pattern-app-connect-ai::index.adoc
   keys:
-    google_analytics: 'G-FWRNJP4L78'
+    google_analytics: 'G-9CVXJ25DE1'
 
 content:
   sources:
