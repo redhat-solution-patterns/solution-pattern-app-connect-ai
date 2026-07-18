@@ -24,12 +24,16 @@ The demo showcases how Red Hat Application Foundations technologies combine to d
 
 == Recorded Video
 
-[NOTE]
-====
-📹 **Video coming soon** — A recorded walkthrough demonstrating the complete solution pattern will be available here shortly. In the meantime, follow the installation and walkthrough guide below to explore the platform.
-====
+Watch the recorded video of the solution pattern, and find below instructions on how to install the demo and run it.
 
-//video::PLACEHOLDER[youtube, width=800, height=480]
+{blank}
+
+// [NOTE]
+// ====
+// 📹 **Video coming soon** — A recorded walkthrough demonstrating the complete solution pattern will be available here shortly. In the meantime, follow the installation and walkthrough guide below to explore the platform.
+// ====
+
+video::buC8h_RkOPA[youtube, width=800, height=450]
 
 {empty} +
 
